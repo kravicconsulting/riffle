@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stefan Spoerri — Delaware River Drift Boat Guide | Riffle</title>
+<meta name="description" content="Book Stefan Spoerri, 25+ years on the Upper Delaware River. Expert drift boat guide on West Branch, East Branch, and Main Stem. Wild brown and rainbow trout, smallmouth bass.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --forest:#1e3222;--forest-mid:#2c4e35;--forest-lt:#3d6b4a;
+  --sage:#5a8a68;--mist:#9ec4aa;--river:#4a7fa0;
+  --pebble:#f0ebe0;--pebble-dk:#ddd6c4;--cream:#fdfaf3;--warm:#faf6ee;
+  --amber:#b8772a;--amber-lt:#d4943a;--gold:#e8c068;
+  --ink:#1a1f16;--text-mid:#3a4a3a;--text-muted:#7a8a72;
+  --white:#fff;--r:14px;--r-sm:8px;--pill:100px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:64px;background:rgba(26,31,22,0.97);backdrop-filter:blur(16px)}
+.nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none}
+.nav-logo svg{width:28px;height:28px}
+.nav-word{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff}
+.nav-back{color:rgba(255,255,255,0.6);text-decoration:none;font-size:13px;font-weight:500;display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:var(--r-sm);border:1px solid rgba(255,255,255,0.15)}
+.nav-back svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:none}
+.nav-back:hover{color:#fff;border-color:rgba(255,255,255,0.4)}
+/* HERO — different treatment: dark river */
+.hero{position:relative;height:520px;overflow:hidden;margin-top:64px}
+.hero-bg{position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1800&q=85&fit=crop');background-size:cover;background-position:center 50%;filter:sepia(15%) contrast(1.08) brightness(0.72) saturate(1.2)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(105deg,rgba(15,22,14,0.92) 0%,rgba(15,22,14,0.7) 45%,rgba(15,22,14,0.2) 100%)}
+.hero-content{position:absolute;top:50%;left:5%;transform:translateY(-50%);max-width:520px}
+.hero-eyebrow{font-size:10px;font-weight:600;letter-spacing:1.3px;text-transform:uppercase;color:var(--mist);margin-bottom:12px}
+.hero-name{font-family:'Playfair Display',serif;font-size:clamp(38px,6vw,60px);font-weight:700;color:#fff;line-height:1;letter-spacing:-1px;margin-bottom:10px}
+.hero-tagline{font-family:'Playfair Display',serif;font-size:14px;font-style:italic;color:rgba(255,255,255,0.6);margin-bottom:20px;line-height:1.65}
+.hero-badges{display:flex;gap:8px;flex-wrap:wrap}
+.hb{font-size:11px;font-weight:600;padding:4px 12px;border-radius:var(--pill)}
+.hb-v{background:var(--sage);color:#fff}
+.hb-g{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.75);border:1px solid rgba(255,255,255,0.18)}
+/* Delaware stat strip */
+.del-strip{background:var(--river);padding:18px 5%;display:flex;gap:40px;justify-content:center;flex-wrap:wrap}
+.ds{text-align:center}
+.ds-n{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff;line-height:1}
+.ds-l{font-size:10px;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:0.8px;margin-top:3px}
+.sticky-bar{position:sticky;top:64px;z-index:200;background:var(--white);border-bottom:1px solid var(--pebble-dk);padding:0 5%}
+.sb-inner{display:flex;align-items:center;justify-content:space-between;height:56px;gap:16px}
+.sb-meta{display:flex;align-items:center;gap:20px}
+.sb-r{display:flex;align-items:center;gap:5px}
+.sb-stars{color:var(--amber-lt);font-size:13px}
+.sb-rn{font-size:14px;font-weight:600;margin-left:5px}
+.sb-rc{font-size:13px;color:var(--text-muted);margin-left:4px}
+.sb-div{width:1px;height:20px;background:var(--pebble-dk)}
+.sb-loc{font-size:13px;color:var(--text-muted)}
+.sb-price{font-size:13px;color:var(--ink)}.sb-price strong{font-size:17px;font-weight:700;color:var(--forest)}
+.sb-cta{background:var(--forest);color:#fff;font-size:14px;font-weight:600;padding:10px 24px;border-radius:var(--pill);border:none;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:all 0.2s}
+.sb-cta:hover{background:var(--forest-mid);transform:translateY(-1px)}
+@media(max-width:700px){.sb-div,.sb-loc,.sb-price{display:none}}
+.body{display:grid;grid-template-columns:1fr 360px;gap:48px;padding:52px 5%;max-width:1200px;margin:0 auto}
+@media(max-width:1024px){.body{grid-template-columns:1fr;padding:36px 5%}}
+.ey{font-size:10px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--sage);margin-bottom:10px}
+.st{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--ink);margin-bottom:14px}
+section.ps{padding:0 0 44px;border-bottom:1px solid var(--pebble-dk);margin-bottom:44px}
+section.ps:last-child{border-bottom:none}
+.bp{font-size:15px;color:var(--text-mid);line-height:1.8;margin-bottom:12px}
+.meta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
+@media(max-width:600px){.meta-grid{grid-template-columns:repeat(2,1fr)}}
+.mg{background:var(--pebble);border-radius:var(--r-sm);padding:14px;text-align:center}
+.mg-v{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--forest);line-height:1;margin-bottom:3px}
+.mg-l{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.7px}
+/* Delaware highlight panel */
+.del-panel{background:var(--forest);border-radius:var(--r);padding:24px;margin-bottom:20px;color:#fff}
+.del-panel-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff;margin-bottom:8px}
+.del-panel-body{font-size:13px;color:rgba(255,255,255,0.58);line-height:1.75;margin-bottom:16px}
+.del-rivers{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:500px){.del-rivers{grid-template-columns:1fr}}
+.dr{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:var(--r-sm);padding:12px}
+.dr-name{font-size:13px;font-weight:700;color:#fff;margin-bottom:3px}
+.dr-spec{font-size:11px;color:rgba(255,255,255,0.45);line-height:1.4}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:600px){.spec-grid{grid-template-columns:1fr}}
+.sc{background:var(--white);border:1px solid var(--pebble-dk);border-radius:var(--r);padding:16px;display:flex;gap:12px}
+.sc-bar{width:3px;border-radius:2px;flex-shrink:0;align-self:stretch}
+.sc-title{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.sc-desc{font-size:12px;color:var(--text-muted);line-height:1.55}
+/* Boat highlight */
+.boat-card{background:var(--warm);border:1px solid var(--pebble-dk);border-radius:var(--r);padding:20px;display:flex;gap:16px;align-items:flex-start;margin-bottom:20px}
+.boat-icon{width:44px;height:44px;background:var(--forest);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.boat-icon svg{width:22px;height:22px;stroke:#fff;stroke-width:1.3;fill:none}
+.boat-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.boat-body{font-size:13px;color:var(--text-muted);line-height:1.6}
+.trip-list{display:flex;flex-direction:column;gap:13px}
+.tc{background:var(--white);border:1px solid var(--pebble-dk);border-radius:var(--r);padding:20px;display:flex;justify-content:space-between;align-items:flex-start;gap:14px;transition:all 0.2s;cursor:pointer}
+.tc:hover{border-color:var(--sage);box-shadow:0 4px 20px rgba(26,31,22,0.08)}
+.tc-name{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--ink);margin-bottom:5px}
+.tc-meta{display:flex;gap:12px;margin-bottom:8px;flex-wrap:wrap}
+.tc-tag{font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:3px}
+.tc-tag svg{width:11px;height:11px;stroke:currentColor;stroke-width:1.5;fill:none}
+.tc-desc{font-size:13px;color:var(--text-muted);line-height:1.6;margin-bottom:8px}
+.tc-chips{display:flex;gap:5px;flex-wrap:wrap}
+.tc-chip{background:var(--pebble);color:var(--forest-mid);font-size:10px;font-weight:500;padding:2px 8px;border-radius:var(--pill)}
+.tc-right{text-align:right;flex-shrink:0}
+.tc-price{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--forest)}
+.tc-per{font-size:11px;color:var(--text-muted);margin-top:2px}
+.tc-bk{margin-top:10px;background:var(--forest);color:#fff;font-size:12px;font-weight:600;padding:7px 16px;border-radius:var(--pill);border:none;cursor:pointer;font-family:'DM Sans',sans-serif}
+.tc-bk:hover{background:var(--forest-mid)}
+.hatch-tbl{width:100%;border-collapse:collapse;font-size:13px}
+.hatch-tbl th{text-align:left;font-size:10px;font-weight:600;letter-spacing:0.8px;text-transform:uppercase;color:var(--text-muted);padding:8px 12px;border-bottom:1px solid var(--pebble-dk)}
+.hatch-tbl td{padding:10px 12px;border-bottom:1px solid var(--pebble-dk);color:var(--text-mid)}
+.hatch-tbl tr:last-child td{border-bottom:none}
+.hatch-tbl tr:hover td{background:var(--pebble)}
+.hm{font-weight:600;color:var(--ink)}
+.hbugs{display:flex;gap:5px;flex-wrap:wrap}
+.hc{background:rgba(90,138,104,0.12);color:var(--forest-mid);font-size:11px;padding:2px 7px;border-radius:var(--pill);border:1px solid rgba(90,138,104,0.2)}
+.rv-card{background:var(--white);border:1px solid var(--pebble-dk);border-radius:var(--r);padding:22px;position:relative;margin-bottom:14px}
+.rv-q{font-family:'Playfair Display',serif;font-size:42px;font-weight:700;color:var(--pebble-dk);line-height:1;position:absolute;top:12px;left:16px}
+.rv-stars{color:var(--amber-lt);font-size:12px;margin-bottom:8px}
+.rv-text{font-size:14px;color:var(--text-mid);line-height:1.75;font-style:italic;margin-top:14px;margin-bottom:16px}
+.rv-author{display:flex;align-items:center;gap:10px}
+.rv-av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.rv-name{font-size:13px;font-weight:600;color:var(--ink)}
+.rv-meta{font-size:11px;color:var(--text-muted);margin-top:1px}
+.rv-verified{display:flex;align-items:center;gap:3px;font-size:10px;font-weight:600;color:var(--sage);margin-top:3px}
+.rv-verified svg{width:10px;height:10px;stroke:currentColor;stroke-width:2;fill:none}
+.bc{background:var(--white);border:1px solid var(--pebble-dk);border-radius:var(--r);overflow:hidden;box-shadow:0 6px 28px rgba(26,31,22,0.08)}
+.bc-head{background:linear-gradient(135deg,var(--river) 0%,var(--forest-mid) 100%);padding:20px 22px}
+.bc-pr{display:flex;align-items:baseline;gap:7px;margin-bottom:3px}
+.bc-from{font-size:11px;color:rgba(255,255,255,0.5)}
+.bc-price{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:#fff}
+.bc-per{font-size:12px;color:rgba(255,255,255,0.5)}
+.bc-rat{display:flex;align-items:center;gap:5px;margin-top:5px}
+.bc-stars{color:var(--gold);font-size:12px}
+.bc-rn{font-size:12px;color:rgba(255,255,255,0.8);font-weight:600}
+.bc-rc{font-size:11px;color:rgba(255,255,255,0.42)}
+.bc-body{padding:20px}
+.bc-lbl{font-size:10px;font-weight:600;letter-spacing:0.8px;text-transform:uppercase;color:var(--text-muted);display:block;margin-bottom:5px}
+.bc-input{width:100%;padding:10px 13px;border:1.5px solid var(--pebble-dk);border-radius:var(--r-sm);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);background:var(--pebble);outline:none;transition:border 0.2s;-webkit-appearance:none}
+.bc-input:focus{border-color:var(--sage);background:#fff}
+.bc-field{margin-bottom:13px}
+.bc-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.bts-wrap{display:flex;flex-direction:column;gap:5px;margin-bottom:13px}
+.bts{border:1.5px solid var(--pebble-dk);border-radius:var(--r-sm);padding:9px 12px;cursor:pointer;transition:all 0.2s;display:flex;justify-content:space-between;align-items:center}
+.bts:hover{border-color:var(--sage)}
+.bts.sel{border-color:var(--forest);background:rgba(30,50,34,0.04)}
+.bts-n{font-size:12px;font-weight:600;color:var(--ink)}
+.bts-p{font-size:12px;font-weight:700;color:var(--forest)}
+.bc-submit{width:100%;background:var(--forest);color:#fff;font-size:14px;font-weight:700;padding:14px;border-radius:var(--pill);border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;margin-top:5px}
+.bc-submit:hover{background:var(--forest-mid);transform:translateY(-1px)}
+.bc-note{text-align:center;font-size:11px;color:var(--text-muted);margin-top:9px;line-height:1.5}
+.bc-foot{padding:14px 20px;border-top:1px solid var(--pebble-dk);background:var(--pebble)}
+.bc-perk{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text-mid);margin-bottom:6px}
+.bc-perk:last-child{margin-bottom:0}
+.bc-perk svg{width:13px;height:13px;stroke:var(--sage);stroke-width:2;fill:none;flex-shrink:0}
+.right-col{position:sticky;top:120px;height:fit-content}
+footer{background:#0c1610;padding:36px 5% 28px;margin-top:72px}
+.ft-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.ft-logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff}
+.ft-tagline{font-family:'Playfair Display',serif;font-size:13px;font-style:italic;color:rgba(255,255,255,0.28)}
+.ft-links a{text-decoration:none;font-size:12px;color:rgba(255,255,255,0.25);margin-left:18px}
+.ft-copy{width:100%;padding-top:18px;border-top:1px solid rgba(255,255,255,0.06);font-size:11px;color:rgba(255,255,255,0.18);margin-top:16px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity 0.5s ease,transform 0.5s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="riffle.html">
+    <svg viewBox="0 0 32 32" fill="none"><path d="M4 22 Q8 14 13 18 Q18 22 23 15 Q27 10 31 13" stroke="#9EC4AA" stroke-width="2.2" stroke-linecap="round" fill="none"/><path d="M4 27 Q9 20 14 24 Q19 28 24 21 Q28 15 31 18" stroke="#5A8A68" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.7"/><circle cx="29.5" cy="10.5" r="2.5" fill="#D4943A"/><path d="M29.5 10.5 L25 6" stroke="#D4943A" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <span class="nav-word">Riffle</span>
+  </a>
+  <a class="nav-back" href="riffle-catskills.html"><svg viewBox="0 0 14 14"><polyline points="9,2 4,7 9,12"/></svg> Catskills guides</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Delaware River · Drift Boat Specialist</div>
+    <div class="hero-name">Stefan Spoerri</div>
+    <div class="hero-tagline">25+ years on the Upper Delaware.<br>Thousands of river trips. Tens of thousands of miles rowed.</div>
+    <div class="hero-badges">
+      <span class="hb hb-v">✓ Riffle Verified</span>
+      <span class="hb hb-g">NY & PA Licensed</span>
+      <span class="hb hb-g">ClackaCraft Drift Boat</span>
+      <span class="hb hb-g">Custom Fly Tier</span>
+    </div>
+  </div>
+</div>
+
+<!-- Delaware stat strip -->
+<div class="del-strip">
+  <div class="ds"><div class="ds-n">25+</div><div class="ds-l">Years on the Delaware</div></div>
+  <div class="ds"><div class="ds-n">30+</div><div class="ds-l">Years fishing the river</div></div>
+  <div class="ds"><div class="ds-n">3</div><div class="ds-l">Branches guided</div></div>
+  <div class="ds"><div class="ds-n">4.9★</div><div class="ds-l">Verified rating</div></div>
+</div>
+
+<div class="sticky-bar">
+  <div class="sb-inner">
+    <div class="sb-meta">
+      <div class="sb-r"><span class="sb-stars">★★★★★</span><span class="sb-rn">4.9</span><span class="sb-rc">(203 reviews)</span></div>
+      <div class="sb-div"></div>
+      <div class="sb-loc">Upper Delaware River · NY & PA</div>
+      <div class="sb-div"></div>
+      <div class="sb-price">From <strong>$425</strong> / half day</div>
+    </div>
+    <button class="sb-cta" onclick="document.getElementById('bc').scrollIntoView({behavior:'smooth'})">Check Availability</button>
+  </div>
+</div>
+
+<div class="body">
+  <div class="left-col">
+
+    <section class="ps reveal">
+      <div class="meta-grid">
+        <div class="mg"><div class="mg-v">30+</div><div class="mg-l">Years on water</div></div>
+        <div class="mg"><div class="mg-v">3</div><div class="mg-l">Delaware branches</div></div>
+        <div class="mg"><div class="mg-v">203</div><div class="mg-l">Reviews</div></div>
+        <div class="mg"><div class="mg-v">4.9★</div><div class="mg-l">Rating</div></div>
+      </div>
+      <div class="ey">About Stefan</div>
+      <h2 class="st">Thirty years of Delaware River life</h2>
+      <p class="bp">Stefan Spoerri first encountered the Upper Delaware River more than thirty years ago and was immediately captivated by the diversity of life in its crystal-clear waters. He made the river valley his home shortly after. Since then, he has spent virtually every available moment on the water — observing hatches, studying fish behavior, and developing an intimate understanding of how the Delaware changes through every season.</p>
+      <p class="bp">After more than fifteen years as a professional fishing guide, Stefan has logged thousands of river trips and tens of thousands of miles rowing clients through the finest trout water in the East. His drift boat — a custom-built 2014 ClackaCraft 16' Low Profile — is perfectly matched to the Delaware's character: efficient in its broad flat pools, agile in its technical riffles.</p>
+      <p class="bp">In his time away from the water, Stefan ties the flies he and his clients fish. The patterns are developed specifically for Delaware River conditions — emerging mayflies, spent spinners, and nymph imitations built from years of watching what the river's fish actually eat. Every client gets a selection before they start fishing.</p>
+      <div class="boat-card">
+        <div class="boat-icon"><svg viewBox="0 0 22 22"><path d="M2 16s3-6 9-6 9 6 9 6"/><path d="M2 16l9 3 9-3"/><path d="M6 10V6l5-3 5 3v4"/></svg></div>
+        <div><div class="boat-title">2014 ClackaCraft 16' Low Profile Drift Boat</div><div class="boat-body">Custom-spec'd to Stefan's exact requirements for the Delaware. Built for two anglers plus guide — comfortable, stable, and ideally positioned for presenting flies to holding fish from multiple angles. All rods, reels, and flies provided.</div></div>
+      </div>
+    </section>
+
+    <section class="ps reveal">
+      <div class="ey">The Upper Delaware</div>
+      <h2 class="st">The best dry-fly water east of the Rockies</h2>
+      <div class="del-panel">
+        <div class="del-panel-title">Why guides and anglers choose the Delaware</div>
+        <div class="del-panel-body">The Upper Delaware system produces hatches of a size and variety that rivals anything in the American West. Wild brown and rainbow trout — genuinely wild, not stocked — feed selectively on emerging mayflies, caddis, and stoneflies throughout the season. The fish are educated and demanding. Fooling a Delaware brown on a dry fly is a serious accomplishment. Stefan has guided this water so thoroughly that he knows individual pools, specific lies, and the precise timing of every major hatch.</div>
+        <div class="del-rivers">
+          <div class="dr"><div class="dr-name">West Branch Delaware</div><div class="dr-spec">Tailwater below Cannonsville. Coldest, most consistent. Trophy brown trout all season. Stefan's primary water.</div></div>
+          <div class="dr"><div class="dr-name">East Branch Delaware</div><div class="dr-spec">Warmer, more varied. Wild trout early season, excellent bass and shad summer. Scenic, uncrowded water.</div></div>
+          <div class="dr"><div class="dr-name">Main Stem Delaware</div><div class="dr-spec">Big water where both branches meet at Hancock. Trout, smallmouth bass, and American shad. Drift boat essential.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ps reveal">
+      <div class="ey">Specialties</div>
+      <h2 class="st">What Stefan does best</h2>
+      <div class="spec-grid">
+        <div class="sc"><div class="sc-bar" style="background:var(--river)"></div><div><div class="sc-title">Drift Boat Fishing</div><div class="sc-desc">Expert oarsman with 25+ years on the Delaware. Positions the boat precisely so both anglers always have the right angle.</div></div></div>
+        <div class="sc"><div class="sc-bar" style="background:var(--sage)"></div><div><div class="sc-title">Technical Dry Fly</div><div class="sc-desc">Delaware trout are among the most selective in the East. Stefan understands presentation and hatch timing at an exceptional level.</div></div></div>
+        <div class="sc"><div class="sc-bar" style="background:var(--amber)"></div><div><div class="sc-title">Smallmouth Bass</div><div class="sc-desc">The Main Stem Delaware is a premier smallmouth river. Stefan loves guiding it in summer — aggressive fish, visual takes, great fun.</div></div></div>
+        <div class="sc"><div class="sc-bar" style="background:var(--forest-mid)"></div><div><div class="sc-title">Seasonal Fly Tying</div><div class="sc-desc">Ties patterns developed specifically for Delaware River fish. Clients fish his custom imitations — built from decades of observation.</div></div></div>
+      </div>
+    </section>
+
+    <section class="ps reveal">
+      <div class="ey">Trip Options</div>
+      <h2 class="st">What Stefan offers</h2>
+      <div class="trip-list">
+        <div class="tc">
+          <div class="tc-left">
+            <div class="tc-name">Full Day Drift Boat — Trout</div>
+            <div class="tc-meta"><span class="tc-tag"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/><polyline points="6,3 6,6 8,7"/></svg>7–8 hours</span><span class="tc-tag"><svg viewBox="0 0 12 12"><circle cx="4" cy="4" r="2"/><circle cx="8" cy="4" r="2"/><path d="M2 11c0-2.2 1.8-4 4-4s4 1.8 4 4"/></svg>1–2 anglers</span><span class="tc-tag">Apr–Oct</span></div>
+            <p class="tc-desc">The flagship experience — a full day on the West Branch or East Branch Delaware, floating the river in Stefan's ClackaCraft. Covers the most productive water efficiently. Morning rise, midday nymphing, afternoon hatch. Lunch included streamside. This is the best dry-fly fishing in the East.</p>
+            <div class="tc-chips"><span class="tc-chip">All rods & flies</span><span class="tc-chip">Streamside lunch</span><span class="tc-chip">Custom patterns</span><span class="tc-chip">Both wading & floating</span></div>
+          </div>
+          <div class="tc-right"><div class="tc-price">$650</div><div class="tc-per">/trip (1–2 anglers)</div><button class="tc-bk" onclick="document.getElementById('bc').scrollIntoView({behavior:'smooth'})">Book</button></div>
+        </div>
+        <div class="tc">
+          <div class="tc-left">
+            <div class="tc-name">Half Day Drift Boat</div>
+            <div class="tc-meta"><span class="tc-tag"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/><polyline points="6,3 6,6 8,7"/></svg>4–5 hours</span><span class="tc-tag"><svg viewBox="0 0 12 12"><circle cx="4" cy="4" r="2"/><circle cx="8" cy="4" r="2"/><path d="M2 11c0-2.2 1.8-4 4-4s4 1.8 4 4"/></svg>1–2 anglers</span><span class="tc-tag">Off-peak available</span></div>
+            <p class="tc-desc">Morning or afternoon session on the Delaware. Stefan targets the highest-probability water for the half-day window. Morning half-days align with the best hatching activity; afternoons are often productive in summer.</p>
+            <div class="tc-chips"><span class="tc-chip">All rods & flies</span><span class="tc-chip">Custom patterns</span></div>
+          </div>
+          <div class="tc-right"><div class="tc-price">$425</div><div class="tc-per">/trip (1–2 anglers)</div><button class="tc-bk" onclick="document.getElementById('bc').scrollIntoView({behavior:'smooth'})">Book</button></div>
+        </div>
+        <div class="tc">
+          <div class="tc-left">
+            <div class="tc-name">Smallmouth Bass — Drift Boat</div>
+            <div class="tc-meta"><span class="tc-tag"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/><polyline points="6,3 6,6 8,7"/></svg>6–7 hours</span><span class="tc-tag"><svg viewBox="0 0 12 12"><circle cx="4" cy="4" r="2"/><circle cx="8" cy="4" r="2"/><path d="M2 11c0-2.2 1.8-4 4-4s4 1.8 4 4"/></svg>1–2 anglers</span><span class="tc-tag">July–Sept best</span></div>
+            <p class="tc-desc">Field & Stream named the Upper Delaware one of the top-five smallmouth rivers in the country. In summer, when trout retreat to cooler water, Stefan shifts to the Main Stem for aggressive bronzebacks on large surface flies. The most action-per-hour trip in his book.</p>
+            <div class="tc-chips"><span class="tc-chip">Main Stem Delaware</span><span class="tc-chip">6-8 wt rods provided</span><span class="tc-chip">Surface fishing</span></div>
+          </div>
+          <div class="tc-right"><div class="tc-price">$575</div><div class="tc-per">/trip (1–2 anglers)</div><button class="tc-bk" onclick="document.getElementById('bc').scrollIntoView({behavior:'smooth'})">Book</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ps reveal">
+      <div class="ey">Delaware Hatch Calendar</div>
+      <h2 class="st">When to be on the water</h2>
+      <table class="hatch-tbl">
+        <thead><tr><th>Month</th><th>Key Hatches / Conditions</th></tr></thead>
+        <tbody>
+          <tr><td class="hm">Late March</td><td><div class="hbugs"><span class="hc">Blue-Winged Olive</span><span class="hc">Little Black Stonefly</span></div></td></tr>
+          <tr><td class="hm">April</td><td><div class="hbugs"><span class="hc">Hendrickson</span><span class="hc">BWO</span><span class="hc">Quill Gordon</span></div></td></tr>
+          <tr><td class="hm">May</td><td><div class="hbugs"><span class="hc">Hendrickson</span><span class="hc">Caddis</span><span class="hc">March Brown</span><span class="hc">Early Sulphur</span></div></td></tr>
+          <tr><td class="hm">June–Aug</td><td><div class="hbugs"><span class="hc">Sulphur</span><span class="hc">Isonychia</span><span class="hc">BWO</span><span class="hc">Trico</span><span class="hc">Ants</span><span class="hc">Smallmouth Bass</span></div></td></tr>
+          <tr><td class="hm">Sept–Oct</td><td><div class="hbugs"><span class="hc">BWO</span><span class="hc">October Caddis</span><span class="hc">Streamers</span><span class="hc">Trophy Browns Active</span></div></td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:12px">Stefan posts weekly river condition reports during season. Contact him directly for current conditions before booking.</p>
+    </section>
+
+    <section class="ps reveal">
+      <div class="ey">Reviews</div>
+      <h2 class="st">What clients say about Stefan</h2>
+      <div class="rv-card">
+        <div class="rv-q">"</div>
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">Stefan has been guiding this river for longer than most people have been fly fishing. The knowledge is encyclopedic — he knows every pool, every lie, which fly to throw in which light. We floated the West Branch on a May afternoon and hit the Sulphur hatch perfectly. He called it to the minute. Remarkable guide.</p>
+        <div class="rv-author">
+          <div class="rv-av" style="background:#2c4e35">DM</div>
+          <div><div class="rv-name">David McCabe</div><div class="rv-meta">Full Day Drift Boat · West Branch · May 2025</div><div class="rv-verified"><svg viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3"/></svg>Verified booking</div></div>
+        </div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-q">"</div>
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">I've fished the Catskills for 15 years and never floated the Delaware until this trip. Stefan made me understand why drift boat fishing on this river is its own category. We covered water I could never have reached wading and put the fly in exactly the right position every time. His custom flies are beautiful — I kept them all.</p>
+        <div class="rv-author">
+          <div class="rv-av" style="background:#4a7fa0">TW</div>
+          <div><div class="rv-name">Tom Worthington</div><div class="rv-meta">Full Day Drift Boat · West Branch · Sept 2025</div><div class="rv-verified"><svg viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3"/></svg>Verified booking</div></div>
+        </div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-q">"</div>
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">Smallmouth bass trip in August on the Main Stem. Field & Stream was right about this river. Stefan had us on aggressive three-pound bronzebacks on surface flies by 9am. Pure fun. He loves this fishery as much as the trout water — the enthusiasm is real and contagious.</p>
+        <div class="rv-author">
+          <div class="rv-av" style="background:#8a4a2c">MF</div>
+          <div><div class="rv-name">Marcus Ford</div><div class="rv-meta">Smallmouth Bass · Main Stem · Aug 2025</div><div class="rv-verified"><svg viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3"/></svg>Verified booking</div></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="right-col">
+    <div class="bc" id="bc">
+      <div class="bc-head">
+        <div class="bc-pr"><span class="bc-from">From</span><span class="bc-price">$425</span><span class="bc-per">/trip</span></div>
+        <div class="bc-rat"><span class="bc-stars">★★★★★</span><span class="bc-rn">4.9</span><span class="bc-rc">· 203 reviews</span></div>
+      </div>
+      <div class="bc-body">
+        <div class="bc-field"><label class="bc-lbl">Select Trip</label>
+          <div class="bts-wrap">
+            <div class="bts sel" onclick="selT(this)"><span class="bts-n">Full Day — Trout</span><span class="bts-p">$650</span></div>
+            <div class="bts" onclick="selT(this)"><span class="bts-n">Half Day — Drift Boat</span><span class="bts-p">$425</span></div>
+            <div class="bts" onclick="selT(this)"><span class="bts-n">Smallmouth Bass Day</span><span class="bts-p">$575</span></div>
+          </div>
+        </div>
+        <div class="bc-row">
+          <div class="bc-field"><label class="bc-lbl">Date</label><input class="bc-input" type="date"></div>
+          <div class="bc-field"><label class="bc-lbl">Anglers</label><select class="bc-input"><option>1 angler</option><option selected>2 anglers</option></select></div>
+        </div>
+        <div class="bc-field"><label class="bc-lbl">Target species</label>
+          <select class="bc-input"><option>Whatever is best that day</option><option>Wild brown trout</option><option>Wild rainbow trout</option><option>Smallmouth bass</option></select>
+        </div>
+        <div class="bc-field"><label class="bc-lbl">Experience Level</label>
+          <select class="bc-input"><option>Some experience</option><option selected>Intermediate</option><option>Experienced</option><option>Expert</option></select>
+        </div>
+        <div class="bc-field"><label class="bc-lbl">Message for Stefan (optional)</label>
+          <textarea class="bc-input" rows="3" style="resize:vertical" placeholder="Techniques you want to focus on, any questions about the Delaware…"></textarea>
+        </div>
+        <button class="bc-submit">Request to Book</button>
+        <div class="bc-note">No charge yet. Stefan confirms within 24 hours.</div>
+      </div>
+      <div class="bc-foot">
+        <div class="bc-perk"><svg viewBox="0 0 14 14"><polyline points="2,7 5,10 12,3"/></svg>Free cancellation up to 14 days out</div>
+        <div class="bc-perk"><svg viewBox="0 0 14 14"><polyline points="2,7 5,10 12,3"/></svg>All rods, reels & custom flies included</div>
+        <div class="bc-perk"><svg viewBox="0 0 14 14"><polyline points="2,7 5,10 12,3"/></svg>Lunch included on full-day trips</div>
+        <div class="bc-perk"><svg viewBox="0 0 14 14"><polyline points="2,7 5,10 12,3"/></svg>NY & PA licensed · Fully insured</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="ft-inner"><div><div class="ft-logo">Riffle</div><div class="ft-tagline">Find your water.</div></div><div class="ft-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Help</a></div></div>
+  <div class="ft-copy">© 2026 Riffle, Inc. · riffle.guide/guides/stefan-spoerri-delaware</div>
+</footer>
+
+<script>
+var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:0.06});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el)});
+function selT(el){document.querySelectorAll('.bts').forEach(function(b){b.classList.remove('sel')});el.classList.add('sel')}
+</script>
+</body>
+</html>

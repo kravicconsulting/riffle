@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mike Walsh — Catskills Fly Fishing Guide | Riffle</title>
+<meta name="description" content="Book Mike Walsh, a 22-year Catskills fly fishing guide specializing in the Beaverkill, Delaware, and Willowemoc rivers. Dry fly, nymphing, and euro nymphing. Roscoe, NY.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --forest:#1e3222;--forest-mid:#2c4e35;--forest-light:#3d6b4a;
+  --sage:#5a8a68;--mist:#9ec4aa;--river:#4a7fa0;
+  --pebble:#f0ebe0;--pebble-dark:#ddd6c4;--cream:#fdfaf3;--warm:#faf6ee;
+  --amber:#b8772a;--amber-light:#d4943a;--gold:#e8c068;
+  --ink:#1a1f16;--text-mid:#3a4a3a;--text-muted:#7a8a72;
+  --white:#fff;--r:14px;--r-sm:8px;--pill:100px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:64px;background:rgba(26,31,22,0.97);backdrop-filter:blur(16px);box-shadow:0 1px 0 rgba(255,255,255,0.05)}
+.nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none}
+.nav-logo svg{width:28px;height:28px}
+.nav-word{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff}
+.nav-back{color:rgba(255,255,255,0.6);text-decoration:none;font-size:13px;font-weight:500;display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:var(--r-sm);border:1px solid rgba(255,255,255,0.15);transition:all 0.2s}
+.nav-back:hover{color:#fff;border-color:rgba(255,255,255,0.4)}
+.nav-back svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:none}
+
+/* HERO */
+.profile-hero{position:relative;height:480px;overflow:hidden;margin-top:64px}
+.ph-img{position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1600&q=85&fit=crop&crop=bottom');background-size:cover;background-position:center;filter:sepia(12%) contrast(1.05) brightness(0.82) saturate(1.1)}
+.ph-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(15,22,14,0.3) 0%,rgba(15,22,14,0.1) 40%,rgba(15,22,14,0.75) 100%)}
+.ph-content{position:absolute;bottom:0;left:0;right:0;padding:32px 5% 36px;display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
+.ph-left{}
+.ph-breadcrumb{font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.ph-breadcrumb a{color:rgba(255,255,255,0.5);text-decoration:none}
+.ph-breadcrumb a:hover{color:rgba(255,255,255,0.8)}
+.ph-breadcrumb span{opacity:0.4}
+.ph-name{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,56px);font-weight:700;color:#fff;line-height:1;margin-bottom:10px}
+.ph-tagline{font-size:15px;color:rgba(255,255,255,0.7);font-style:italic;font-family:'Playfair Display',serif}
+.ph-badges{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.ph-badge{font-size:11px;font-weight:600;padding:4px 11px;border-radius:var(--pill)}
+.pb-verified{background:var(--sage);color:#fff}
+.pb-orvis{background:rgba(232,192,104,0.2);color:var(--gold);border:1px solid rgba(232,192,104,0.3)}
+.pb-years{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.75);border:1px solid rgba(255,255,255,0.15)}
+.ph-right{flex-shrink:0}
+.ph-avatar{width:88px;height:88px;border-radius:50%;border:4px solid rgba(255,255,255,0.9);background:var(--forest-mid);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:#fff;box-shadow:0 4px 20px rgba(0,0,0,0.3)}
+
+/* STICKY BOOKING BAR */
+.sticky-bar{position:sticky;top:64px;z-index:200;background:var(--white);border-bottom:1px solid var(--pebble-dark);padding:0 5%}
+.sb-inner{display:flex;align-items:center;justify-content:space-between;height:56px;gap:20px}
+.sb-meta{display:flex;align-items:center;gap:24px}
+.sb-rating{display:flex;align-items:center;gap:6px}
+.sb-stars{color:var(--amber-light);font-size:13px}
+.sb-rn{font-size:14px;font-weight:600;color:var(--ink)}
+.sb-rc{font-size:13px;color:var(--text-muted)}
+.sb-divider{width:1px;height:20px;background:var(--pebble-dark)}
+.sb-loc{font-size:13px;color:var(--text-muted);display:flex;align-items:center;gap:4px}
+.sb-loc svg{width:12px;height:12px;stroke:currentColor;stroke-width:1.5;fill:none}
+.sb-price{font-size:14px;color:var(--ink)}
+.sb-price strong{font-size:17px;font-weight:700;color:var(--forest)}
+.sb-book{background:var(--forest);color:#fff;font-size:14px;font-weight:600;padding:10px 24px;border-radius:var(--pill);border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;white-space:nowrap}
+.sb-book:hover{background:var(--forest-mid);transform:translateY(-1px)}
+@media(max-width:700px){.sb-divider,.sb-loc,.sb-price{display:none}}
+
+/* LAYOUT */
+.profile-body{display:grid;grid-template-columns:1fr 380px;gap:48px;padding:52px 5%;max-width:1200px;margin:0 auto}
+@media(max-width:1024px){.profile-body{grid-template-columns:1fr;padding:36px 5%}}
+
+/* LEFT COLUMN */
+.left-col{}
+section.ps{padding:0 0 48px;border-bottom:1px solid var(--pebble-dark);margin-bottom:48px}
+section.ps:last-child{border-bottom:none}
+.ey{font-size:10px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--sage);margin-bottom:10px}
+.sec-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--ink);margin-bottom:16px}
+.body-text{font-size:15px;color:var(--text-mid);line-height:1.8;margin-bottom:12px}
+.body-text:last-child{margin-bottom:0}
+
+/* About */
+.guide-meta-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px}
+.gm-card{background:var(--pebble);border-radius:var(--r-sm);padding:16px;text-align:center}
+.gm-val{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--forest);margin-bottom:4px}
+.gm-label{font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.7px}
+
+/* Specialties */
+.specialty-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.spec-card{background:var(--white);border:1px solid var(--pebble-dark);border-radius:var(--r);padding:16px;display:flex;gap:12px;align-items:flex-start}
+.spec-bar{width:3px;border-radius:2px;flex-shrink:0;align-self:stretch}
+.sb-sage{background:var(--sage)}
+.sb-forest{background:var(--forest-mid)}
+.sb-amber{background:var(--amber)}
+.sb-river{background:var(--river)}
+.spec-title{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.spec-desc{font-size:12px;color:var(--text-muted);line-height:1.5}
+
+/* Waters */
+.waters-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.water-card{position:relative;border-radius:var(--r);overflow:hidden;height:160px;cursor:pointer;transition:transform 0.3s}
+.water-card:hover{transform:translateY(-3px)}
+.water-card:hover .wc-img{transform:scale(1.05)}
+.wc-img{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 0.5s;filter:sepia(10%) contrast(1.05) brightness(0.85)}
+.wc-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,18,10,0.85) 0%,transparent 60%)}
+.wc-info{position:absolute;bottom:0;left:0;right:0;padding:14px}
+.wc-name{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#fff}
+.wc-sub{font-size:11px;color:rgba(255,255,255,0.6);margin-top:2px}
+.wbg-1{background-image:url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80&fit=crop&crop=bottom')}
+.wbg-2{background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80&fit=crop')}
+.wbg-3{background-image:url('https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=600&q=80&fit=crop')}
+.wbg-4{background-image:url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600&q=80&fit=crop')}
+
+/* Trips */
+.trip-list{display:flex;flex-direction:column;gap:14px}
+.trip-card{background:var(--white);border:1px solid var(--pebble-dark);border-radius:var(--r);padding:20px;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;transition:all 0.2s;cursor:pointer}
+.trip-card:hover{border-color:var(--sage);box-shadow:0 6px 24px rgba(26,31,22,0.08)}
+.trip-left{}
+.trip-name{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.trip-meta{display:flex;gap:14px;margin-bottom:10px;flex-wrap:wrap}
+.trip-tag{font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:4px}
+.trip-tag svg{width:12px;height:12px;stroke:currentColor;stroke-width:1.5;fill:none}
+.trip-desc{font-size:13px;color:var(--text-muted);line-height:1.6}
+.trip-includes{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.ti-chip{background:var(--pebble);color:var(--forest-mid);font-size:11px;font-weight:500;padding:3px 9px;border-radius:var(--pill)}
+.trip-right{text-align:right;flex-shrink:0}
+.trip-price{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--forest)}
+.trip-per{font-size:11px;color:var(--text-muted);margin-top:2px}
+.trip-book{margin-top:12px;background:var(--forest);color:#fff;font-size:12px;font-weight:600;padding:8px 18px;border-radius:var(--pill);border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;white-space:nowrap}
+.trip-book:hover{background:var(--forest-mid)}
+
+/* Hatch calendar */
+.hatch-table{width:100%;border-collapse:collapse;font-size:13px}
+.hatch-table th{text-align:left;font-size:10px;font-weight:600;letter-spacing:0.8px;text-transform:uppercase;color:var(--text-muted);padding:8px 12px;border-bottom:1px solid var(--pebble-dark)}
+.hatch-table td{padding:10px 12px;border-bottom:1px solid var(--pebble-dark);color:var(--text-mid)}
+.hatch-table tr:last-child td{border-bottom:none}
+.hatch-table tr:hover td{background:var(--pebble)}
+.hatch-month{font-weight:600;color:var(--ink)}
+.hatch-bugs{display:flex;gap:6px;flex-wrap:wrap}
+.hatch-chip{background:rgba(90,138,104,0.12);color:var(--forest-mid);font-size:11px;padding:2px 8px;border-radius:var(--pill);border:1px solid rgba(90,138,104,0.2)}
+.hatch-activity{display:flex;gap:2px}
+.hact{width:10px;height:10px;border-radius:2px}
+.hact.low{background:rgba(90,138,104,0.2)}
+.hact.med{background:rgba(90,138,104,0.5)}
+.hact.high{background:var(--sage)}
+
+/* Reviews */
+.review-list{display:flex;flex-direction:column;gap:20px}
+.rv-card{background:var(--white);border:1px solid var(--pebble-dark);border-radius:var(--r);padding:24px;position:relative}
+.rv-q{font-family:'Playfair Display',serif;font-size:44px;font-weight:700;color:var(--pebble-dark);line-height:1;position:absolute;top:12px;left:18px}
+.rv-stars{color:var(--amber-light);font-size:12px;margin-bottom:10px}
+.rv-text{font-size:14px;color:var(--text-mid);line-height:1.75;font-style:italic;margin-top:16px;margin-bottom:18px}
+.rv-author{display:flex;align-items:center;gap:10px}
+.rv-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
+.rv-name{font-size:13px;font-weight:600;color:var(--ink)}
+.rv-meta{font-size:11px;color:var(--text-muted);margin-top:1px}
+.rv-verified{display:inline-flex;align-items:center;gap:3px;font-size:10px;font-weight:600;color:var(--sage);margin-top:3px}
+.rv-verified svg{width:10px;height:10px;stroke:currentColor;stroke-width:2;fill:none}
+
+/* Rating summary */
+.rating-summary{display:flex;gap:24px;align-items:center;background:var(--pebble);border-radius:var(--r);padding:24px;margin-bottom:28px}
+.rs-big{text-align:center;flex-shrink:0}
+.rs-num{font-family:'Playfair Display',serif;font-size:52px;font-weight:700;color:var(--forest);line-height:1}
+.rs-stars{color:var(--amber-light);font-size:16px;display:block;margin-top:4px}
+.rs-ct{font-size:12px;color:var(--text-muted);margin-top:4px}
+.rs-bars{flex:1}
+.rb{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.rb-label{font-size:12px;color:var(--text-muted);width:40px;text-align:right;flex-shrink:0}
+.rb-track{flex:1;height:6px;background:var(--pebble-dark);border-radius:3px;overflow:hidden}
+.rb-fill{height:100%;background:var(--amber-light);border-radius:3px}
+.rb-ct{font-size:12px;color:var(--text-muted);width:24px;flex-shrink:0}
+
+/* RIGHT COLUMN — booking card */
+.right-col{position:sticky;top:120px;height:fit-content}
+.booking-card{background:var(--white);border:1px solid var(--pebble-dark);border-radius:var(--r);overflow:hidden;box-shadow:0 8px 32px rgba(26,31,22,0.08)}
+.bc-header{background:var(--forest);padding:22px 24px}
+.bc-price-row{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
+.bc-from{font-size:12px;color:rgba(255,255,255,0.5)}
+.bc-price{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:#fff}
+.bc-per{font-size:13px;color:rgba(255,255,255,0.5)}
+.bc-rating{display:flex;align-items:center;gap:6px;margin-top:6px}
+.bc-stars{color:var(--gold);font-size:12px}
+.bc-rn{font-size:13px;color:rgba(255,255,255,0.8);font-weight:600}
+.bc-rc{font-size:12px;color:rgba(255,255,255,0.45)}
+.bc-body{padding:24px}
+.bc-field{margin-bottom:14px}
+.bc-label{font-size:10px;font-weight:600;letter-spacing:0.8px;text-transform:uppercase;color:var(--text-muted);display:block;margin-bottom:6px}
+.bc-input{width:100%;padding:11px 14px;border:1.5px solid var(--pebble-dark);border-radius:var(--r-sm);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);background:var(--pebble);outline:none;transition:border 0.2s;appearance:none;-webkit-appearance:none}
+.bc-input:focus{border-color:var(--sage);background:#fff}
+.bc-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.bc-trip-select{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.bts{border:1.5px solid var(--pebble-dark);border-radius:var(--r-sm);padding:10px 14px;cursor:pointer;transition:all 0.2s;display:flex;justify-content:space-between;align-items:center}
+.bts:hover{border-color:var(--sage)}
+.bts.selected{border-color:var(--forest);background:rgba(30,50,34,0.04)}
+.bts-name{font-size:13px;font-weight:600;color:var(--ink)}
+.bts-price{font-size:13px;font-weight:700;color:var(--forest)}
+.bc-submit{width:100%;background:var(--forest);color:#fff;font-size:15px;font-weight:700;padding:15px;border-radius:var(--pill);border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;margin-top:6px}
+.bc-submit:hover{background:var(--forest-mid);transform:translateY(-1px)}
+.bc-note{text-align:center;font-size:12px;color:var(--text-muted);margin-top:10px}
+.bc-note svg{width:12px;height:12px;stroke:currentColor;stroke-width:1.5;fill:none;vertical-align:middle;margin-right:3px}
+.bc-footer{padding:16px 24px;border-top:1px solid var(--pebble-dark);background:var(--pebble)}
+.bc-perks{display:flex;flex-direction:column;gap:8px}
+.bc-perk{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-mid)}
+.bc-perk svg{width:14px;height:14px;stroke:var(--sage);stroke-width:2;fill:none;flex-shrink:0}
+.bc-share{display:flex;gap:8px;margin-top:16px}
+.bc-share-btn{flex:1;background:transparent;border:1px solid var(--pebble-dark);border-radius:var(--r-sm);padding:8px;font-size:12px;font-weight:500;color:var(--text-muted);cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:5px;transition:all 0.2s}
+.bc-share-btn:hover{border-color:var(--sage);color:var(--sage)}
+.bc-share-btn svg{width:13px;height:13px;stroke:currentColor;stroke-width:1.5;fill:none}
+
+/* FOOTER */
+footer{background:#0c1610;padding:40px 5% 32px;margin-top:80px}
+.ft-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
+.ft-logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff}
+.ft-tagline{font-family:'Playfair Display',serif;font-size:14px;font-style:italic;color:rgba(255,255,255,0.28)}
+.ft-links{display:flex;gap:20px}
+.ft-links a{text-decoration:none;font-size:12px;color:rgba(255,255,255,0.25)}
+.ft-links a:hover{color:rgba(255,255,255,0.6)}
+.ft-copy{width:100%;padding-top:24px;border-top:1px solid rgba(255,255,255,0.06);font-size:11px;color:rgba(255,255,255,0.18);margin-top:20px}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity 0.5s ease,transform 0.5s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:700px){
+  .profile-hero{height:360px}
+  .ph-content{flex-direction:column;align-items:flex-start;padding:24px 20px 28px}
+  .ph-right{display:none}
+  .guide-meta-grid{grid-template-columns:repeat(3,1fr)}
+  .specialty-grid{grid-template-columns:1fr}
+  .waters-grid{grid-template-columns:1fr 1fr}
+  .profile-body{padding:28px 20px}
+  .trip-card{flex-direction:column}
+  .trip-right{text-align:left}
+  .rating-summary{flex-direction:column;text-align:center}
+  .rs-bars{width:100%}
+  .rb-label{width:30px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <svg viewBox="0 0 32 32" fill="none"><path d="M4 22 Q8 14 13 18 Q18 22 23 15 Q27 10 31 13" stroke="#9ec4aa" stroke-width="2.2" stroke-linecap="round" fill="none"/><path d="M4 27 Q9 20 14 24 Q19 28 24 21 Q28 15 31 18" stroke="#5a8a68" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.7"/><circle cx="29.5" cy="10.5" r="2.5" fill="#d4943a"/><path d="M29.5 10.5 L25 6" stroke="#d4943a" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <span class="nav-word">Riffle</span>
+  </a>
+  <a class="nav-back" href="index.html"><svg viewBox="0 0 14 14"><polyline points="9,2 4,7 9,12"/></svg> Back to guides</a>
+</nav>
+
+<!-- HERO -->
+<div class="profile-hero">
+  <div class="ph-img"></div>
+  <div class="ph-overlay"></div>
+  <div class="ph-content">
+    <div class="ph-left">
+      <div class="ph-breadcrumb">
+        <a href="#">Guides</a><span>›</span>
+        <a href="#">New York</a><span>›</span>
+        <a href="#">Catskills</a>
+      </div>
+      <div class="ph-name">Mike Walsh</div>
+      <div class="ph-tagline">Catskills Fly Fishing Guide · Roscoe, New York</div>
+      <div class="ph-badges">
+        <span class="ph-badge pb-verified">✓ Verified Guide</span>
+        <span class="ph-badge pb-orvis">Orvis-Endorsed</span>
+        <span class="ph-badge pb-years">22 Years Guiding</span>
+      </div>
+    </div>
+    <div class="ph-right">
+      <div class="ph-avatar">MW</div>
+    </div>
+  </div>
+</div>
+
+<!-- STICKY BAR -->
+<div class="sticky-bar">
+  <div class="sb-inner">
+    <div class="sb-meta">
+      <div class="sb-rating">
+        <span class="sb-stars">★★★★★</span>
+        <span class="sb-rn">4.9</span>
+        <span class="sb-rc">(224 reviews)</span>
+      </div>
+      <div class="sb-divider"></div>
+      <div class="sb-loc">
+        <svg viewBox="0 0 12 12"><path d="M6 1C4.3 1 3 2.3 3 3.8c0 2.4 3 7.2 3 7.2s3-4.8 3-7.2C9 2.3 7.7 1 6 1z"/><circle cx="6" cy="3.8" r="1.2"/></svg>
+        Roscoe, New York
+      </div>
+      <div class="sb-divider"></div>
+      <div class="sb-price">From <strong>$380</strong> / day</div>
+    </div>
+    <button class="sb-book" onclick="document.getElementById('booking-card').scrollIntoView({behavior:'smooth'})">Check Availability</button>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="profile-body">
+
+  <!-- LEFT -->
+  <div class="left-col">
+
+    <!-- ABOUT -->
+    <section class="ps reveal">
+      <div class="guide-meta-grid">
+        <div class="gm-card"><div class="gm-val">22</div><div class="gm-label">Years guiding</div></div>
+        <div class="gm-card"><div class="gm-val">4</div><div class="gm-label">Home rivers</div></div>
+        <div class="gm-card"><div class="gm-val">224</div><div class="gm-label">Verified reviews</div></div>
+      </div>
+      <div class="ey">About Mike</div>
+      <div class="sec-title">A lifetime on Catskill water</div>
+      <p class="body-text">Mike Walsh grew up a mile from the Beaverkill. He was casting a fly rod before he was ten years old, taught by his grandfather on the same runs he now guides for clients from around the world. He has spent more than two decades learning every riffle, pool, seam, and eddy on the Beaverkill, Willowemoc, and upper Delaware river system.</p>
+      <p class="body-text">He is known for his patience with beginners and his ability to put experienced anglers into fish that other guides walk past. He does not take every client who asks — he is selective about who he guides because he cares about the experience on both sides of the rod.</p>
+      <p class="body-text">Mike is an Orvis-Endorsed guide and a licensed New York State guide. He holds a first aid certification and carries full liability insurance on every trip.</p>
+    </section>
+
+    <!-- SPECIALTIES -->
+    <section class="ps reveal">
+      <div class="ey">Specialties</div>
+      <div class="sec-title">What Mike does best</div>
+      <div class="specialty-grid">
+        <div class="spec-card"><div class="spec-bar sb-sage"></div><div><div class="spec-title">Dry Fly Fishing</div><div class="spec-desc">Reading hatches and presenting emergers and dries to rising fish. Mike lives for the evening rise on the Beaverkill.</div></div></div>
+        <div class="spec-card"><div class="spec-bar sb-forest"></div><div><div class="spec-title">Euro Nymphing</div><div class="spec-desc">Tight-line technique for technical runs and pockets. Highly effective year-round when fish aren't rising.</div></div></div>
+        <div class="spec-card"><div class="spec-bar sb-amber"></div><div><div class="spec-title">Streamer Fishing</div><div class="spec-desc">Big flies, big fish. Mike knows the trophy holding lies on the Delaware's main stem and West Branch.</div></div></div>
+        <div class="spec-card"><div class="spec-bar sb-river"></div><div><div class="spec-title">Casting Instruction</div><div class="spec-desc">Works with all levels. Certified casting instructor — ideal for beginners and those wanting to break bad habits.</div></div></div>
+      </div>
+    </section>
+
+    <!-- HOME WATERS -->
+    <section class="ps reveal">
+      <div class="ey">Home Waters</div>
+      <div class="sec-title">The rivers Mike knows cold</div>
+      <div class="waters-grid">
+        <div class="water-card">
+          <div class="wc-img wbg-1"></div>
+          <div class="wc-overlay"></div>
+          <div class="wc-info"><div class="wc-name">Beaverkill River</div><div class="wc-sub">Primary water · Roscoe to Pools Eddy</div></div>
+        </div>
+        <div class="water-card">
+          <div class="wc-img wbg-2"></div>
+          <div class="wc-overlay"></div>
+          <div class="wc-info"><div class="wc-name">West Branch Delaware</div><div class="wc-sub">Tailwater · Lordville to Callicoon</div></div>
+        </div>
+        <div class="water-card">
+          <div class="wc-img wbg-3"></div>
+          <div class="wc-overlay"></div>
+          <div class="wc-info"><div class="wc-name">Willowemoc Creek</div><div class="wc-sub">Tributary · Livingston Manor</div></div>
+        </div>
+        <div class="water-card">
+          <div class="wc-img wbg-4"></div>
+          <div class="wc-overlay"></div>
+          <div class="wc-info"><div class="wc-name">East Branch Delaware</div><div class="wc-sub">Remote water · Margaretville reach</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRIPS -->
+    <section class="ps reveal">
+      <div class="ey">Trip Options</div>
+      <div class="sec-title">Choose your experience</div>
+      <div class="trip-list">
+
+        <div class="trip-card">
+          <div class="trip-left">
+            <div class="trip-name">Full Day — Drift &amp; Wade</div>
+            <div class="trip-meta">
+              <span class="trip-tag"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/><polyline points="6,3 6,6 8,7.5"/></svg>8 hours</span>
+              <span class="trip-tag"><svg viewBox="0 0 12 12"><circle cx="4" cy="4" r="2"/><circle cx="8" cy="4" r="2"/><path d="M2 11c0-2.2 1.8-4 4-4s4 1.8 4 4"/></svg>1–2 anglers</span>
+              <span class="trip-tag"><svg viewBox="0 0 12 12"><rect x="2" y="2" width="8" height="8" rx="1"/><line x1="2" y1="5" x2="10" y2="5"/></svg>Apr–Oct</span>
+            </div>
+            <p class="trip-desc">A full day on the Beaverkill or Delaware — Mike's choice based on current conditions. Combination of wading prime runs and floating productive sections by raft. Best option for experienced anglers chasing wild browns.</p>
+            <div class="trip-includes">
+              <span class="ti-chip">Flies included</span>
+              <span class="ti-chip">Leaders &amp; tippet</span>
+              <span class="ti-chip">Waders available</span>
+              <span class="ti-chip">Lunch</span>
+            </div>
+          </div>
+          <div class="trip-right">
+            <div class="trip-price">$480</div>
+            <div class="trip-per">per angler / day</div>
+            <button class="trip-book">Book This Trip</button>
+          </div>
+        </div>
+
+        <div class="trip-card">
+          <div class="trip-left">
+            <div class="trip-name">Half Day — Wading</div>
+            <div class="trip-meta">
+              <span class="trip-tag"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/><polyline points="6,3 6,6 8,7.5"/></svg>4 hours</span>
+              <span class="trip-tag"><svg viewBox="0 0 12 12"><circle cx="4" cy="4" r="2"/><circle cx="8" cy="4" r="2"/><path d="M2 11c0-2.2 1.8-4 4-4s4 1.8 4 4"/></svg>1–2 anglers</span>
+              <span class="trip-tag"><svg viewBox="0 0 12 12"><rect x="2" y="2" width="8" height="8" rx="1"/><line x1="2" y1="5" x2="10" y2="5"/></svg>Year-round</span>
+            </div>
+            <p class="trip-desc">Morning or afternoon session on the Beaverkill. Ideal for beginners, those with limited time, or anglers who want focused instruction. Mike works a handful of his most productive known pools.</p>
+            <div class="trip-includes">
+              <span class="ti-chip">Flies included</span>
+              <span class="ti-chip">Leaders &amp; tippet</span>
+              <span class="ti-chip">Instruction available</span>
+            </div>
+          </div>
+          <div class="trip-right">
+            <div class="trip-price">$280</div>
+            <div class="trip-per">per angler / half day</div>
+            <button class="trip-book">Book This Trip</button>
+          </div>
+        </div>
+
+        <div class="trip-card">
+          <div class="trip-left">
+            <div class="trip-name">Multi-Day Catskills Experience</div>
+            <div class="trip-meta">
+              <span class="trip-tag"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/><polyline points="6,3 6,6 8,7.5"/></svg>2–3 days</span>
+              <span class="trip-tag"><svg viewBox="0 0 12 12"><circle cx="4" cy="4" r="2"/><circle cx="8" cy="4" r="2"/><path d="M2 11c0-2.2 1.8-4 4-4s4 1.8 4 4"/></svg>1–3 anglers</span>
+              <span class="trip-tag"><svg viewBox="0 0 12 12"><rect x="2" y="2" width="8" height="8" rx="1"/><line x1="2" y1="5" x2="10" y2="5"/></svg>May–Oct best</span>
+            </div>
+            <p class="trip-desc">The full Catskills experience — multiple rivers, multiple techniques, Mike's full knowledge. Cover the Beaverkill, Delaware, and Willowemoc across several days. Lodging recommendations provided. The trip serious anglers travel for.</p>
+            <div class="trip-includes">
+              <span class="ti-chip">All flies</span>
+              <span class="ti-chip">Full equipment</span>
+              <span class="ti-chip">Lodging referrals</span>
+              <span class="ti-chip">All meals on water</span>
+            </div>
+          </div>
+          <div class="trip-right">
+            <div class="trip-price">$420</div>
+            <div class="trip-per">per angler / day</div>
+            <button class="trip-book">Inquire</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- HATCH CALENDAR -->
+    <section class="ps reveal">
+      <div class="ey">Seasonal Guide</div>
+      <div class="sec-title">Catskills hatch calendar</div>
+      <p class="body-text" style="margin-bottom:20px">Mike's personal notes on when to be on the water. Activity levels reflect typical years — conditions vary.</p>
+      <table class="hatch-table">
+        <thead><tr><th>Month</th><th>Key Hatches</th><th>Activity</th></tr></thead>
+        <tbody>
+          <tr><td class="hatch-month">April</td><td><div class="hatch-bugs"><span class="hatch-chip">Hendrickson</span><span class="hatch-chip">Blue Quill</span></div></td><td><div class="hatch-activity"><span class="hact med"></span><span class="hact med"></span><span class="hact low"></span></div></td></tr>
+          <tr><td class="hatch-month">May</td><td><div class="hatch-bugs"><span class="hatch-chip">March Brown</span><span class="hatch-chip">Sulphur</span><span class="hatch-chip">Caddis</span></div></td><td><div class="hatch-activity"><span class="hact high"></span><span class="hact high"></span><span class="hact high"></span></div></td></tr>
+          <tr><td class="hatch-month">June</td><td><div class="hatch-bugs"><span class="hatch-chip">Green Drake</span><span class="hatch-chip">Isonychia</span><span class="hatch-chip">Yellow Sally</span></div></td><td><div class="hatch-activity"><span class="hact high"></span><span class="hact high"></span><span class="hact high"></span></div></td></tr>
+          <tr><td class="hatch-month">July</td><td><div class="hatch-bugs"><span class="hatch-chip">Trico</span><span class="hatch-chip">Pale Evening Dun</span></div></td><td><div class="hatch-activity"><span class="hact med"></span><span class="hact med"></span><span class="hact low"></span></div></td></tr>
+          <tr><td class="hatch-month">Aug</td><td><div class="hatch-bugs"><span class="hatch-chip">Trico</span><span class="hatch-chip">Terrestrials</span></div></td><td><div class="hatch-activity"><span class="hact low"></span><span class="hact med"></span><span class="hact low"></span></div></td></tr>
+          <tr><td class="hatch-month">Sept</td><td><div class="hatch-bugs"><span class="hatch-chip">Isonychia</span><span class="hatch-chip">Blue-Winged Olive</span></div></td><td><div class="hatch-activity"><span class="hact high"></span><span class="hact high"></span><span class="hact med"></span></div></td></tr>
+          <tr><td class="hatch-month">Oct</td><td><div class="hatch-bugs"><span class="hatch-chip">Blue-Winged Olive</span><span class="hatch-chip">Streamers</span></div></td><td><div class="hatch-activity"><span class="hact high"></span><span class="hact high"></span><span class="hact high"></span></div></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- REVIEWS -->
+    <section class="ps reveal">
+      <div class="ey">Angler Reviews</div>
+      <div class="sec-title">What clients say</div>
+      <div class="rating-summary">
+        <div class="rs-big">
+          <div class="rs-num">4.9</div>
+          <span class="rs-stars">★★★★★</span>
+          <div class="rs-ct">224 reviews</div>
+        </div>
+        <div class="rs-bars">
+          <div class="rb"><span class="rb-label">5★</span><div class="rb-track"><div class="rb-fill" style="width:88%"></div></div><span class="rb-ct">196</span></div>
+          <div class="rb"><span class="rb-label">4★</span><div class="rb-track"><div class="rb-fill" style="width:8%"></div></div><span class="rb-ct">18</span></div>
+          <div class="rb"><span class="rb-label">3★</span><div class="rb-track"><div class="rb-fill" style="width:3%"></div></div><span class="rb-ct">7</span></div>
+          <div class="rb"><span class="rb-label">2★</span><div class="rb-track"><div class="rb-fill" style="width:1%"></div></div><span class="rb-ct">2</span></div>
+          <div class="rb"><span class="rb-label">1★</span><div class="rb-track"><div class="rb-fill" style="width:0%"></div></div><span class="rb-ct">1</span></div>
+        </div>
+      </div>
+
+      <div class="review-list">
+        <div class="rv-card">
+          <div class="rv-q">"</div>
+          <div class="rv-stars">★★★★★</div>
+          <p class="rv-text">Mike walked me to a run on the Beaverkill I never would have found on my own. By 8am we had a dozen browns. He has been fishing that river his whole life — you can feel it in every step he takes on the water.</p>
+          <div class="rv-author">
+            <div class="rv-av" style="background:#2c4e35">TH</div>
+            <div>
+              <div class="rv-name">Tom Harrington</div>
+              <div class="rv-meta">Beaverkill River · June 2025 · Full Day</div>
+              <div class="rv-verified"><svg viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3"/></svg>Verified booking</div>
+            </div>
+          </div>
+        </div>
+        <div class="rv-card">
+          <div class="rv-q">"</div>
+          <div class="rv-stars">★★★★★</div>
+          <p class="rv-text">I am a total beginner and was embarrassed to book a guide. Mike made me feel completely at ease. By the end of the half day I was landing fish independently. His patience is extraordinary. Already booked a full day for May.</p>
+          <div class="rv-author">
+            <div class="rv-av" style="background:#4a7fa0">SB</div>
+            <div>
+              <div class="rv-name">Sarah Brennan</div>
+              <div class="rv-meta">Beaverkill River · Sept 2025 · Half Day</div>
+              <div class="rv-verified"><svg viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3"/></svg>Verified booking</div>
+            </div>
+          </div>
+        </div>
+        <div class="rv-card">
+          <div class="rv-q">"</div>
+          <div class="rv-stars">★★★★★</div>
+          <p class="rv-text">Three days on the Delaware with Mike. Every morning he had conditions figured out and put us exactly where the fish were. The streamer fishing on the West Branch in October was the best fishing I've had in 20 years. Worth every cent.</p>
+          <div class="rv-author">
+            <div class="rv-av" style="background:#8a4a2c">RK</div>
+            <div>
+              <div class="rv-name">Robert Kim</div>
+              <div class="rv-meta">West Branch Delaware · Oct 2025 · Multi-Day</div>
+              <div class="rv-verified"><svg viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3"/></svg>Verified booking</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- RIGHT — BOOKING CARD -->
+  <div class="right-col">
+    <div class="booking-card" id="booking-card">
+      <div class="bc-header">
+        <div class="bc-price-row">
+          <span class="bc-from">From</span>
+          <span class="bc-price">$280</span>
+          <span class="bc-per">per angler</span>
+        </div>
+        <div class="bc-rating">
+          <span class="bc-stars">★★★★★</span>
+          <span class="bc-rn">4.9</span>
+          <span class="bc-rc">· 224 reviews</span>
+        </div>
+      </div>
+      <div class="bc-body">
+        <div class="bc-field">
+          <label class="bc-label">Select Trip</label>
+          <div class="bc-trip-select">
+            <div class="bts selected" onclick="selectTrip(this,'$480')">
+              <span class="bts-name">Full Day — Drift &amp; Wade</span>
+              <span class="bts-price">$480</span>
+            </div>
+            <div class="bts" onclick="selectTrip(this,'$280')">
+              <span class="bts-name">Half Day — Wading</span>
+              <span class="bts-price">$280</span>
+            </div>
+            <div class="bts" onclick="selectTrip(this,'$420/day')">
+              <span class="bts-name">Multi-Day Experience</span>
+              <span class="bts-price">$420/day</span>
+            </div>
+          </div>
+        </div>
+        <div class="bc-row">
+          <div class="bc-field">
+            <label class="bc-label">Date</label>
+            <input class="bc-input" type="date">
+          </div>
+          <div class="bc-field">
+            <label class="bc-label">Anglers</label>
+            <select class="bc-input">
+              <option>1 angler</option>
+              <option>2 anglers</option>
+            </select>
+          </div>
+        </div>
+        <div class="bc-field">
+          <label class="bc-label">Experience Level</label>
+          <select class="bc-input">
+            <option>Complete beginner</option>
+            <option>Some experience</option>
+            <option>Intermediate</option>
+            <option>Experienced</option>
+            <option>Expert</option>
+          </select>
+        </div>
+        <div class="bc-field">
+          <label class="bc-label">Notes for Mike (optional)</label>
+          <textarea class="bc-input" rows="3" style="resize:vertical" placeholder="Target species, techniques you want to practice, any questions…"></textarea>
+        </div>
+        <button class="bc-submit">Request to Book</button>
+        <div class="bc-note">
+          <svg viewBox="0 0 12 12"><path d="M6 1a5 5 0 100 10A5 5 0 006 1z"/><line x1="6" y1="5" x2="6" y2="8"/><circle cx="6" cy="3.5" r=".5" fill="currentColor"/></svg>
+          You won't be charged yet. Mike confirms within 24 hours.
+        </div>
+      </div>
+      <div class="bc-footer">
+        <div class="bc-perks">
+          <div class="bc-perk"><svg viewBox="0 0 14 14"><polyline points="2,7 5,10 12,3"/></svg>Free cancellation up to 14 days out</div>
+          <div class="bc-perk"><svg viewBox="0 0 14 14"><polyline points="2,7 5,10 12,3"/></svg>25% deposit to confirm, rest on the day</div>
+          <div class="bc-perk"><svg viewBox="0 0 14 14"><polyline points="2,7 5,10 12,3"/></svg>Flies, leaders &amp; tippet included</div>
+          <div class="bc-perk"><svg viewBox="0 0 14 14"><polyline points="2,7 5,10 12,3"/></svg>NY State licensed &amp; insured guide</div>
+        </div>
+        <div class="bc-share">
+          <button class="bc-share-btn"><svg viewBox="0 0 13 13"><circle cx="10" cy="2" r="1.5"/><circle cx="10" cy="11" r="1.5"/><circle cx="2" cy="6.5" r="1.5"/><line x1="3.4" y1="7.2" x2="8.6" y2="10.3"/><line x1="3.4" y1="5.8" x2="8.6" y2="2.7"/></svg>Share</button>
+          <button class="bc-share-btn"><svg viewBox="0 0 13 13"><path d="M9.5 2h-7a1 1 0 00-1 1v7a1 1 0 001 1h7a1 1 0 001-1V3a1 1 0 00-1-1z"/><polyline points="8,1 8,3"/><polyline points="5,1 5,3"/><line x1="1.5" y1="5.5" x2="11.5" y2="5.5"/></svg>Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="ft-inner">
+    <div>
+      <div class="ft-logo">Riffle</div>
+      <div class="ft-tagline">Find your water.</div>
+    </div>
+    <div class="ft-links">
+      <a href="#">Privacy</a><a href="#">Terms</a><a href="#">Help</a><a href="#">riffle.guide</a>
+    </div>
+  </div>
+  <div class="ft-copy">© 2026 Riffle, Inc. All rights reserved.</div>
+</footer>
+
+<script>
+var nav=document.querySelector('nav');
+window.addEventListener('scroll',function(){
+  nav.style.background=window.scrollY>40?'rgba(26,31,22,0.97)':'rgba(26,31,22,0.97)';
+},{passive:true});
+
+var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el)});
+
+function selectTrip(el,price){
+  document.querySelectorAll('.bts').forEach(function(b){b.classList.remove('selected')});
+  el.classList.add('selected');
+}
+
+document.querySelectorAll('.trip-book').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.getElementById('booking-card').scrollIntoView({behavior:'smooth'});
+  });
+});
+</script>
+</body>
+</html>

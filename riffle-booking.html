@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Request to Book — Mike Walsh | Riffle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --forest:#1e3222;--forest-mid:#2c4e35;--forest-light:#3d6b4a;
+  --sage:#5a8a68;--mist:#9ec4aa;
+  --pebble:#f0ebe0;--pebble-dark:#ddd6c4;--cream:#fdfaf3;
+  --amber:#b8772a;--amber-light:#d4943a;--gold:#e8c068;
+  --ink:#1a1f16;--text-mid:#3a4a3a;--text-muted:#7a8a72;
+  --white:#fff;--r:14px;--r-sm:8px;--pill:100px;
+  --success:#2d6a4f;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;min-height:100vh}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:64px;background:rgba(26,31,22,0.97);backdrop-filter:blur(16px)}
+.nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none}
+.nav-logo svg{width:28px;height:28px}
+.nav-word{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff}
+.nav-back{color:rgba(255,255,255,0.6);text-decoration:none;font-size:13px;font-weight:500;display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:var(--r-sm);border:1px solid rgba(255,255,255,0.15);transition:all 0.2s}
+.nav-back svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:none}
+.nav-back:hover{color:#fff;border-color:rgba(255,255,255,0.4)}
+
+/* LAYOUT */
+.page-wrap{display:grid;grid-template-columns:1fr 420px;gap:48px;padding:96px 5% 80px;max-width:1100px;margin:0 auto}
+@media(max-width:900px){.page-wrap{grid-template-columns:1fr;padding:88px 20px 60px}}
+
+/* PROGRESS */
+.progress-bar{position:fixed;top:64px;left:0;right:0;z-index:200;height:3px;background:var(--pebble-dark)}
+.pb-fill{height:100%;background:var(--sage);transition:width 0.4s ease}
+
+/* LEFT — FORM */
+.form-col{}
+.step-indicator{display:flex;gap:6px;align-items:center;margin-bottom:32px}
+.si-step{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-muted)}
+.si-step.active{color:var(--forest);font-weight:600}
+.si-step.done{color:var(--sage)}
+.si-dot{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--pebble-dark);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;transition:all 0.2s}
+.si-step.active .si-dot{border-color:var(--forest);background:var(--forest);color:#fff}
+.si-step.done .si-dot{border-color:var(--sage);background:var(--sage);color:#fff}
+.si-line{flex:1;height:1px;background:var(--pebble-dark)}
+.si-step.done + .si-line{background:var(--sage)}
+
+.step-panel{display:none}
+.step-panel.active{display:block;animation:fadeUp 0.35s ease both}
+
+.step-title{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.step-sub{font-size:15px;color:var(--text-muted);margin-bottom:32px;line-height:1.65}
+
+.field{margin-bottom:20px}
+.field label{display:block;font-size:12px;font-weight:600;color:var(--text-mid);margin-bottom:7px}
+.field input,.field select,.field textarea{
+  width:100%;padding:13px 16px;
+  border:1.5px solid var(--pebble-dark);border-radius:var(--r-sm);
+  font-family:'DM Sans',sans-serif;font-size:15px;color:var(--ink);
+  background:var(--white);outline:none;transition:all 0.2s;-webkit-appearance:none;
+}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--sage);box-shadow:0 0 0 3px rgba(90,138,104,0.1)}
+.field textarea{resize:vertical;min-height:90px}
+.field-hint{font-size:12px;color:var(--text-muted);margin-top:5px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:500px){.field-row{grid-template-columns:1fr}}
+
+/* Trip option cards */
+.trip-options{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.to{border:1.5px solid var(--pebble-dark);border-radius:var(--r);padding:16px 18px;cursor:pointer;transition:all 0.2s;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.to:hover{border-color:var(--sage)}
+.to.selected{border-color:var(--forest);background:rgba(30,50,34,0.04)}
+.to-left{}
+.to-name{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:3px}
+.to-meta{font-size:12px;color:var(--text-muted);display:flex;gap:12px;flex-wrap:wrap}
+.to-meta span{display:flex;align-items:center;gap:3px}
+.to-meta svg{width:11px;height:11px;stroke:currentColor;stroke-width:1.5;fill:none}
+.to-right{text-align:right;flex-shrink:0}
+.to-price{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--forest)}
+.to-per{font-size:11px;color:var(--text-muted)}
+.to-radio{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--pebble-dark);flex-shrink:0;transition:all 0.2s;display:flex;align-items:center;justify-content:center}
+.to.selected .to-radio{border-color:var(--forest);background:var(--forest)}
+.to-radio-dot{width:6px;height:6px;border-radius:50%;background:#fff;opacity:0}
+.to.selected .to-radio-dot{opacity:1}
+
+/* Availability calendar mini */
+.avail-note{background:rgba(90,138,104,0.08);border:1px solid rgba(90,138,104,0.2);border-radius:var(--r-sm);padding:12px 16px;font-size:13px;color:var(--forest-mid);display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.avail-note svg{width:16px;height:16px;stroke:currentColor;stroke-width:1.5;fill:none;flex-shrink:0}
+
+/* Experience chips */
+.exp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media(max-width:400px){.exp-grid{grid-template-columns:1fr}}
+.exp-chip{border:1.5px solid var(--pebble-dark);border-radius:var(--r-sm);padding:12px 10px;text-align:center;cursor:pointer;transition:all 0.2s}
+.exp-chip:hover{border-color:var(--sage)}
+.exp-chip.selected{border-color:var(--forest);background:rgba(30,50,34,0.04)}
+.exp-icon{font-size:22px;display:block;margin-bottom:6px}
+.exp-label{font-size:12px;font-weight:600;color:var(--ink)}
+.exp-desc{font-size:10px;color:var(--text-muted);margin-top:3px;line-height:1.4}
+
+/* Navigation */
+.form-nav{display:flex;align-items:center;justify-content:space-between;margin-top:32px;padding-top:24px;border-top:1px solid var(--pebble-dark)}
+.btn-back{background:transparent;color:var(--text-muted);font-size:14px;font-weight:500;border:1.5px solid var(--pebble-dark);padding:12px 24px;border-radius:var(--pill);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s}
+.btn-back:hover{border-color:var(--text-muted);color:var(--ink)}
+.btn-next{background:var(--forest);color:#fff;font-size:14px;font-weight:700;padding:13px 32px;border-radius:var(--pill);border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;display:flex;align-items:center;gap:8px}
+.btn-next:hover{background:var(--forest-mid);transform:translateY(-1px)}
+.btn-next svg{width:16px;height:16px;stroke:#fff;stroke-width:2;fill:none}
+.btn-submit{background:var(--amber-light);color:#fff;font-size:15px;font-weight:700;padding:15px 40px;border-radius:var(--pill);border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;display:flex;align-items:center;gap:8px}
+.btn-submit:hover{background:var(--amber);transform:translateY(-1px)}
+.btn-submit svg{width:16px;height:16px;stroke:#fff;stroke-width:2;fill:none}
+
+/* RIGHT — BOOKING SUMMARY */
+.summary-col{position:sticky;top:88px;height:fit-content}
+.guide-summary-card{background:var(--white);border:1px solid var(--pebble-dark);border-radius:var(--r);overflow:hidden;margin-bottom:16px}
+.gs-hero{height:160px;position:relative;overflow:hidden}
+.gs-hero-img{position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80&fit=crop&crop=bottom');background-size:cover;background-position:center;filter:sepia(10%) brightness(0.85)}
+.gs-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,18,10,0.75) 0%,transparent 55%)}
+.gs-hero-info{position:absolute;bottom:0;left:0;right:0;padding:14px 16px}
+.gs-name{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#fff}
+.gs-loc{font-size:12px;color:rgba(255,255,255,0.6);margin-top:2px}
+.gs-body{padding:18px}
+.gs-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--pebble-dark);font-size:13px}
+.gs-row:last-child{border-bottom:none}
+.gs-label{color:var(--text-muted)}
+.gs-val{font-weight:600;color:var(--ink);text-align:right}
+.gs-total{padding-top:14px;display:flex;justify-content:space-between;align-items:center;border-top:2px solid var(--ink)}
+.gs-total-label{font-size:15px;font-weight:700;color:var(--ink)}
+.gs-total-val{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--forest)}
+.gs-deposit{background:rgba(90,138,104,0.08);border:1px solid rgba(90,138,104,0.18);border-radius:var(--r-sm);padding:12px 14px;margin-top:12px;font-size:13px;color:var(--forest-mid);line-height:1.5}
+.gs-deposit strong{display:block;font-weight:700;margin-bottom:2px}
+
+.trust-card{background:var(--white);border:1px solid var(--pebble-dark);border-radius:var(--r);padding:18px}
+.tc-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:12px}
+.tc-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-mid);margin-bottom:8px}
+.tc-item:last-child{margin-bottom:0}
+.tc-item svg{width:14px;height:14px;stroke:var(--sage);stroke-width:2;fill:none;flex-shrink:0}
+
+/* Success screen */
+.success-wrap{display:none;padding:60px 20px;text-align:center;max-width:560px;margin:0 auto}
+.success-circle{width:80px;height:80px;border-radius:50%;background:rgba(90,138,104,0.1);border:2px solid var(--sage);margin:0 auto 28px;display:flex;align-items:center;justify-content:center}
+.success-circle svg{width:40px;height:40px;stroke:var(--sage);stroke-width:1.5;fill:none}
+.success-title{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--ink);margin-bottom:14px}
+.success-desc{font-size:16px;color:var(--text-muted);line-height:1.7;margin-bottom:36px}
+.success-timeline{background:var(--white);border:1px solid var(--pebble-dark);border-radius:var(--r);padding:24px;text-align:left;margin-bottom:32px}
+.stl-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:16px;text-transform:uppercase;letter-spacing:0.8px}
+.stl-item{display:flex;gap:14px;padding:10px 0;border-bottom:1px solid var(--pebble-dark)}
+.stl-item:last-child{border-bottom:none}
+.stl-num{width:24px;height:24px;border-radius:50%;background:var(--sage);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.stl-text{font-size:13px;color:var(--text-mid);line-height:1.6}
+.stl-text strong{color:var(--ink)}
+.success-btns{display:flex;flex-direction:column;gap:10px;max-width:320px;margin:0 auto}
+.sb-primary{background:var(--forest);color:#fff;font-size:14px;font-weight:700;padding:14px;border-radius:var(--pill);border:none;cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:none;display:block;text-align:center}
+.sb-secondary{background:transparent;color:var(--forest-mid);font-size:14px;font-weight:500;padding:13px;border-radius:var(--pill);border:1.5px solid var(--pebble-dark);cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:none;display:block;text-align:center}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<div class="progress-bar"><div class="pb-fill" id="pbFill" style="width:33%"></div></div>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <svg viewBox="0 0 32 32" fill="none"><path d="M4 22 Q8 14 13 18 Q18 22 23 15 Q27 10 31 13" stroke="#9ec4aa" stroke-width="2.2" stroke-linecap="round" fill="none"/><path d="M4 27 Q9 20 14 24 Q19 28 24 21 Q28 15 31 18" stroke="#5a8a68" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.7"/><circle cx="29.5" cy="10.5" r="2.5" fill="#d4943a"/><path d="M29.5 10.5 L25 6" stroke="#d4943a" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <span class="nav-word">Riffle</span>
+  </a>
+  <a class="nav-back" href="guide-profile.html"><svg viewBox="0 0 14 14"><polyline points="9,2 4,7 9,12"/></svg> Mike Walsh</a>
+</nav>
+
+<div class="page-wrap" id="mainWrap">
+
+  <!-- FORM COLUMN -->
+  <div class="form-col">
+
+    <!-- STEP INDICATOR -->
+    <div class="step-indicator" id="stepIndicator">
+      <div class="si-step active" data-step="1"><div class="si-dot">1</div>Trip Details</div>
+      <div class="si-line"></div>
+      <div class="si-step" data-step="2"><div class="si-dot">2</div>Your Info</div>
+      <div class="si-line"></div>
+      <div class="si-step" data-step="3"><div class="si-dot">3</div>Confirm</div>
+    </div>
+
+    <!-- STEP 1: TRIP DETAILS -->
+    <div class="step-panel active" id="step1">
+      <div class="step-title">Choose your trip</div>
+      <p class="step-sub">Select a trip type and date. Mike will confirm within 24 hours.</p>
+
+      <div class="field">
+        <label>Trip type</label>
+        <div class="trip-options">
+          <div class="to selected" onclick="selectTrip(this,'Full Day — Drift & Wade','$480',480)">
+            <div class="to-left">
+              <div class="to-name">Full Day — Drift &amp; Wade</div>
+              <div class="to-meta">
+                <span><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/><polyline points="6,3 6,6 8,7"/></svg>8 hours</span>
+                <span><svg viewBox="0 0 12 12"><circle cx="4" cy="4" r="2"/><circle cx="8" cy="4" r="2"/><path d="M2 11c0-2.2 1.8-4 4-4s4 1.8 4 4"/></svg>1–2 anglers</span>
+                <span>Flies &amp; lunch included</span>
+              </div>
+            </div>
+            <div class="to-right"><div class="to-price">$480</div><div class="to-per">/angler</div></div>
+            <div class="to-radio"><div class="to-radio-dot"></div></div>
+          </div>
+          <div class="to" onclick="selectTrip(this,'Half Day — Wading','$280',280)">
+            <div class="to-left">
+              <div class="to-name">Half Day — Wading</div>
+              <div class="to-meta">
+                <span><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/><polyline points="6,3 6,6 8,7"/></svg>4 hours</span>
+                <span><svg viewBox="0 0 12 12"><circle cx="4" cy="4" r="2"/><circle cx="8" cy="4" r="2"/><path d="M2 11c0-2.2 1.8-4 4-4s4 1.8 4 4"/></svg>1–2 anglers</span>
+                <span>Flies included</span>
+              </div>
+            </div>
+            <div class="to-right"><div class="to-price">$280</div><div class="to-per">/angler</div></div>
+            <div class="to-radio"><div class="to-radio-dot"></div></div>
+          </div>
+          <div class="to" onclick="selectTrip(this,'Multi-Day Experience','$420/day',420)">
+            <div class="to-left">
+              <div class="to-name">Multi-Day Catskills Experience</div>
+              <div class="to-meta">
+                <span><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/><polyline points="6,3 6,6 8,7"/></svg>2–3 days</span>
+                <span><svg viewBox="0 0 12 12"><circle cx="4" cy="4" r="2"/><circle cx="8" cy="4" r="2"/><path d="M2 11c0-2.2 1.8-4 4-4s4 1.8 4 4"/></svg>1–3 anglers</span>
+                <span>All gear &amp; meals included</span>
+              </div>
+            </div>
+            <div class="to-right"><div class="to-price">$420</div><div class="to-per">/angler/day</div></div>
+            <div class="to-radio"><div class="to-radio-dot"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Preferred date</label>
+          <input type="date" id="tripDate" onchange="updateSummaryDate()">
+        </div>
+        <div class="field">
+          <label>Number of anglers</label>
+          <select id="anglers" onchange="updateAnglers()">
+            <option value="1">1 angler</option>
+            <option value="2">2 anglers</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="avail-note">
+        <svg viewBox="0 0 16 16"><rect x="2" y="3" width="12" height="11" rx="1.5"/><line x1="2" y1="7" x2="14" y2="7"/><line x1="5" y1="1" x2="5" y2="5"/><line x1="11" y1="1" x2="11" y2="5"/></svg>
+        Mike is typically available April through October. He'll confirm your date within 24 hours of your request.
+      </div>
+
+      <div class="field">
+        <label>Your experience level</label>
+        <div class="exp-grid">
+          <div class="exp-chip" onclick="selectExp(this)"><span class="exp-icon">🎣</span><div class="exp-label">Complete Beginner</div><div class="exp-desc">Never cast a fly before</div></div>
+          <div class="exp-chip" onclick="selectExp(this)"><span class="exp-icon">📖</span><div class="exp-label">Some Experience</div><div class="exp-desc">Fished a few times</div></div>
+          <div class="exp-chip selected" onclick="selectExp(this)"><span class="exp-icon">🏔️</span><div class="exp-label">Intermediate</div><div class="exp-desc">Regular fly angler</div></div>
+          <div class="exp-chip" onclick="selectExp(this)"><span class="exp-icon">⭐</span><div class="exp-label">Experienced</div><div class="exp-desc">Fish often, independently</div></div>
+          <div class="exp-chip" onclick="selectExp(this)"><span class="exp-icon">🏆</span><div class="exp-label">Expert</div><div class="exp-desc">Advanced techniques</div></div>
+          <div class="exp-chip" onclick="selectExp(this)"><span class="exp-icon">👨‍👧</span><div class="exp-label">Family / Kids</div><div class="exp-desc">Bringing young anglers</div></div>
+        </div>
+      </div>
+
+      <div class="form-nav">
+        <div></div>
+        <button class="btn-next" onclick="goTo(2)">Continue <svg viewBox="0 0 16 16"><polyline points="6,3 11,8 6,13"/></svg></button>
+      </div>
+    </div>
+
+    <!-- STEP 2: YOUR INFO -->
+    <div class="step-panel" id="step2">
+      <div class="step-title">About you</div>
+      <p class="step-sub">Mike uses this to prepare the right gear, flies, and experience for your day on the water.</p>
+
+      <div class="field-row">
+        <div class="field"><label>First name</label><input type="text" placeholder="Tom" id="fname"></div>
+        <div class="field"><label>Last name</label><input type="text" placeholder="Harrington" id="lname"></div>
+      </div>
+      <div class="field"><label>Email address</label><input type="email" placeholder="tom@email.com" id="email"><div class="field-hint">Your booking confirmation goes here.</div></div>
+      <div class="field"><label>Phone number</label><input type="tel" placeholder="(212) 555-0142"><div class="field-hint">Mike may text you the morning of with conditions and meeting point.</div></div>
+
+      <div class="field">
+        <label>Do you need waders and boots?</label>
+        <select>
+          <option>No — I have my own</option>
+          <option>Yes — please provide (size: )</option>
+          <option>One of us needs gear</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Target species (optional)</label>
+        <select>
+          <option>Whatever is best that day — Mike's choice</option>
+          <option>Wild brown trout — Beaverkill</option>
+          <option>Wild rainbow trout — Esopus</option>
+          <option>Trophy browns — West Branch Delaware</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Message for Mike (optional but encouraged)</label>
+        <textarea placeholder="Tell Mike anything that helps him plan your day — what you want to learn, any physical limitations, if you're celebrating something, flies you love or hate, specific goals…"></textarea>
+        <div class="field-hint">Guides who know more about their clients always run better trips. Don't be shy.</div>
+      </div>
+
+      <div class="field">
+        <label>How did you hear about Riffle?</label>
+        <select>
+          <option>Google search</option>
+          <option>Instagram</option>
+          <option>A friend recommended Riffle</option>
+          <option>Fly Fishing Show</option>
+          <option>Fly shop referral</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="form-nav">
+        <button class="btn-back" onclick="goTo(1)">← Back</button>
+        <button class="btn-next" onclick="goTo(3)">Review Request <svg viewBox="0 0 16 16"><polyline points="6,3 11,8 6,13"/></svg></button>
+      </div>
+    </div>
+
+    <!-- STEP 3: CONFIRM -->
+    <div class="step-panel" id="step3">
+      <div class="step-title">Review your request</div>
+      <p class="step-sub">Check everything before sending. Mike will confirm within 24 hours — you won't be charged until he does.</p>
+
+      <div style="background:var(--white);border:1px solid var(--pebble-dark);border-radius:var(--r);padding:22px;margin-bottom:22px">
+        <div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:14px;text-transform:uppercase;letter-spacing:0.8px">Trip summary</div>
+        <div style="display:flex;flex-direction:column;gap:0">
+          <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--pebble-dark);font-size:14px"><span style="color:var(--text-muted)">Guide</span><span style="font-weight:600">Mike Walsh · Roscoe, NY</span></div>
+          <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--pebble-dark);font-size:14px"><span style="color:var(--text-muted)">Trip type</span><span style="font-weight:600" id="confirmTrip">Full Day — Drift &amp; Wade</span></div>
+          <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--pebble-dark);font-size:14px"><span style="color:var(--text-muted)">Requested date</span><span style="font-weight:600" id="confirmDate">—</span></div>
+          <div style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--pebble-dark);font-size:14px"><span style="color:var(--text-muted)">Anglers</span><span style="font-weight:600" id="confirmAnglers">1 angler</span></div>
+          <div style="display:flex;justify-content:space-between;padding:9px 0;font-size:14px"><span style="color:var(--text-muted)">Total trip cost</span><span style="font-weight:700;color:var(--forest);font-family:'Playfair Display',serif;font-size:18px" id="confirmTotal">$480</span></div>
+        </div>
+      </div>
+
+      <div style="background:rgba(90,138,104,0.08);border:1px solid rgba(90,138,104,0.2);border-radius:var(--r);padding:20px;margin-bottom:22px">
+        <div style="font-size:14px;font-weight:700;color:var(--forest-mid);margin-bottom:10px">Payment timeline</div>
+        <div style="font-size:13px;color:var(--text-mid);line-height:1.7">
+          <strong style="color:var(--ink)">Today:</strong> You send the request. No charge yet.<br>
+          <strong style="color:var(--ink)">Within 24 hours:</strong> Mike confirms your date. You pay a 25% deposit via Stripe to lock the booking.<br>
+          <strong style="color:var(--ink)">Day of trip:</strong> Pay the remaining 75% in cash or card directly to Mike.
+        </div>
+      </div>
+
+      <div style="background:var(--white);border:1px solid var(--pebble-dark);border-radius:var(--r);padding:18px;margin-bottom:28px">
+        <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:13px;color:var(--text-mid);line-height:1.6">
+          <input type="checkbox" style="margin-top:2px;flex-shrink:0;width:16px;height:16px" checked>
+          I agree to Riffle's <a href="#" style="color:var(--forest-mid)">Terms of Service</a> and <a href="#" style="color:var(--forest-mid)">Booking Policy</a>. I understand my card will not be charged until Mike confirms the booking.
+        </label>
+      </div>
+
+      <div class="form-nav">
+        <button class="btn-back" onclick="goTo(2)">← Back</button>
+        <button class="btn-submit" onclick="submitRequest()">
+          <svg viewBox="0 0 16 16"><path d="M2 8l10 0M8 3l5 5-5 5"/></svg>
+          Send Request to Mike
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SUMMARY COLUMN -->
+  <div class="summary-col">
+    <div class="guide-summary-card">
+      <div class="gs-hero">
+        <div class="gs-hero-img"></div>
+        <div class="gs-hero-overlay"></div>
+        <div class="gs-hero-info">
+          <div class="gs-name">Mike Walsh</div>
+          <div class="gs-loc">Catskills Fly Fishing Guide · Roscoe, NY</div>
+        </div>
+      </div>
+      <div class="gs-body">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:14px;font-size:13px">
+          <span style="color:var(--amber-light)">★★★★★</span>
+          <span style="font-weight:600;color:var(--ink)">4.9</span>
+          <span style="color:var(--text-muted)">· 224 reviews</span>
+          <span style="margin-left:auto;font-size:11px;font-weight:600;color:var(--sage)">✓ Verified</span>
+        </div>
+        <div class="gs-row"><span class="gs-label">Trip type</span><span class="gs-val" id="sumTrip">Full Day — Drift &amp; Wade</span></div>
+        <div class="gs-row"><span class="gs-label">Date requested</span><span class="gs-val" id="sumDate">Not selected</span></div>
+        <div class="gs-row"><span class="gs-label">Anglers</span><span class="gs-val" id="sumAnglers">1 angler</span></div>
+        <div class="gs-row"><span class="gs-label">Price per angler</span><span class="gs-val" id="sumPrice">$480</span></div>
+        <div class="gs-total">
+          <span class="gs-total-label">Total</span>
+          <span class="gs-total-val" id="sumTotal">$480</span>
+        </div>
+        <div class="gs-deposit">
+          <strong>Deposit due on confirmation: <span id="sumDeposit">$120</span></strong>
+          25% deposit secures your booking. Pay the rest on the day of your trip.
+        </div>
+      </div>
+    </div>
+
+    <div class="trust-card">
+      <div class="tc-title">You're protected</div>
+      <div class="tc-item"><svg viewBox="0 0 14 14"><polyline points="2,7 5,10 12,3"/></svg>No charge until Mike confirms</div>
+      <div class="tc-item"><svg viewBox="0 0 14 14"><polyline points="2,7 5,10 12,3"/></svg>Free cancellation up to 14 days out</div>
+      <div class="tc-item"><svg viewBox="0 0 14 14"><polyline points="2,7 5,10 12,3"/></svg>Secure payment via Stripe</div>
+      <div class="tc-item"><svg viewBox="0 0 14 14"><polyline points="2,7 5,10 12,3"/></svg>Licensed, insured guide</div>
+      <div class="tc-item"><svg viewBox="0 0 14 14"><polyline points="2,7 5,10 12,3"/></svg>Riffle support if anything goes wrong</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SUCCESS SCREEN -->
+<div class="success-wrap" id="successWrap">
+  <div class="success-circle">
+    <svg viewBox="0 0 40 40"><polyline points="7,20 15,28 33,12"/></svg>
+  </div>
+  <div class="success-title">Request sent to Mike.</div>
+  <p class="success-desc">Mike will review your request and confirm within 24 hours. You'll get an email at <strong id="successEmail">your email</strong> as soon as he responds.</p>
+  <div class="success-timeline">
+    <div class="stl-title">What happens next</div>
+    <div class="stl-item"><div class="stl-num">1</div><div class="stl-text"><strong>Mike reviews your request</strong> — He checks his calendar and conditions for your date. You'll hear back within 24 hours, usually sooner.</div></div>
+    <div class="stl-item"><div class="stl-num">2</div><div class="stl-text"><strong>You pay the 25% deposit</strong> — Once Mike confirms, Riffle sends you a secure Stripe link to lock the booking. Takes 2 minutes.</div></div>
+    <div class="stl-item"><div class="stl-num">3</div><div class="stl-text"><strong>Mike sends trip details</strong> — Meeting point, what to bring, current conditions. Usually the evening before.</div></div>
+    <div class="stl-item"><div class="stl-num">4</div><div class="stl-text"><strong>You fish.</strong> Pay the remaining 75% on the day. Leave a review when you're done — it helps the next angler find Mike.</div></div>
+  </div>
+  <div class="success-btns">
+    <a class="sb-primary" href="guide-profile.html">Back to Mike's Profile</a>
+    <a class="sb-secondary" href="catskills.html">Browse More Catskills Guides</a>
+    <a class="sb-secondary" href="index.html">Return to Riffle Homepage</a>
+  </div>
+</div>
+
+<script>
+var currentStep=1;
+var tripPrice=480;
+var tripName='Full Day — Drift & Wade';
+var numAnglers=1;
+
+function goTo(n){
+  document.getElementById('step'+currentStep).classList.remove('active');
+  currentStep=n;
+  document.getElementById('step'+n).classList.add('active');
+  var pct=Math.round((n/3)*100);
+  document.getElementById('pbFill').style.width=pct+'%';
+
+  document.querySelectorAll('.si-step').forEach(function(s,i){
+    var sn=parseInt(s.dataset.step);
+    if(sn<n)s.className='si-step done';
+    else if(sn===n)s.className='si-step active';
+    else s.className='si-step';
+  });
+
+  // Update step 3 confirm fields
+  if(n===3){
+    document.getElementById('confirmTrip').textContent=tripName;
+    var dateVal=document.getElementById('tripDate').value;
+    document.getElementById('confirmDate').textContent=dateVal?new Date(dateVal+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'}):'Not selected';
+    document.getElementById('confirmAnglers').textContent=numAnglers+' angler'+(numAnglers>1?'s':'');
+    document.getElementById('confirmTotal').textContent='$'+tripPrice*numAnglers;
+  }
+
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function selectTrip(el,name,priceStr,price){
+  document.querySelectorAll('.to').forEach(function(t){t.classList.remove('selected')});
+  el.classList.add('selected');
+  tripName=name;tripPrice=price;
+  updateSummary();
+}
+
+function selectExp(el){
+  document.querySelectorAll('.exp-chip').forEach(function(c){c.classList.remove('selected')});
+  el.classList.add('selected');
+}
+
+function updateAnglers(){
+  numAnglers=parseInt(document.getElementById('anglers').value);
+  updateSummary();
+}
+
+function updateSummaryDate(){
+  var val=document.getElementById('tripDate').value;
+  var display=val?new Date(val+'T12:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'Not selected';
+  document.getElementById('sumDate').textContent=display;
+}
+
+function updateSummary(){
+  document.getElementById('sumTrip').textContent=tripName;
+  document.getElementById('sumAnglers').textContent=numAnglers+' angler'+(numAnglers>1?'s':'');
+  document.getElementById('sumPrice').textContent='$'+tripPrice;
+  var total=tripPrice*numAnglers;
+  document.getElementById('sumTotal').textContent='$'+total;
+  document.getElementById('sumDeposit').textContent='$'+Math.round(total*0.25);
+}
+
+function submitRequest(){
+  var email=document.getElementById('email').value||'your email';
+  document.getElementById('successEmail').textContent=email;
+  document.getElementById('mainWrap').style.display='none';
+  document.getElementById('successWrap').style.display='block';
+  document.getElementById('pbFill').style.width='100%';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+updateSummary();
+</script>
+</body>
+</html>

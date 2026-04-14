@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fly Fishing Lodges — Book on Riffle | riffle.guide/lodges</title>
+<meta name="description" content="Book the finest fly fishing lodges in the US and beyond. Private water, expert guides, and all-inclusive packages on legendary trout, salmon, and saltwater destinations.">
+<link rel="canonical" href="https://riffle.guide/lodges">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --forest:#1e3222;--forest-mid:#2c4e35;--forest-lt:#3d6b4a;
+  --sage:#5a8a68;--mist:#9ec4aa;--river:#4a7fa0;
+  --pebble:#f0ebe0;--pebble-dk:#ddd6c4;--cream:#fdfaf3;--warm:#faf6ee;
+  --amber:#b8772a;--amber-lt:#d4943a;--gold:#e8c068;
+  --ink:#1a1f16;--text-mid:#3a4a3a;--text-muted:#7a8a72;
+  --white:#fff;--r:14px;--r-sm:8px;--pill:100px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:64px;background:rgba(26,31,22,0.97);backdrop-filter:blur(16px)}
+.nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none}
+.nav-logo svg{width:28px;height:28px}
+.nav-word{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff}
+.nav-links{display:flex;align-items:center;gap:6px}
+.nl{color:rgba(255,255,255,0.68);text-decoration:none;font-size:14px;font-weight:500;padding:7px 12px;border-radius:var(--r-sm)}
+.nl:hover{color:#fff;background:rgba(255,255,255,0.08)}
+.nl.active{color:#fff;background:rgba(255,255,255,0.1)}
+.n-cta{background:var(--amber-lt);color:#fff;font-size:13px;font-weight:600;padding:8px 18px;border-radius:var(--pill);text-decoration:none;margin-left:8px}
+.n-cta:hover{background:var(--amber)}
+@media(max-width:700px){.nav-links .nl{display:none}}
+
+/* HERO */
+.hero{position:relative;height:460px;overflow:hidden;margin-top:64px}
+.hero-img{position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1800&q=85&fit=crop&crop=center');background-size:cover;background-position:center 40%;filter:sepia(10%) contrast(1.06) brightness(0.72) saturate(1.1)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(15,22,14,0.4) 0%,rgba(15,22,14,0.15) 40%,rgba(15,22,14,0.85) 100%)}
+.hero-content{position:absolute;bottom:0;left:0;right:0;padding:40px 5% 44px}
+.hc-eyebrow{font-size:10px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--mist);margin-bottom:12px}
+.hc-title{font-family:'Playfair Display',serif;font-size:clamp(36px,6vw,60px);font-weight:900;color:#fff;line-height:1;letter-spacing:-1px;margin-bottom:12px}
+.hc-title em{font-style:italic;color:var(--mist)}
+.hc-sub{font-size:15px;color:rgba(255,255,255,0.6);max-width:500px;line-height:1.7;margin-bottom:24px}
+.hc-chips{display:flex;gap:8px;flex-wrap:wrap}
+.hc-chip{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);color:rgba(255,255,255,0.75);font-size:12px;padding:5px 13px;border-radius:var(--pill)}
+
+/* SEARCH BAR */
+.search-bar{background:var(--white);border-bottom:1px solid var(--pebble-dk);padding:16px 5%;display:flex;gap:12px;align-items:center;flex-wrap:wrap;position:sticky;top:64px;z-index:200}
+.sb-field{display:flex;align-items:center;gap:8px;border:1.5px solid var(--pebble-dk);border-radius:var(--r-sm);padding:8px 14px;background:var(--pebble);flex:1;min-width:160px;cursor:text}
+.sb-field svg{width:14px;height:14px;stroke:var(--text-muted);stroke-width:1.5;fill:none;flex-shrink:0}
+.sb-field input,.sb-field select{border:none;outline:none;background:transparent;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink);width:100%;-webkit-appearance:none}
+.sb-field input::placeholder{color:var(--text-muted)}
+.sb-go{background:var(--forest);color:#fff;font-size:13px;font-weight:700;padding:9px 22px;border-radius:var(--r-sm);border:none;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:all 0.2s}
+.sb-go:hover{background:var(--forest-mid)}
+.sb-count{font-size:13px;color:var(--text-muted);white-space:nowrap;margin-left:auto}
+
+/* FILTER CHIPS */
+.filter-bar{background:var(--white);border-bottom:1px solid var(--pebble-dk);padding:12px 5%;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.filter-bar::-webkit-scrollbar{display:none}
+.fc{background:var(--pebble);color:var(--forest-mid);font-size:12px;font-weight:500;padding:6px 14px;border-radius:var(--pill);cursor:pointer;border:1px solid var(--pebble-dk);transition:all 0.2s;white-space:nowrap;flex-shrink:0}
+.fc.active{background:var(--forest);color:#fff;border-color:var(--forest)}
+.fc:hover{border-color:var(--sage)}
+
+/* MAIN LAYOUT */
+.page-body{display:grid;grid-template-columns:260px 1fr;gap:32px;padding:40px 5%;max-width:1280px;margin:0 auto}
+@media(max-width:1024px){.page-body{grid-template-columns:1fr;padding:28px 5%}.filter-sidebar{display:none}}
+
+/* SIDEBAR FILTERS */
+.filter-sidebar{position:sticky;top:140px;height:fit-content}
+.fs-section{margin-bottom:28px}
+.fs-title{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.5px}
+.fs-check{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-mid);cursor:pointer;padding:4px 0}
+.fs-check input{width:15px;height:15px;accent-color:var(--forest);flex-shrink:0}
+.fs-range{display:flex;gap:8px}
+.fs-range input{width:100%;padding:8px 10px;border:1.5px solid var(--pebble-dk);border-radius:var(--r-sm);font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink);background:var(--pebble);outline:none}
+.fs-range input:focus{border-color:var(--sage)}
+.fs-rule{height:1px;background:var(--pebble-dk);margin-bottom:24px}
+
+/* LODGE CARDS */
+.lodges-list{display:flex;flex-direction:column;gap:20px}
+.lc{background:var(--white);border:1px solid var(--pebble-dk);border-radius:var(--r);display:flex;gap:0;overflow:hidden;transition:all 0.25s;cursor:pointer;text-decoration:none;color:inherit}
+.lc:hover{box-shadow:0 8px 32px rgba(26,31,22,0.1);transform:translateY(-2px);border-color:transparent}
+.lc-img-wrap{width:280px;flex-shrink:0;position:relative;overflow:hidden}
+.lc-img{width:100%;height:100%;object-fit:cover;display:block;filter:sepia(8%) contrast(1.05) brightness(0.88);transition:transform 0.5s}
+.lc:hover .lc-img{transform:scale(1.04)}
+.lc-badge{position:absolute;top:12px;left:12px;font-size:10px;font-weight:700;padding:4px 10px;border-radius:var(--pill)}
+.lcb-featured{background:var(--amber-lt);color:#fff}
+.lcb-private{background:rgba(30,50,34,0.85);color:var(--mist);backdrop-filter:blur(6px)}
+.lcb-intl{background:rgba(74,127,160,0.85);color:#fff;backdrop-filter:blur(6px)}
+.lc-body{flex:1;padding:22px 22px 18px}
+.lc-header{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:8px}
+.lc-name{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink)}
+.lc-price-wrap{text-align:right;flex-shrink:0}
+.lc-price{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--forest)}
+.lc-per{font-size:11px;color:var(--text-muted)}
+.lc-loc{font-size:13px;color:var(--text-muted);display:flex;align-items:center;gap:4px;margin-bottom:8px}
+.lc-loc svg{width:11px;height:11px;stroke:currentColor;stroke-width:1.5;fill:none}
+.lc-highlights{display:flex;gap:16px;margin-bottom:10px;flex-wrap:wrap}
+.lc-hl{font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:4px}
+.lc-hl svg{width:11px;height:11px;stroke:var(--sage);stroke-width:1.8;fill:none}
+.lc-desc{font-size:13px;color:var(--text-mid);line-height:1.65;margin-bottom:12px}
+.lc-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px}
+.ltag{background:var(--pebble);color:var(--forest-mid);font-size:11px;font-weight:500;padding:3px 9px;border-radius:var(--pill);border:1px solid var(--pebble-dk)}
+.lc-footer{display:flex;align-items:center;justify-content:space-between}
+.lc-rating{display:flex;align-items:center;gap:5px}
+.lc-stars{color:var(--amber-lt);font-size:12px}
+.lc-rn{font-size:13px;font-weight:600;color:var(--ink)}
+.lc-rc{font-size:12px;color:var(--text-muted)}
+.lc-bk{background:var(--forest);color:#fff;font-size:12px;font-weight:600;padding:8px 18px;border-radius:var(--pill);border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s}
+.lc-bk:hover{background:var(--forest-mid)}
+@media(max-width:700px){.lc{flex-direction:column}.lc-img-wrap{width:100%;height:220px}.lc-header{flex-direction:column}.lc-price-wrap{text-align:left}}
+
+/* LOAD MORE */
+.load-more{display:flex;justify-content:center;margin-top:28px}
+.lm-btn{background:transparent;border:1.5px solid var(--pebble-dk);color:var(--forest-mid);font-size:14px;font-weight:600;padding:12px 32px;border-radius:var(--pill);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s}
+.lm-btn:hover{border-color:var(--sage)}
+
+/* DESTINATION SECTIONS */
+.dest-section{margin-top:60px;padding-top:48px;border-top:1px solid var(--pebble-dk)}
+.ds-header{margin-bottom:24px}
+.ds-eyebrow{font-size:10px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--sage);margin-bottom:8px}
+.ds-title{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--ink)}
+
+/* WHY RIFFLE LODGES */
+.why-section{background:var(--forest);border-radius:var(--r);padding:36px;margin-top:48px;color:#fff}
+.wy-eyebrow{font-size:10px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--mist);margin-bottom:10px}
+.wy-title{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:#fff;margin-bottom:14px}
+.wy-title em{font-style:italic;color:var(--gold)}
+.wy-sub{font-size:14px;color:rgba(255,255,255,0.55);line-height:1.7;margin-bottom:24px}
+.wy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:600px){.wy-grid{grid-template-columns:1fr}}
+.wy-item{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:var(--r-sm);padding:16px}
+.wyi-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:5px}
+.wyi-body{font-size:12px;color:rgba(255,255,255,0.45);line-height:1.55}
+
+/* FOOTER */
+footer{background:#0c1610;padding:40px 5% 32px;margin-top:60px}
+.ft-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
+.ft-logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff}
+.ft-tagline{font-family:'Playfair Display',serif;font-size:13px;font-style:italic;color:rgba(255,255,255,0.28)}
+.ft-links a{text-decoration:none;font-size:12px;color:rgba(255,255,255,0.25);margin-left:20px}
+.ft-copy{width:100%;padding-top:20px;border-top:1px solid rgba(255,255,255,0.06);font-size:11px;color:rgba(255,255,255,0.18);margin-top:16px}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(12px);transition:opacity 0.5s ease,transform 0.5s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="riffle.html">
+    <svg viewBox="0 0 32 32" fill="none"><path d="M4 22 Q8 14 13 18 Q18 22 23 15 Q27 10 31 13" stroke="#9EC4AA" stroke-width="2.2" stroke-linecap="round" fill="none"/><path d="M4 27 Q9 20 14 24 Q19 28 24 21 Q28 15 31 18" stroke="#5A8A68" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.7"/><circle cx="29.5" cy="10.5" r="2.5" fill="#D4943A"/><path d="M29.5 10.5 L25 6" stroke="#D4943A" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <span class="nav-word">Riffle</span>
+  </a>
+  <div class="nav-links">
+    <a class="nl" href="riffle-catskills.html">Guides</a>
+    <a class="nl active" href="#">Lodges</a>
+    <a class="nl" href="#">Destinations</a>
+    <a class="n-cta" href="riffle-lodge-onboarding.html">List Your Lodge</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-img"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hc-eyebrow">Fly Fishing Lodges</div>
+    <h1 class="hc-title">Private water.<br><em>Expert guides. Unforgettable.</em></h1>
+    <p class="hc-sub">Curated fly fishing lodges with private river access, resident guides, and all-inclusive packages. From Catskills tailwaters to Patagonian wilderness.</p>
+    <div class="hc-chips">
+      <span class="hc-chip">142 Verified Lodges</span>
+      <span class="hc-chip">28 Countries</span>
+      <span class="hc-chip">Private Water Access</span>
+      <span class="hc-chip">Guides Included</span>
+    </div>
+  </div>
+</div>
+
+<!-- SEARCH BAR -->
+<div class="search-bar">
+  <div class="sb-field" style="max-width:240px">
+    <svg viewBox="0 0 14 14"><circle cx="6" cy="6" r="4.5"/><line x1="9.5" y1="9.5" x2="13" y2="13"/></svg>
+    <input type="text" placeholder="Region, river, or lodge name…">
+  </div>
+  <div class="sb-field" style="max-width:160px">
+    <svg viewBox="0 0 14 14"><rect x="1" y="2" width="12" height="11" rx="1.5"/><line x1="1" y1="6" x2="13" y2="6"/><line x1="4" y1="1" x2="4" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/></svg>
+    <input type="date">
+  </div>
+  <div class="sb-field" style="max-width:140px">
+    <svg viewBox="0 0 14 14"><circle cx="5" cy="4" r="2"/><circle cx="9" cy="4" r="2"/><path d="M1 12c0-2.8 1.8-5 4-5s4 2.2 4 5"/></svg>
+    <select><option>1–2 guests</option><option>3–4 guests</option><option>5–8 guests</option><option>Group (9+)</option></select>
+  </div>
+  <div class="sb-field" style="max-width:140px">
+    <svg viewBox="0 0 14 14"><circle cx="7" cy="7" r="5.5"/><polyline points="7,4 7,7 9,8.5"/></svg>
+    <select><option>Any duration</option><option>2–3 nights</option><option>4–6 nights</option><option>7+ nights</option></select>
+  </div>
+  <button class="sb-go">Search Lodges</button>
+  <span class="sb-count">142 lodges available</span>
+</div>
+
+<!-- FILTER CHIPS -->
+<div class="filter-bar">
+  <span class="fc active" onclick="filter(this)">All Lodges</span>
+  <span class="fc" onclick="filter(this)">Private Water</span>
+  <span class="fc" onclick="filter(this)">Dry Fly Focus</span>
+  <span class="fc" onclick="filter(this)">All-Inclusive</span>
+  <span class="fc" onclick="filter(this)">Northeast US</span>
+  <span class="fc" onclick="filter(this)">Montana</span>
+  <span class="fc" onclick="filter(this)">Colorado</span>
+  <span class="fc" onclick="filter(this)">International</span>
+  <span class="fc" onclick="filter(this)">Beginners Welcome</span>
+  <span class="fc" onclick="filter(this)">Saltwater</span>
+  <span class="fc" onclick="filter(this)">Under $500/night</span>
+</div>
+
+<!-- BODY -->
+<div class="page-body">
+
+  <!-- SIDEBAR -->
+  <div class="filter-sidebar">
+    <div class="fs-section">
+      <div class="fs-title">Location</div>
+      <label class="fs-check"><input type="checkbox" checked> Northeast US (32)</label>
+      <label class="fs-check"><input type="checkbox"> Rocky Mountains (38)</label>
+      <label class="fs-check"><input type="checkbox"> Southeast US (14)</label>
+      <label class="fs-check"><input type="checkbox"> Pacific Northwest (18)</label>
+      <label class="fs-check"><input type="checkbox"> International (40)</label>
+    </div>
+    <div class="fs-rule"></div>
+    <div class="fs-section">
+      <div class="fs-title">Price per person / night</div>
+      <div class="fs-range">
+        <input type="number" placeholder="Min $" value="200">
+        <input type="number" placeholder="Max $" value="2000">
+      </div>
+    </div>
+    <div class="fs-rule"></div>
+    <div class="fs-section">
+      <div class="fs-title">What's included</div>
+      <label class="fs-check"><input type="checkbox" checked> Guided fishing</label>
+      <label class="fs-check"><input type="checkbox"> All meals</label>
+      <label class="fs-check"><input type="checkbox"> Private water access</label>
+      <label class="fs-check"><input type="checkbox"> Flies & gear</label>
+      <label class="fs-check"><input type="checkbox"> Airport transfers</label>
+    </div>
+    <div class="fs-rule"></div>
+    <div class="fs-section">
+      <div class="fs-title">Target species</div>
+      <label class="fs-check"><input type="checkbox" checked> Brown Trout</label>
+      <label class="fs-check"><input type="checkbox" checked> Rainbow Trout</label>
+      <label class="fs-check"><input type="checkbox"> Cutthroat</label>
+      <label class="fs-check"><input type="checkbox"> Atlantic Salmon</label>
+      <label class="fs-check"><input type="checkbox"> Steelhead</label>
+      <label class="fs-check"><input type="checkbox"> Bonefish / Permit</label>
+      <label class="fs-check"><input type="checkbox"> Tarpon</label>
+    </div>
+    <div class="fs-rule"></div>
+    <div class="fs-section">
+      <div class="fs-title">Lodge type</div>
+      <label class="fs-check"><input type="checkbox"> Rustic / Classic</label>
+      <label class="fs-check"><input type="checkbox"> Luxury</label>
+      <label class="fs-check"><input type="checkbox"> Remote / Backcountry</label>
+      <label class="fs-check"><input type="checkbox"> Family-friendly</label>
+    </div>
+  </div>
+
+  <!-- LODGE LISTINGS -->
+  <div>
+    <div class="lodges-list reveal">
+
+      <!-- Beaverkill Valley Inn -->
+      <a class="lc" href="riffle-lodge-profile.html">
+        <div class="lc-img-wrap">
+          <img class="lc-img" src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80&fit=crop&crop=bottom" alt="Beaverkill Valley Inn">
+          <span class="lc-badge lcb-featured">⭐ Featured</span>
+        </div>
+        <div class="lc-body">
+          <div class="lc-header">
+            <div class="lc-name">Beaverkill Valley Inn</div>
+            <div class="lc-price-wrap"><div class="lc-price">$485</div><div class="lc-per">/person/night</div></div>
+          </div>
+          <div class="lc-loc"><svg viewBox="0 0 12 12"><path d="M6 1C4.3 1 3 2.3 3 3.8c0 2.4 3 7.2 3 7.2s3-4.8 3-7.2C9 2.3 7.7 1 6 1z"/><circle cx="6" cy="3.8" r="1.2"/></svg>Lew Beach, New York · Beaverkill River</div>
+          <div class="lc-highlights">
+            <span class="lc-hl"><svg viewBox="0 0 11 11"><polyline points="1.5,5.5 4,8 9.5,2.5"/></svg>3 miles private water</span>
+            <span class="lc-hl"><svg viewBox="0 0 11 11"><polyline points="1.5,5.5 4,8 9.5,2.5"/></svg>6 resident guides</span>
+            <span class="lc-hl"><svg viewBox="0 0 11 11"><polyline points="1.5,5.5 4,8 9.5,2.5"/></svg>Est. 1893</span>
+            <span class="lc-hl"><svg viewBox="0 0 11 11"><polyline points="1.5,5.5 4,8 9.5,2.5"/></svg>20 rooms</span>
+          </div>
+          <p class="lc-desc">The most storied fly fishing lodge in the Catskills. Three miles of private Beaverkill frontage with 14 named pools, 6 resident guides, fine dining, and all-inclusive packages built entirely around fishing wild brown trout on legendary water.</p>
+          <div class="lc-tags"><span class="ltag">Beaverkill</span><span class="ltag">Dry Fly</span><span class="ltag">Brown Trout</span><span class="ltag">Private Water</span><span class="ltag">All-Inclusive</span></div>
+          <div class="lc-footer">
+            <div>
+              <div class="lc-rating"><span class="lc-stars">★★★★★</span><span class="lc-rn">4.9</span><span class="lc-rc">(186 reviews)</span></div>
+            </div>
+            <button class="lc-bk">View Lodge</button>
+          </div>
+        </div>
+      </a>
+
+      <!-- DeBruce Country Inn -->
+      <div class="lc reveal">
+        <div class="lc-img-wrap">
+          <img class="lc-img" src="https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=600&q=80&fit=crop" alt="DeBruce Country Inn">
+          <span class="lc-badge lcb-private">Private Water</span>
+        </div>
+        <div class="lc-body">
+          <div class="lc-header">
+            <div class="lc-name">DeBruce Country Inn</div>
+            <div class="lc-price-wrap"><div class="lc-price">$380</div><div class="lc-per">/person/night</div></div>
+          </div>
+          <div class="lc-loc"><svg viewBox="0 0 12 12"><path d="M6 1C4.3 1 3 2.3 3 3.8c0 2.4 3 7.2 3 7.2s3-4.8 3-7.2C9 2.3 7.7 1 6 1z"/><circle cx="6" cy="3.8" r="1.2"/></svg>DeBruce, New York · Willowemoc Creek</div>
+          <div class="lc-highlights">
+            <span class="lc-hl"><svg viewBox="0 0 11 11"><polyline points="1.5,5.5 4,8 9.5,2.5"/></svg>1.5 miles private Willowemoc</span>
+            <span class="lc-hl"><svg viewBox="0 0 11 11"><polyline points="1.5,5.5 4,8 9.5,2.5"/></svg>4 resident guides</span>
+            <span class="lc-hl"><svg viewBox="0 0 11 11"><polyline points="1.5,5.5 4,8 9.5,2.5"/></svg>10 rooms</span>
+          </div>
+          <p class="lc-desc">Intimate Catskills lodge on the Willowemoc Creek — quieter and less pressured than the main Beaverkill, with just as good fishing. Known for exceptional instruction, warm hospitality, and a kitchen that sources locally. A fly angler's second home.</p>
+          <div class="lc-tags"><span class="ltag">Willowemoc</span><span class="ltag">Dry Fly</span><span class="ltag">Instruction</span><span class="ltag">Intimate</span></div>
+          <div class="lc-footer">
+            <div><div class="lc-rating"><span class="lc-stars">★★★★★</span><span class="lc-rn">4.8</span><span class="lc-rc">(94 reviews)</span></div></div>
+            <button class="lc-bk">View Lodge</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Montana -->
+      <div class="lc reveal">
+        <div class="lc-img-wrap">
+          <img class="lc-img" src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=80&fit=crop" alt="Montana Lodge">
+          <span class="lc-badge lcb-private">Private Water</span>
+        </div>
+        <div class="lc-body">
+          <div class="lc-header">
+            <div class="lc-name">Gallatin River Lodge</div>
+            <div class="lc-price-wrap"><div class="lc-price">$620</div><div class="lc-per">/person/night</div></div>
+          </div>
+          <div class="lc-loc"><svg viewBox="0 0 12 12"><path d="M6 1C4.3 1 3 2.3 3 3.8c0 2.4 3 7.2 3 7.2s3-4.8 3-7.2C9 2.3 7.7 1 6 1z"/><circle cx="6" cy="3.8" r="1.2"/></svg>Bozeman, Montana · Gallatin & Madison Rivers</div>
+          <div class="lc-highlights">
+            <span class="lc-hl"><svg viewBox="0 0 11 11"><polyline points="1.5,5.5 4,8 9.5,2.5"/></svg>Access to 5 blue ribbon rivers</span>
+            <span class="lc-hl"><svg viewBox="0 0 11 11"><polyline points="1.5,5.5 4,8 9.5,2.5"/></svg>Drift boat & wading</span>
+            <span class="lc-hl"><svg viewBox="0 0 11 11"><polyline points="1.5,5.5 4,8 9.5,2.5"/></svg>12 cabins</span>
+          </div>
+          <p class="lc-desc">Gateway to the best trout rivers in North America. The lodge sits 20 minutes from Bozeman with access to the Gallatin, Madison, Yellowstone, and Firehole. Drift boat and wading programs for all levels. The Rocky Mountains as backdrop.</p>
+          <div class="lc-tags"><span class="ltag">Montana</span><span class="ltag">Drift Boat</span><span class="ltag">Cutthroat</span><span class="ltag">Rainbow Trout</span><span class="ltag">5 Rivers</span></div>
+          <div class="lc-footer">
+            <div><div class="lc-rating"><span class="lc-stars">★★★★★</span><span class="lc-rn">4.9</span><span class="lc-rc">(218 reviews)</span></div></div>
+            <button class="lc-bk">View Lodge</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Patagonia -->
+      <div class="lc reveal">
+        <div class="lc-img-wrap">
+          <img class="lc-img" src="https://images.unsplash.com/photo-1553913861-c0fddf2619ee?w=600&q=80&fit=crop" alt="Patagonia Lodge">
+          <span class="lc-badge lcb-intl">🌍 International</span>
+        </div>
+        <div class="lc-body">
+          <div class="lc-header">
+            <div class="lc-name">Río Palena Lodge</div>
+            <div class="lc-price-wrap"><div class="lc-price">$1,240</div><div class="lc-per">/person/night</div></div>
+          </div>
+          <div class="lc-loc"><svg viewBox="0 0 12 12"><path d="M6 1C4.3 1 3 2.3 3 3.8c0 2.4 3 7.2 3 7.2s3-4.8 3-7.2C9 2.3 7.7 1 6 1z"/><circle cx="6" cy="3.8" r="1.2"/></svg>Chilean Patagonia · Río Palena</div>
+          <div class="lc-highlights">
+            <span class="lc-hl"><svg viewBox="0 0 11 11"><polyline points="1.5,5.5 4,8 9.5,2.5"/></svg>Fly-in only access</span>
+            <span class="lc-hl"><svg viewBox="0 0 11 11"><polyline points="1.5,5.5 4,8 9.5,2.5"/></svg>Exclusive 40km river stretch</span>
+            <span class="lc-hl"><svg viewBox="0 0 11 11"><polyline points="1.5,5.5 4,8 9.5,2.5"/></svg>6 guests max</span>
+          </div>
+          <p class="lc-desc">One of the last wild places on earth. Remote Chilean Patagonia accessible only by floatplane. Six guests maximum. Exclusive rights to 40 kilometers of the Río Palena — wild brown and rainbow trout to 20+ pounds in crystalline wilderness water.</p>
+          <div class="lc-tags"><span class="ltag">Patagonia</span><span class="ltag">Sight Fishing</span><span class="ltag">Wild Brown Trout</span><span class="ltag">Remote</span><span class="ltag">Exclusive</span></div>
+          <div class="lc-footer">
+            <div><div class="lc-rating"><span class="lc-stars">★★★★★</span><span class="lc-rn">5.0</span><span class="lc-rc">(62 reviews)</span></div></div>
+            <button class="lc-bk">View Lodge</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Florida Keys -->
+      <div class="lc reveal">
+        <div class="lc-img-wrap">
+          <img class="lc-img" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80&fit=crop" alt="Florida Keys Lodge">
+        </div>
+        <div class="lc-body">
+          <div class="lc-header">
+            <div class="lc-name">Islamorada Flats Lodge</div>
+            <div class="lc-price-wrap"><div class="lc-price">$580</div><div class="lc-per">/person/night</div></div>
+          </div>
+          <div class="lc-loc"><svg viewBox="0 0 12 12"><path d="M6 1C4.3 1 3 2.3 3 3.8c0 2.4 3 7.2 3 7.2s3-4.8 3-7.2C9 2.3 7.7 1 6 1z"/><circle cx="6" cy="3.8" r="1.2"/></svg>Islamorada, Florida · The Florida Keys</div>
+          <div class="lc-highlights">
+            <span class="lc-hl"><svg viewBox="0 0 11 11"><polyline points="1.5,5.5 4,8 9.5,2.5"/></svg>Private dock & skiffs</span>
+            <span class="lc-hl"><svg viewBox="0 0 11 11"><polyline points="1.5,5.5 4,8 9.5,2.5"/></svg>Grand Slam guides</span>
+            <span class="lc-hl"><svg viewBox="0 0 11 11"><polyline points="1.5,5.5 4,8 9.5,2.5"/></svg>8 rooms</span>
+          </div>
+          <p class="lc-desc">Flats fishing lodge in the heart of the Florida Keys. Private dock, eight dedicated skiffs, and eight of the best bonefish and permit guides in the country. Grand Slam attempts daily. The holy grail of saltwater fly fishing, built into a package.</p>
+          <div class="lc-tags"><span class="ltag">Saltwater</span><span class="ltag">Bonefish</span><span class="ltag">Permit</span><span class="ltag">Tarpon</span><span class="ltag">Grand Slam</span></div>
+          <div class="lc-footer">
+            <div><div class="lc-rating"><span class="lc-stars">★★★★★</span><span class="lc-rn">4.8</span><span class="lc-rc">(143 reviews)</span></div></div>
+            <button class="lc-bk">View Lodge</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="load-more"><button class="lm-btn">Load 137 more lodges →</button></div>
+
+    <!-- WHY RIFFLE LODGES -->
+    <div class="why-section reveal">
+      <div class="wy-eyebrow">Why Book Through Riffle</div>
+      <div class="wy-title">The only lodge platform built for <em>serious anglers</em></div>
+      <p class="wy-sub">Every lodge on Riffle is personally verified. We fish these lodges, talk to their guides, and read every review before listing. No generic booking platform can tell you which pool fishes best in October. We can.</p>
+      <div class="wy-grid">
+        <div class="wy-item"><div class="wyi-title">Curated, not aggregated</div><div class="wyi-body">Every lodge is individually verified. We reject lodges that don't meet our fishing quality standard — no matter how nice the rooms are.</div></div>
+        <div class="wy-item"><div class="wyi-title">Anglers reviewing for anglers</div><div class="wyi-body">Reviews are from verified guests who actually fished there. Five categories: fishing quality, guides, accommodations, food, and value.</div></div>
+        <div class="wy-item"><div class="wyi-title">One platform, full journey</div><div class="wyi-body">Book a Catskills day guide today, a Montana lodge for September, and a Patagonia expedition for next year — all in one place, all the same trust layer.</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="ft-inner">
+    <div><div class="ft-logo">Riffle</div><div class="ft-tagline">Find your water.</div></div>
+    <div class="ft-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Help</a><a href="#">riffle.guide</a></div>
+  </div>
+  <div class="ft-copy">© 2026 Riffle, Inc. · riffle.guide/lodges</div>
+</footer>
+
+<script>
+var obs = new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:0.06});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el)});
+function filter(el){document.querySelectorAll('.fc').forEach(function(c){c.classList.remove('active')});el.classList.add('active')}
+</script>
+</body>
+</html>

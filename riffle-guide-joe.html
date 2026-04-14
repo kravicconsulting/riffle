@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joe — Catskills on the Fly | Riffle</title>
+<meta name="description" content="Book Joe, founder of Catskills on the Fly. Walk-wade guide on the Beaverkill, Willowemoc, Esopus, and Delaware. Custom fly patterns, TU lifetime member, Roscoe NY.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --forest:#1e3222;--forest-mid:#2c4e35;--forest-lt:#3d6b4a;
+  --sage:#5a8a68;--mist:#9ec4aa;--river:#4a7fa0;
+  --pebble:#f0ebe0;--pebble-dk:#ddd6c4;--cream:#fdfaf3;--warm:#faf6ee;
+  --amber:#b8772a;--amber-lt:#d4943a;--gold:#e8c068;
+  --ink:#1a1f16;--text-mid:#3a4a3a;--text-muted:#7a8a72;
+  --white:#fff;--r:14px;--r-sm:8px;--pill:100px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:64px;background:rgba(26,31,22,0.97);backdrop-filter:blur(16px)}
+.nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none}
+.nav-logo svg{width:28px;height:28px}
+.nav-word{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff}
+.nav-back{color:rgba(255,255,255,0.6);text-decoration:none;font-size:13px;font-weight:500;display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:var(--r-sm);border:1px solid rgba(255,255,255,0.15)}
+.nav-back svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:none}
+.nav-back:hover{color:#fff;border-color:rgba(255,255,255,0.4)}
+.hero{position:relative;height:480px;overflow:hidden;margin-top:64px}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;filter:sepia(12%) contrast(1.05) brightness(0.78)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(15,22,14,0.3) 0%,rgba(15,22,14,0.1) 35%,rgba(15,22,14,0.8) 100%)}
+.hero-content{position:absolute;bottom:0;left:0;right:0;padding:36px 5% 40px}
+.breadcrumb{font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.breadcrumb a{color:rgba(255,255,255,0.5);text-decoration:none}
+.breadcrumb a:hover{color:rgba(255,255,255,0.8)}
+.hero-name{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,56px);font-weight:700;color:#fff;line-height:1;margin-bottom:8px}
+.hero-tagline{font-size:15px;color:rgba(255,255,255,0.65);font-style:italic;font-family:'Playfair Display',serif;margin-bottom:14px}
+.hero-badges{display:flex;gap:8px;flex-wrap:wrap}
+.hb{font-size:11px;font-weight:600;padding:4px 12px;border-radius:var(--pill)}
+.hb-v{background:var(--sage);color:#fff}
+.hb-g{background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.8);border:1px solid rgba(255,255,255,0.2)}
+.sticky-bar{position:sticky;top:64px;z-index:200;background:var(--white);border-bottom:1px solid var(--pebble-dk);padding:0 5%}
+.sb-inner{display:flex;align-items:center;justify-content:space-between;height:56px;gap:16px}
+.sb-meta{display:flex;align-items:center;gap:20px}
+.sb-r{display:flex;align-items:center;gap:5px}
+.sb-stars{color:var(--amber-lt);font-size:13px}
+.sb-rn{font-size:14px;font-weight:600}
+.sb-rc{font-size:13px;color:var(--text-muted)}
+.sb-div{width:1px;height:20px;background:var(--pebble-dk)}
+.sb-loc{font-size:13px;color:var(--text-muted)}
+.sb-price{font-size:13px;color:var(--ink)}.sb-price strong{font-size:17px;font-weight:700;color:var(--forest)}
+.sb-cta{background:var(--forest);color:#fff;font-size:14px;font-weight:600;padding:10px 24px;border-radius:var(--pill);border:none;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:all 0.2s}
+.sb-cta:hover{background:var(--forest-mid);transform:translateY(-1px)}
+@media(max-width:700px){.sb-div,.sb-loc,.sb-price{display:none}}
+.body{display:grid;grid-template-columns:1fr 360px;gap:48px;padding:52px 5%;max-width:1200px;margin:0 auto}
+@media(max-width:1024px){.body{grid-template-columns:1fr;padding:36px 5%}}
+.ey{font-size:10px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--sage);margin-bottom:10px}
+.st{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--ink);margin-bottom:14px}
+section.ps{padding:0 0 44px;border-bottom:1px solid var(--pebble-dk);margin-bottom:44px}
+section.ps:last-child{border-bottom:none}
+.bp{font-size:15px;color:var(--text-mid);line-height:1.8;margin-bottom:12px}
+.meta-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px}
+.mg{background:var(--pebble);border-radius:var(--r-sm);padding:14px;text-align:center}
+.mg-v{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--forest);line-height:1;margin-bottom:3px}
+.mg-l{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.7px}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:600px){.spec-grid{grid-template-columns:1fr}}
+.sc{background:var(--white);border:1px solid var(--pebble-dk);border-radius:var(--r);padding:16px;display:flex;gap:12px}
+.sc-bar{width:3px;border-radius:2px;flex-shrink:0;align-self:stretch}
+.sc-title{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.sc-desc{font-size:12px;color:var(--text-muted);line-height:1.55}
+.water-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.wc{position:relative;border-radius:var(--r);overflow:hidden;height:155px;cursor:pointer}
+.wc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:sepia(10%) brightness(0.88);transition:transform 0.4s}
+.wc:hover img{transform:scale(1.05)}
+.wc-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,18,10,0.85) 0%,transparent 60%)}
+.wc-info{position:absolute;bottom:0;left:0;right:0;padding:12px}
+.wc-name{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#fff}
+.wc-sub{font-size:10px;color:rgba(255,255,255,0.6);margin-top:2px}
+.trip-list{display:flex;flex-direction:column;gap:13px}
+.tc{background:var(--white);border:1px solid var(--pebble-dk);border-radius:var(--r);padding:20px;display:flex;justify-content:space-between;align-items:flex-start;gap:14px;transition:all 0.2s;cursor:pointer}
+.tc:hover{border-color:var(--sage);box-shadow:0 4px 20px rgba(26,31,22,0.08)}
+.tc-name{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--ink);margin-bottom:5px}
+.tc-meta{display:flex;gap:12px;margin-bottom:8px;flex-wrap:wrap}
+.tc-tag{font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:3px}
+.tc-tag svg{width:11px;height:11px;stroke:currentColor;stroke-width:1.5;fill:none}
+.tc-desc{font-size:13px;color:var(--text-muted);line-height:1.6;margin-bottom:8px}
+.tc-chips{display:flex;gap:5px;flex-wrap:wrap}
+.tc-chip{background:var(--pebble);color:var(--forest-mid);font-size:10px;font-weight:500;padding:2px 8px;border-radius:var(--pill)}
+.tc-right{text-align:right;flex-shrink:0}
+.tc-price{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--forest)}
+.tc-per{font-size:11px;color:var(--text-muted);margin-top:2px}
+.tc-bk{margin-top:10px;background:var(--forest);color:#fff;font-size:12px;font-weight:600;padding:7px 16px;border-radius:var(--pill);border:none;cursor:pointer;font-family:'DM Sans',sans-serif}
+.tc-bk:hover{background:var(--forest-mid)}
+.hatch-tbl{width:100%;border-collapse:collapse;font-size:13px}
+.hatch-tbl th{text-align:left;font-size:10px;font-weight:600;letter-spacing:0.8px;text-transform:uppercase;color:var(--text-muted);padding:8px 12px;border-bottom:1px solid var(--pebble-dk)}
+.hatch-tbl td{padding:10px 12px;border-bottom:1px solid var(--pebble-dk);color:var(--text-mid)}
+.hatch-tbl tr:last-child td{border-bottom:none}
+.hatch-tbl tr:hover td{background:var(--pebble)}
+.hm{font-weight:600;color:var(--ink)}
+.hbugs{display:flex;gap:5px;flex-wrap:wrap}
+.hc{background:rgba(90,138,104,0.12);color:var(--forest-mid);font-size:11px;padding:2px 7px;border-radius:var(--pill);border:1px solid rgba(90,138,104,0.2)}
+.rv-card{background:var(--white);border:1px solid var(--pebble-dk);border-radius:var(--r);padding:22px;position:relative;margin-bottom:14px}
+.rv-q{font-family:'Playfair Display',serif;font-size:42px;font-weight:700;color:var(--pebble-dk);line-height:1;position:absolute;top:12px;left:16px}
+.rv-stars{color:var(--amber-lt);font-size:12px;margin-bottom:8px}
+.rv-text{font-size:14px;color:var(--text-mid);line-height:1.75;font-style:italic;margin-top:14px;margin-bottom:16px}
+.rv-author{display:flex;align-items:center;gap:10px}
+.rv-av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.rv-name{font-size:13px;font-weight:600;color:var(--ink)}
+.rv-meta{font-size:11px;color:var(--text-muted);margin-top:1px}
+.rv-verified{display:flex;align-items:center;gap:3px;font-size:10px;font-weight:600;color:var(--sage);margin-top:3px}
+.rv-verified svg{width:10px;height:10px;stroke:currentColor;stroke-width:2;fill:none}
+.rating-sum{display:flex;gap:22px;align-items:center;background:var(--pebble);border-radius:var(--r);padding:20px;margin-bottom:22px}
+.rs-big{text-align:center;flex-shrink:0}
+.rs-n{font-family:'Playfair Display',serif;font-size:48px;font-weight:700;color:var(--forest);line-height:1}
+.rs-s{color:var(--amber-lt);font-size:15px;display:block;margin-top:3px}
+.rs-c{font-size:12px;color:var(--text-muted);margin-top:3px}
+.rs-bars{flex:1}
+.rb{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.rb-l{font-size:12px;color:var(--text-muted);width:36px;text-align:right;flex-shrink:0}
+.rb-t{flex:1;height:6px;background:var(--pebble-dk);border-radius:3px;overflow:hidden}
+.rb-f{height:100%;background:var(--amber-lt);border-radius:3px}
+.rb-c{font-size:12px;color:var(--text-muted);width:22px;flex-shrink:0}
+/* BOOKING CARD */
+.right-col{position:sticky;top:120px;height:fit-content}
+.bc{background:var(--white);border:1px solid var(--pebble-dk);border-radius:var(--r);overflow:hidden;box-shadow:0 6px 28px rgba(26,31,22,0.08)}
+.bc-head{background:var(--forest);padding:20px 22px}
+.bc-pr{display:flex;align-items:baseline;gap:7px;margin-bottom:3px}
+.bc-from{font-size:11px;color:rgba(255,255,255,0.5)}
+.bc-price{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:#fff}
+.bc-per{font-size:12px;color:rgba(255,255,255,0.5)}
+.bc-rat{display:flex;align-items:center;gap:5px;margin-top:5px}
+.bc-stars{color:var(--gold);font-size:12px}
+.bc-rn{font-size:12px;color:rgba(255,255,255,0.8);font-weight:600}
+.bc-rc{font-size:11px;color:rgba(255,255,255,0.42)}
+.bc-body{padding:20px}
+.bc-lbl{font-size:10px;font-weight:600;letter-spacing:0.8px;text-transform:uppercase;color:var(--text-muted);display:block;margin-bottom:5px}
+.bc-input{width:100%;padding:10px 13px;border:1.5px solid var(--pebble-dk);border-radius:var(--r-sm);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);background:var(--pebble);outline:none;transition:border 0.2s;-webkit-appearance:none}
+.bc-input:focus{border-color:var(--sage);background:#fff}
+.bc-field{margin-bottom:13px}
+.bc-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.bts-wrap{display:flex;flex-direction:column;gap:5px;margin-bottom:13px}
+.bts{border:1.5px solid var(--pebble-dk);border-radius:var(--r-sm);padding:9px 12px;cursor:pointer;transition:all 0.2s;display:flex;justify-content:space-between;align-items:center}
+.bts:hover{border-color:var(--sage)}
+.bts.sel{border-color:var(--forest);background:rgba(30,50,34,0.04)}
+.bts-n{font-size:12px;font-weight:600;color:var(--ink)}
+.bts-p{font-size:12px;font-weight:700;color:var(--forest)}
+.bc-submit{width:100%;background:var(--forest);color:#fff;font-size:14px;font-weight:700;padding:14px;border-radius:var(--pill);border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;margin-top:5px}
+.bc-submit:hover{background:var(--forest-mid);transform:translateY(-1px)}
+.bc-note{text-align:center;font-size:11px;color:var(--text-muted);margin-top:9px;line-height:1.5}
+.bc-foot{padding:14px 20px;border-top:1px solid var(--pebble-dk);background:var(--pebble)}
+.bc-perk{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text-mid);margin-bottom:6px}
+.bc-perk:last-child{margin-bottom:0}
+.bc-perk svg{width:13px;height:13px;stroke:var(--sage);stroke-width:2;fill:none;flex-shrink:0}
+/* TU badge */
+.tu-badge{display:flex;align-items:center;gap:10px;background:rgba(90,138,104,0.08);border:1px solid rgba(90,138,104,0.2);border-radius:var(--r-sm);padding:12px 14px;margin-bottom:20px}
+.tu-badge svg{width:18px;height:18px;stroke:var(--sage);stroke-width:1.5;fill:none;flex-shrink:0}
+.tu-text{font-size:12px;color:var(--forest-mid);line-height:1.5}
+.tu-text strong{display:block;font-weight:700;font-size:13px;margin-bottom:1px}
+/* Video/photo note */
+.video-note{background:var(--forest);border-radius:var(--r-sm);padding:14px 16px;margin-bottom:20px;display:flex;gap:10px;align-items:center}
+.video-note svg{width:18px;height:18px;stroke:var(--mist);stroke-width:1.5;fill:none;flex-shrink:0}
+.vn-text{font-size:12px;color:rgba(255,255,255,0.65);line-height:1.5}
+.vn-text strong{color:#fff;display:block;margin-bottom:1px}
+footer{background:#0c1610;padding:36px 5% 28px;margin-top:72px}
+.ft-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.ft-logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff}
+.ft-tagline{font-family:'Playfair Display',serif;font-size:13px;font-style:italic;color:rgba(255,255,255,0.28)}
+.ft-links a{text-decoration:none;font-size:12px;color:rgba(255,255,255,0.25);margin-left:18px}
+.ft-copy{width:100%;padding-top:18px;border-top:1px solid rgba(255,255,255,0.06);font-size:11px;color:rgba(255,255,255,0.18);margin-top:16px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity 0.5s ease,transform 0.5s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="riffle.html">
+    <svg viewBox="0 0 32 32" fill="none"><path d="M4 22 Q8 14 13 18 Q18 22 23 15 Q27 10 31 13" stroke="#9EC4AA" stroke-width="2.2" stroke-linecap="round" fill="none"/><path d="M4 27 Q9 20 14 24 Q19 28 24 21 Q28 15 31 18" stroke="#5A8A68" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.7"/><circle cx="29.5" cy="10.5" r="2.5" fill="#D4943A"/><path d="M29.5 10.5 L25 6" stroke="#D4943A" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <span class="nav-word">Riffle</span>
+  </a>
+  <a class="nav-back" href="riffle-catskills.html"><svg viewBox="0 0 14 14"><polyline points="9,2 4,7 9,12"/></svg> Catskills guides</a>
+</nav>
+
+<div class="hero">
+  <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1800&q=85&fit=crop&crop=bottom" alt="Catskills river">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="breadcrumb"><a href="#">Guides</a><span>›</span><a href="#">New York</a><span>›</span><a href="#">Catskills</a></div>
+    <div class="hero-name">Joe</div>
+    <div class="hero-tagline">Catskills on the Fly · Walk-Wade Specialist · Roscoe, New York</div>
+    <div class="hero-badges">
+      <span class="hb hb-v">✓ Riffle Verified</span>
+      <span class="hb hb-g">TU Lifetime Member</span>
+      <span class="hb hb-g">Custom Fly Tier</span>
+      <span class="hb hb-g">Photo & Video Included</span>
+    </div>
+  </div>
+</div>
+
+<div class="sticky-bar">
+  <div class="sb-inner">
+    <div class="sb-meta">
+      <div class="sb-r"><span class="sb-stars">★★★★★</span><span class="sb-rn" style="margin-left:5px">5.0</span><span class="sb-rc" style="margin-left:4px">(148 reviews)</span></div>
+      <div class="sb-div"></div>
+      <div class="sb-loc">Roscoe, New York · Walk/Wade only</div>
+      <div class="sb-div"></div>
+      <div class="sb-price">From <strong>$375</strong> / half day</div>
+    </div>
+    <button class="sb-cta" onclick="document.getElementById('bc').scrollIntoView({behavior:'smooth'})">Check Availability</button>
+  </div>
+</div>
+
+<div class="body">
+  <div class="left-col">
+
+    <section class="ps reveal">
+      <div class="meta-grid">
+        <div class="mg"><div class="mg-v">8</div><div class="mg-l">Rivers guided</div></div>
+        <div class="mg"><div class="mg-v">148</div><div class="mg-l">Verified reviews</div></div>
+        <div class="mg"><div class="mg-v">5.0★</div><div class="mg-l">Average rating</div></div>
+      </div>
+      <div class="ey">About Joe</div>
+      <h2 class="st">Where the sport began — fished by someone who lives it</h2>
+      <p class="bp">Joe grew up in northwestern Pennsylvania fishing stocked trout with his grandfather on opening day. He was introduced to fly fishing in his late teens and eventually built a life in Sullivan County, New York — the place where American fly fishing took root. He has spent years on the Willowemoc, Beaverkill, Neversink, and all branches of the Delaware, developing a deep obsession with technical dry fly fishing to selective trout.</p>
+      <p class="bp">What sets Joe apart is his philosophy. He doesn't guide the way most guides guide. His days are designed as learning experiences — he wants anglers to leave able to read water they've never seen, understand what's hatching, and fish with real confidence. He is a patient, gifted teacher with a long list of clients who started as beginners and now plan annual trips back.</p>
+      <p class="bp">Joe ties all his own flies, matched specifically to the insects of these Catskill rivers. Every client gets a set for the day. He also provides video and photography of your trip — a genuine differentiator you won't find anywhere else in the region.</p>
+      <div class="tu-badge">
+        <svg viewBox="0 0 18 18"><path d="M9 2L11 7H16L12.5 10L14 15L9 12L4 15L5.5 10L2 7H7Z"/></svg>
+        <div class="tu-text"><strong>Trout Unlimited Lifetime Member</strong>Active in Catskills conservation — streambank restoration, water quality monitoring, and TU youth programs.</div>
+      </div>
+      <div class="video-note">
+        <svg viewBox="0 0 18 18"><rect x="1" y="3" width="12" height="12" rx="2"/><path d="M13 7l4-2v6l-4-2"/></svg>
+        <div class="vn-text"><strong>Photo & video included on every trip</strong>Joe captures footage and stills throughout your day and sends a curated edit after. No extra cost — it's part of how he guides.</div>
+      </div>
+    </section>
+
+    <section class="ps reveal">
+      <div class="ey">Specialties</div>
+      <h2 class="st">How Joe guides</h2>
+      <div class="spec-grid">
+        <div class="sc"><div class="sc-bar" style="background:var(--sage)"></div><div><div class="sc-title">Technical Dry Fly</div><div class="sc-desc">Matching hatches, leader presentation, reading feeding lanes. The heart of Catskill tradition — Joe lives for it.</div></div></div>
+        <div class="sc"><div class="sc-bar" style="background:var(--forest-mid)"></div><div><div class="sc-title">Entomology</div><div class="sc-desc">Deep knowledge of Catskill insect life. He'll teach you what's hatching, why, and exactly what fly to throw.</div></div></div>
+        <div class="sc"><div class="sc-bar" style="background:var(--amber)"></div><div><div class="sc-title">Custom Fly Patterns</div><div class="sc-desc">Ties his own patterns in the Catskill tradition. Every client gets hand-tied flies built for the day's water.</div></div></div>
+        <div class="sc"><div class="sc-bar" style="background:var(--river)"></div><div><div class="sc-title">Teaching Beginners</div><div class="sc-desc">Some of the best reviews come from first-timers. Patient, encouraging, methodical. You will catch fish.</div></div></div>
+      </div>
+    </section>
+
+    <section class="ps reveal">
+      <div class="ey">Home Waters</div>
+      <h2 class="st">Joe's rivers</h2>
+      <p class="bp" style="margin-bottom:18px">Walk/wade only — Joe doesn't use a drift boat. He works the water on foot, side by side with his clients, all day. He covers 8 rivers in the Catskill system.</p>
+      <div class="water-grid">
+        <div class="wc">
+          <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80&fit=crop&crop=bottom" alt="Beaverkill">
+          <div class="wc-overlay"></div>
+          <div class="wc-info"><div class="wc-name">Beaverkill River</div><div class="wc-sub">Roscoe to Poolville</div></div>
+        </div>
+        <div class="wc">
+          <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80&fit=crop" alt="Willowemoc">
+          <div class="wc-overlay"></div>
+          <div class="wc-info"><div class="wc-name">Willowemoc Creek</div><div class="wc-sub">Livingston Manor · Catskills</div></div>
+        </div>
+        <div class="wc">
+          <img src="https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=600&q=80&fit=crop" alt="Esopus">
+          <div class="wc-overlay"></div>
+          <div class="wc-info"><div class="wc-name">Esopus Creek</div><div class="wc-sub">Phoenicia · Catskill Park</div></div>
+        </div>
+        <div class="wc">
+          <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600&q=80&fit=crop" alt="Delaware">
+          <div class="wc-overlay"></div>
+          <div class="wc-info"><div class="wc-name">Delaware River System</div><div class="wc-sub">West, East & Main Stem</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ps reveal">
+      <div class="ey">Trip Types</div>
+      <h2 class="st">What's available</h2>
+      <div class="trip-list">
+        <div class="tc">
+          <div class="tc-left">
+            <div class="tc-name">Half Day Walk/Wade</div>
+            <div class="tc-meta"><span class="tc-tag"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/><polyline points="6,3 6,6 8,7"/></svg>4 hours</span><span class="tc-tag"><svg viewBox="0 0 12 12"><circle cx="4" cy="4" r="2"/><circle cx="8" cy="4" r="2"/><path d="M2 11c0-2.2 1.8-4 4-4s4 1.8 4 4"/></svg>1–2 anglers</span><span class="tc-tag">Year-round</span></div>
+            <p class="tc-desc">Joe's most booked trip. Morning or afternoon session on whichever river is fishing best that day. Tailored completely to your level and goals. He starts every trip with a conversation.</p>
+            <div class="tc-chips"><span class="tc-chip">Hand-tied flies</span><span class="tc-chip">All gear provided</span><span class="tc-chip">Photo & video</span></div>
+          </div>
+          <div class="tc-right"><div class="tc-price">$375</div><div class="tc-per">/angler</div><button class="tc-bk" onclick="document.getElementById('bc').scrollIntoView({behavior:'smooth'})">Book</button></div>
+        </div>
+        <div class="tc">
+          <div class="tc-left">
+            <div class="tc-name">Full Day Walk/Wade</div>
+            <div class="tc-meta"><span class="tc-tag"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/><polyline points="6,3 6,6 8,7"/></svg>7–8 hours</span><span class="tc-tag"><svg viewBox="0 0 12 12"><circle cx="4" cy="4" r="2"/><circle cx="8" cy="4" r="2"/><path d="M2 11c0-2.2 1.8-4 4-4s4 1.8 4 4"/></svg>1–2 anglers</span><span class="tc-tag">Apr–Oct best</span></div>
+            <p class="tc-desc">A full day means multiple rivers, multiple techniques, and usually both a morning session and an evening rise. The full breadth of what Joe knows about these waters, all in a single day.</p>
+            <div class="tc-chips"><span class="tc-chip">Hand-tied flies</span><span class="tc-chip">All gear</span><span class="tc-chip">Photo & video</span><span class="tc-chip">Snacks</span></div>
+          </div>
+          <div class="tc-right"><div class="tc-price">$550</div><div class="tc-per">/angler</div><button class="tc-bk" onclick="document.getElementById('bc').scrollIntoView({behavior:'smooth'})">Book</button></div>
+        </div>
+        <div class="tc">
+          <div class="tc-left">
+            <div class="tc-name">Casting Lesson + Half Day</div>
+            <div class="tc-meta"><span class="tc-tag"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/><polyline points="6,3 6,6 8,7"/></svg>5 hours</span><span class="tc-tag">Beginners welcome</span></div>
+            <p class="tc-desc">The ideal first fly fishing experience. Starts with 60–90 minutes of casting instruction on a section of river before moving into active fishing. Joe has taken dozens of complete beginners to catching fish on a dry fly in a single session.</p>
+            <div class="tc-chips"><span class="tc-chip">Full casting instruction</span><span class="tc-chip">All gear</span><span class="tc-chip">Flies tied for you</span></div>
+          </div>
+          <div class="tc-right"><div class="tc-price">$395</div><div class="tc-per">/angler</div><button class="tc-bk" onclick="document.getElementById('bc').scrollIntoView({behavior:'smooth'})">Book</button></div>
+        </div>
+        <div class="tc">
+          <div class="tc-left">
+            <div class="tc-name">Corporate & Group Outing</div>
+            <div class="tc-meta"><span class="tc-tag"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/><polyline points="6,3 6,6 8,7"/></svg>Full day</span><span class="tc-tag">Up to 8 guests</span></div>
+            <p class="tc-desc">Custom corporate retreats and team outings on Catskill water. Joe coordinates multiple guides for larger groups. All levels welcomed. A full day in the Catskills fishing legendary rivers — an experience your team will talk about for years.</p>
+            <div class="tc-chips"><span class="tc-chip">Multiple guides</span><span class="tc-chip">Custom programming</span><span class="tc-chip">Full gear</span></div>
+          </div>
+          <div class="tc-right"><div class="tc-price">Inquire</div><div class="tc-per">custom pricing</div><button class="tc-bk" onclick="document.getElementById('bc').scrollIntoView({behavior:'smooth'})">Inquire</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ps reveal">
+      <div class="ey">Hatch Calendar</div>
+      <h2 class="st">When to come</h2>
+      <table class="hatch-tbl">
+        <thead><tr><th>Month</th><th>Key Hatches</th></tr></thead>
+        <tbody>
+          <tr><td class="hm">April</td><td><div class="hbugs"><span class="hc">Hendrickson</span><span class="hc">Blue Quill</span><span class="hc">Quill Gordon</span></div></td></tr>
+          <tr><td class="hm">May</td><td><div class="hbugs"><span class="hc">March Brown</span><span class="hc">Sulphur</span><span class="hc">Caddis</span><span class="hc">Grey Fox</span></div></td></tr>
+          <tr><td class="hm">June</td><td><div class="hbugs"><span class="hc">Green Drake</span><span class="hc">Isonychia</span><span class="hc">Yellow Sally</span></div></td></tr>
+          <tr><td class="hm">July</td><td><div class="hbugs"><span class="hc">Trico</span><span class="hc">Pale Evening Dun</span><span class="hc">Ants & Hoppers</span></div></td></tr>
+          <tr><td class="hm">September</td><td><div class="hbugs"><span class="hc">Isonychia</span><span class="hc">Blue-Winged Olive</span></div></td></tr>
+          <tr><td class="hm">October</td><td><div class="hbugs"><span class="hc">BWO</span><span class="hc">October Caddis</span><span class="hc">Streamers</span></div></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="ps reveal">
+      <div class="ey">Reviews</div>
+      <h2 class="st">What anglers say about Joe</h2>
+      <div class="rating-sum">
+        <div class="rs-big"><div class="rs-n">5.0</div><span class="rs-s">★★★★★</span><div class="rs-c">148 reviews</div></div>
+        <div class="rs-bars">
+          <div class="rb"><span class="rb-l">5★</span><div class="rb-t"><div class="rb-f" style="width:95%"></div></div><span class="rb-c">140</span></div>
+          <div class="rb"><span class="rb-l">4★</span><div class="rb-t"><div class="rb-f" style="width:5%"></div></div><span class="rb-c">7</span></div>
+          <div class="rb"><span class="rb-l">3★</span><div class="rb-t"><div class="rb-f" style="width:1%"></div></div><span class="rb-c">1</span></div>
+          <div class="rb"><span class="rb-l">2★</span><div class="rb-t"><div class="rb-f" style="width:0%"></div></div><span class="rb-c">0</span></div>
+          <div class="rb"><span class="rb-l">1★</span><div class="rb-t"><div class="rb-f" style="width:0%"></div></div><span class="rb-c">0</span></div>
+        </div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-q">"</div>
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">I've fished with a lot of good guides over the years, but Joe is quite simply the best guide I've ever fished with. He is a natural teacher, patient as can be and more knowledgeable than the day is long. If you want to up your game, you could not do better than to fish with Joe.</p>
+        <div class="rv-author">
+          <div class="rv-av" style="background:#2c4e35">RH</div>
+          <div><div class="rv-name">Richard H.</div><div class="rv-meta">Full Day · Beaverkill · June 2025</div><div class="rv-verified"><svg viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3"/></svg>Verified booking</div></div>
+        </div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-q">"</div>
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">My partner and I spent an afternoon with Joe — both new to fly fishing — and it was our favorite part of the whole vacation. Joe is very knowledgeable about everything from the flies he ties himself to reading water and finding fish. Patient teacher and great company for a day.</p>
+        <div class="rv-author">
+          <div class="rv-av" style="background:#4a7fa0">PB</div>
+          <div><div class="rv-name">Phoebe & Ben</div><div class="rv-meta">Half Day · Willowemoc · August 2025</div><div class="rv-verified"><svg viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3"/></svg>Verified booking</div></div>
+        </div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-q">"</div>
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">Excellent guide with extensive knowledge of Catskills rivers and entomology. Joe taught me how to contact nymph and has me observing and reading water in a whole new light. The video he sent after was an incredible keepsake. Absolutely recommend — and I'm already booked for next May.</p>
+        <div class="rv-author">
+          <div class="rv-av" style="background:#8a4a2c">JK</div>
+          <div><div class="rv-name">Jimmy K.</div><div class="rv-meta">Full Day · Esopus Creek · Sept 2025</div><div class="rv-verified"><svg viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3"/></svg>Verified booking</div></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="right-col">
+    <div class="bc" id="bc">
+      <div class="bc-head">
+        <div class="bc-pr"><span class="bc-from">From</span><span class="bc-price">$375</span><span class="bc-per">/angler</span></div>
+        <div class="bc-rat"><span class="bc-stars">★★★★★</span><span class="bc-rn">5.0</span><span class="bc-rc">· 148 reviews</span></div>
+      </div>
+      <div class="bc-body">
+        <div class="bc-field"><label class="bc-lbl">Select Trip</label>
+          <div class="bts-wrap">
+            <div class="bts sel" onclick="selTrip(this)"><span class="bts-n">Half Day Walk/Wade</span><span class="bts-p">$375</span></div>
+            <div class="bts" onclick="selTrip(this)"><span class="bts-n">Full Day Walk/Wade</span><span class="bts-p">$550</span></div>
+            <div class="bts" onclick="selTrip(this)"><span class="bts-n">Casting Lesson + Half Day</span><span class="bts-p">$395</span></div>
+          </div>
+        </div>
+        <div class="bc-row">
+          <div class="bc-field"><label class="bc-lbl">Date</label><input class="bc-input" type="date"></div>
+          <div class="bc-field"><label class="bc-lbl">Anglers</label><select class="bc-input"><option>1 angler</option><option selected>2 anglers</option></select></div>
+        </div>
+        <div class="bc-field"><label class="bc-lbl">Experience Level</label>
+          <select class="bc-input"><option>Complete beginner</option><option>Some experience</option><option selected>Intermediate</option><option>Experienced</option></select>
+        </div>
+        <div class="bc-field"><label class="bc-lbl">Message for Joe (optional)</label>
+          <textarea class="bc-input" rows="3" style="resize:vertical" placeholder="What you'd like to work on, any questions…"></textarea>
+        </div>
+        <button class="bc-submit">Request to Book</button>
+        <div class="bc-note">No charge yet. Joe confirms within 24 hours.</div>
+      </div>
+      <div class="bc-foot">
+        <div class="bc-perk"><svg viewBox="0 0 14 14"><polyline points="2,7 5,10 12,3"/></svg>Free cancellation up to 14 days out</div>
+        <div class="bc-perk"><svg viewBox="0 0 14 14"><polyline points="2,7 5,10 12,3"/></svg>Hand-tied flies included on every trip</div>
+        <div class="bc-perk"><svg viewBox="0 0 14 14"><polyline points="2,7 5,10 12,3"/></svg>Photo & video delivered after your trip</div>
+        <div class="bc-perk"><svg viewBox="0 0 14 14"><polyline points="2,7 5,10 12,3"/></svg>NY State licensed · Fully insured</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="ft-inner"><div><div class="ft-logo">Riffle</div><div class="ft-tagline">Find your water.</div></div><div class="ft-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Help</a></div></div>
+  <div class="ft-copy">© 2026 Riffle, Inc. · riffle.guide/guides/catskills-on-the-fly</div>
+</footer>
+
+<script>
+var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:0.06});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el)});
+function selTrip(el){document.querySelectorAll('.bts').forEach(function(b){b.classList.remove('sel')});el.classList.add('sel')}
+document.querySelectorAll('.tc-bk').forEach(function(b){b.addEventListener('click',function(){document.getElementById('bc').scrollIntoView({behavior:'smooth'})})});
+</script>
+</body>
+</html>

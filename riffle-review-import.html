@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Import Your Reviews — Riffle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --forest:#1e3222;--forest-mid:#2c4e35;--forest-lt:#3d6b4a;
+  --sage:#5a8a68;--mist:#9ec4aa;
+  --pebble:#f0ebe0;--pebble-dk:#ddd6c4;--cream:#fdfaf3;--warm:#faf6ee;
+  --amber:#b8772a;--amber-lt:#d4943a;--gold:#e8c068;
+  --ink:#1a1f16;--text-mid:#3a4a3a;--text-muted:#7a8a72;
+  --white:#fff;--r:14px;--r-sm:8px;--pill:100px;
+  --error:#c0392b;--error-bg:#fdf2f2;
+  --success:#2d6a4f;--success-bg:#eef6f0;
+  --warn:#b8772a;--warn-bg:#fdf4e8;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;min-height:100vh}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:64px;background:rgba(26,31,22,0.97);backdrop-filter:blur(16px)}
+.nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none}
+.nav-logo svg{width:28px;height:28px}
+.nav-word{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff}
+.nav-right{font-size:13px;color:rgba(255,255,255,0.5)}
+.nav-right a{color:rgba(255,255,255,0.7);text-decoration:none}
+
+/* PAGE */
+.page{max-width:860px;margin:0 auto;padding:96px 24px 80px}
+
+/* HEADER */
+.page-header{margin-bottom:40px}
+.ph-eyebrow{font-size:10px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--sage);margin-bottom:10px}
+.ph-title{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,40px);font-weight:700;color:var(--ink);margin-bottom:12px;line-height:1.1}
+.ph-title em{font-style:italic;color:var(--forest-mid)}
+.ph-sub{font-size:15px;color:var(--text-muted);line-height:1.7;max-width:580px}
+
+/* INTEGRITY BANNER */
+.integrity-banner{background:var(--warm);border:1px solid var(--pebble-dk);border-left:4px solid var(--sage);border-radius:var(--r);padding:18px 20px;margin-bottom:36px;display:flex;gap:14px;align-items:flex-start}
+.ib-icon{width:36px;height:36px;background:rgba(90,138,104,0.12);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.ib-icon svg{width:18px;height:18px;stroke:var(--sage);stroke-width:1.5;fill:none}
+.ib-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.ib-body{font-size:13px;color:var(--text-muted);line-height:1.65}
+
+/* SOURCE SELECTOR */
+.source-section{margin-bottom:32px}
+.section-label{font-size:12px;font-weight:600;color:var(--text-mid);margin-bottom:12px;letter-spacing:0.3px}
+.source-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.source-card{border:1.5px solid var(--pebble-dk);border-radius:var(--r);padding:14px 12px;cursor:pointer;transition:all 0.2s;text-align:center;background:var(--white);position:relative}
+.source-card:hover{border-color:var(--sage)}
+.source-card.selected{border-color:var(--forest);background:rgba(30,50,34,0.04)}
+.source-card.selected .sc-check{opacity:1}
+.sc-check{position:absolute;top:8px;right:8px;width:16px;height:16px;border-radius:50%;background:var(--sage);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.2s}
+.sc-check svg{width:8px;height:8px;stroke:#fff;stroke-width:2.5;fill:none}
+.sc-logo{width:36px;height:36px;border-radius:8px;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-size:18px}
+.sc-name{font-size:12px;font-weight:600;color:var(--ink)}
+.sc-note{font-size:10px;color:var(--text-muted);margin-top:2px}
+
+/* MAIN CARD */
+.card{background:var(--white);border:1px solid var(--pebble-dk);border-radius:var(--r);overflow:hidden;margin-bottom:20px}
+.card-header{padding:18px 22px;border-bottom:1px solid var(--pebble-dk);display:flex;align-items:center;justify-content:space-between}
+.card-title{font-size:14px;font-weight:700;color:var(--ink)}
+.card-sub{font-size:12px;color:var(--text-muted);margin-top:2px}
+.card-body{padding:22px}
+
+/* STEP TABS */
+.step-tabs{display:flex;gap:0;margin-bottom:28px;border:1px solid var(--pebble-dk);border-radius:var(--r);overflow:hidden}
+.step-tab{flex:1;padding:12px 8px;text-align:center;font-size:12px;font-weight:600;color:var(--text-muted);background:var(--pebble);cursor:pointer;border-right:1px solid var(--pebble-dk);transition:all 0.2s;display:flex;flex-direction:column;align-items:center;gap:4px}
+.step-tab:last-child{border-right:none}
+.step-tab.active{background:var(--white);color:var(--forest);border-bottom:2px solid var(--forest)}
+.step-tab.done{background:var(--white);color:var(--sage)}
+.step-tab svg{width:14px;height:14px;stroke:currentColor;stroke-width:1.8;fill:none}
+.st-num{width:20px;height:20px;border-radius:50%;border:1.5px solid currentColor;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-tab.done .st-num{background:var(--sage);border-color:var(--sage);color:#fff}
+.step-tab.active .st-num{background:var(--forest);border-color:var(--forest);color:#fff}
+
+/* STEP PANELS */
+.step-panel{display:none}
+.step-panel.active{display:block;animation:fadeUp 0.3s ease both}
+
+/* FORM FIELDS */
+.field{margin-bottom:18px}
+.field label{display:block;font-size:12px;font-weight:600;color:var(--text-mid);margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;padding:11px 14px;border:1.5px solid var(--pebble-dk);border-radius:var(--r-sm);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);background:var(--white);outline:none;transition:all 0.2s;-webkit-appearance:none}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--sage);box-shadow:0 0 0 3px rgba(90,138,104,0.1)}
+.field textarea{resize:vertical;min-height:90px}
+.field-hint{font-size:11px;color:var(--text-muted);margin-top:5px;line-height:1.5}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:500px){.field-row{grid-template-columns:1fr}}
+
+/* STAR SELECTOR */
+.star-select{display:flex;gap:6px;margin-top:4px}
+.star-btn{width:36px;height:36px;border:1.5px solid var(--pebble-dk);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;transition:all 0.15s;background:var(--white);line-height:1}
+.star-btn.active{background:rgba(232,192,104,0.15);border-color:var(--gold)}
+.star-btn:hover{border-color:var(--gold)}
+
+/* REVIEW ENTRY */
+.review-entry{background:var(--pebble);border-radius:var(--r);padding:18px;margin-bottom:14px;position:relative}
+.re-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.re-num{font-size:12px;font-weight:700;color:var(--forest-mid);text-transform:uppercase;letter-spacing:0.5px}
+.re-remove{background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:18px;line-height:1;padding:2px 6px;border-radius:4px;transition:all 0.2s}
+.re-remove:hover{background:rgba(192,57,43,0.1);color:var(--error)}
+.re-stars{display:flex;gap:4px;margin-bottom:12px}
+.re-star{font-size:18px;cursor:pointer;transition:transform 0.1s;user-select:none}
+.re-star:hover{transform:scale(1.2)}
+
+/* ADD BUTTON */
+.add-btn{width:100%;border:2px dashed var(--pebble-dk);border-radius:var(--r);padding:14px;background:transparent;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--text-muted);transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:7px;margin-bottom:18px}
+.add-btn:hover{border-color:var(--sage);color:var(--sage);background:rgba(90,138,104,0.04)}
+.add-btn svg{width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none}
+
+/* PREVIEW SECTION */
+.preview-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:gap}
+.preview-count{font-size:13px;color:var(--text-muted)}
+.preview-stats{display:flex;gap:20px;background:var(--pebble);border-radius:var(--r);padding:16px 20px;margin-bottom:20px}
+.ps-item{text-align:center}
+.ps-num{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--forest);line-height:1}
+.ps-label{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.7px;margin-top:3px}
+.ps-divider{width:1px;background:var(--pebble-dk)}
+
+/* REVIEW PREVIEW CARD */
+.review-preview{background:var(--white);border:1px solid var(--pebble-dk);border-radius:var(--r);padding:20px;margin-bottom:12px;position:relative}
+.rp-source-badge{position:absolute;top:14px;right:14px;display:flex;align-items:center;gap:4px;background:var(--pebble);border-radius:var(--pill);padding:3px 10px;font-size:10px;font-weight:600;color:var(--text-muted)}
+.rp-source-badge svg{width:11px;height:11px;stroke:currentColor;stroke-width:1.5;fill:none}
+.rp-stars{color:var(--amber-lt);font-size:13px;margin-bottom:8px}
+.rp-text{font-size:13px;color:var(--text-mid);font-style:italic;line-height:1.7;margin-bottom:14px;padding-right:80px}
+.rp-meta{display:flex;align-items:center;gap:10px}
+.rp-av{width:32px;height:32px;border-radius:50%;background:var(--forest-mid);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.rp-name{font-size:13px;font-weight:600;color:var(--ink)}
+.rp-date{font-size:11px;color:var(--text-muted)}
+.rp-imported{font-size:10px;font-weight:600;color:var(--sage);display:flex;align-items:center;gap:3px;margin-top:2px}
+.rp-imported svg{width:10px;height:10px;stroke:currentColor;stroke-width:2;fill:none}
+
+/* CONSENT BOX */
+.consent-box{background:var(--warn-bg);border:1px solid rgba(184,119,42,0.25);border-radius:var(--r);padding:18px 20px;margin-bottom:20px}
+.cb-title{font-size:13px;font-weight:700;color:var(--warn);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.cb-title svg{width:15px;height:15px;stroke:currentColor;stroke-width:1.8;fill:none}
+.cb-body{font-size:13px;color:var(--text-mid);line-height:1.65;margin-bottom:14px}
+.cb-checks{display:flex;flex-direction:column;gap:8px}
+.cb-check{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--text-mid);cursor:pointer;line-height:1.5}
+.cb-check input{margin-top:3px;flex-shrink:0;width:15px;height:15px;accent-color:var(--forest)}
+
+/* PROGRESS BAR */
+.progress-bar{height:3px;background:var(--pebble-dk);border-radius:2px;margin-bottom:28px;overflow:hidden}
+.pb-fill{height:100%;background:var(--sage);border-radius:2px;transition:width 0.4s ease}
+
+/* BUTTONS */
+.btn-row{display:flex;align-items:center;justify-content:space-between;margin-top:24px;padding-top:20px;border-top:1px solid var(--pebble-dk)}
+.btn-back{background:transparent;color:var(--text-muted);font-size:14px;font-weight:500;border:1.5px solid var(--pebble-dk);padding:11px 22px;border-radius:var(--pill);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s}
+.btn-back:hover{border-color:var(--text-muted);color:var(--ink)}
+.btn-next{background:var(--forest);color:#fff;font-size:14px;font-weight:700;padding:12px 30px;border-radius:var(--pill);border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;display:flex;align-items:center;gap:7px}
+.btn-next:hover{background:var(--forest-mid);transform:translateY(-1px)}
+.btn-next:disabled{opacity:0.45;pointer-events:none}
+.btn-next svg{width:15px;height:15px;stroke:#fff;stroke-width:2;fill:none}
+.btn-submit{background:var(--amber-lt);color:#fff;font-size:14px;font-weight:700;padding:13px 32px;border-radius:var(--pill);border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s}
+.btn-submit:hover{background:var(--amber);transform:translateY(-1px)}
+.btn-submit:disabled{opacity:0.45;pointer-events:none}
+
+/* SUCCESS */
+.success-wrap{display:none;text-align:center;padding:48px 20px}
+.success-icon{width:72px;height:72px;border-radius:50%;background:var(--success-bg);border:2px solid var(--sage);margin:0 auto 24px;display:flex;align-items:center;justify-content:center}
+.success-icon svg{width:36px;height:36px;stroke:var(--sage);stroke-width:1.5;fill:none}
+.success-title{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--ink);margin-bottom:10px}
+.success-sub{font-size:15px;color:var(--text-muted);line-height:1.7;max-width:460px;margin:0 auto 28px}
+.success-preview-label{font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:14px}
+.success-btns{display:flex;gap:10px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+.sb-btn{padding:12px 24px;border-radius:var(--pill);font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;text-decoration:none}
+.sb-primary{background:var(--forest);color:#fff;border:none}
+.sb-primary:hover{background:var(--forest-mid)}
+.sb-secondary{background:transparent;color:var(--forest-mid);border:1.5px solid var(--pebble-dk)}
+.sb-secondary:hover{border-color:var(--sage)}
+
+/* VALIDATION */
+.field-error{font-size:11px;color:var(--error);margin-top:4px;display:none}
+.field.invalid input,.field.invalid select,.field.invalid textarea{border-color:var(--error)}
+.field.invalid .field-error{display:block}
+
+/* REVIEW COUNTER BADGE */
+.review-count-badge{display:inline-flex;align-items:center;justify-content:center;background:var(--forest);color:#fff;font-size:11px;font-weight:700;width:20px;height:20px;border-radius:50%;margin-left:6px}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">
+    <svg viewBox="0 0 32 32" fill="none"><path d="M4 22 Q8 14 13 18 Q18 22 23 15 Q27 10 31 13" stroke="#9EC4AA" stroke-width="2.2" stroke-linecap="round" fill="none"/><path d="M4 27 Q9 20 14 24 Q19 28 24 21 Q28 15 31 18" stroke="#5A8A68" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.7"/><circle cx="29.5" cy="10.5" r="2.5" fill="#D4943A"/><path d="M29.5 10.5 L25 6" stroke="#D4943A" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <span class="nav-word">Riffle</span>
+  </a>
+  <div class="nav-right">Guide dashboard → <a href="#">Mike Walsh</a></div>
+</nav>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div class="ph-eyebrow">Guide Dashboard</div>
+    <h1 class="ph-title">Import your existing <em>reviews</em></h1>
+    <p class="ph-sub">You've worked hard to earn your reputation. Bring your reviews from Google, Facebook, or anywhere else you've collected them. They'll appear on your Riffle profile clearly labeled as imported — honest, transparent, and yours.</p>
+  </div>
+
+  <!-- INTEGRITY BANNER -->
+  <div class="integrity-banner">
+    <div class="ib-icon">
+      <svg viewBox="0 0 18 18"><path d="M9 2L11 7H16L12.5 10L14 15L9 12L4 15L5.5 10L2 7H7Z"/></svg>
+    </div>
+    <div>
+      <div class="ib-title">How imported reviews work on Riffle</div>
+      <div class="ib-body">Imported reviews are displayed with a clear source badge (e.g. "From Google") and the original date. They appear in a separate section from Riffle-verified bookings — anglers always know which reviews come from a completed Riffle trip and which are imported. This keeps the platform honest and your reputation real.</div>
+    </div>
+  </div>
+
+  <!-- MAIN CARD -->
+  <div class="card" id="mainCard">
+    <div class="card-header">
+      <div>
+        <div class="card-title">Review Import Tool</div>
+        <div class="card-sub">Enter reviews manually from any source — Google, Facebook, your website, or direct emails from clients</div>
+      </div>
+      <div id="reviewCountBadge" style="display:none;background:var(--sage);color:#fff;font-size:12px;font-weight:700;padding:4px 12px;border-radius:var(--pill)">0 reviews</div>
+    </div>
+    <div class="card-body">
+
+      <!-- PROGRESS -->
+      <div class="progress-bar"><div class="pb-fill" id="pbFill" style="width:25%"></div></div>
+
+      <!-- STEP TABS -->
+      <div class="step-tabs" id="stepTabs">
+        <div class="step-tab active" data-step="1">
+          <div class="st-num">1</div>
+          <span>Source</span>
+        </div>
+        <div class="step-tab" data-step="2">
+          <div class="st-num">2</div>
+          <span>Enter Reviews</span>
+        </div>
+        <div class="step-tab" data-step="3">
+          <div class="st-num">3</div>
+          <span>Preview</span>
+        </div>
+        <div class="step-tab" data-step="4">
+          <div class="st-num">4</div>
+          <span>Confirm</span>
+        </div>
+      </div>
+
+      <!-- ── STEP 1: SOURCE ── -->
+      <div class="step-panel active" id="step1">
+        <div class="section-label">Where are your reviews coming from?</div>
+        <div class="source-grid" id="sourceGrid">
+
+          <div class="source-card" onclick="selectSource('Google','🔍','#4285F4')" data-source="Google">
+            <div class="sc-check"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2"/></svg></div>
+            <div class="sc-logo" style="background:rgba(66,133,244,0.1)">🔍</div>
+            <div class="sc-name">Google</div>
+            <div class="sc-note">Google Business reviews</div>
+          </div>
+
+          <div class="source-card" onclick="selectSource('Facebook','📘','#1877F2')" data-source="Facebook">
+            <div class="sc-check"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2"/></svg></div>
+            <div class="sc-logo" style="background:rgba(24,119,242,0.1)">📘</div>
+            <div class="sc-name">Facebook</div>
+            <div class="sc-note">Facebook page reviews</div>
+          </div>
+
+          <div class="source-card" onclick="selectSource('TripAdvisor','🦉','#00af87')" data-source="TripAdvisor">
+            <div class="sc-check"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2"/></svg></div>
+            <div class="sc-logo" style="background:rgba(0,175,135,0.1)">🦉</div>
+            <div class="sc-name">TripAdvisor</div>
+            <div class="sc-note">TripAdvisor experiences</div>
+          </div>
+
+          <div class="source-card" onclick="selectSource('Yelp','⭐','#d32323')" data-source="Yelp">
+            <div class="sc-check"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2"/></svg></div>
+            <div class="sc-logo" style="background:rgba(211,35,35,0.1)">⭐</div>
+            <div class="sc-name">Yelp</div>
+            <div class="sc-note">Yelp business reviews</div>
+          </div>
+
+          <div class="source-card" onclick="selectSource('FishingBooker','🎣','#1e6bb8')" data-source="FishingBooker">
+            <div class="sc-check"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2"/></svg></div>
+            <div class="sc-logo" style="background:rgba(30,107,184,0.1)">🎣</div>
+            <div class="sc-name">FishingBooker</div>
+            <div class="sc-note">FishingBooker profile</div>
+          </div>
+
+          <div class="source-card" onclick="selectSource('Direct / Email','✉️','#5a8a68')" data-source="Direct">
+            <div class="sc-check"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2"/></svg></div>
+            <div class="sc-logo" style="background:rgba(90,138,104,0.1)">✉️</div>
+            <div class="sc-name">Direct / Email</div>
+            <div class="sc-note">Client emails, texts, etc.</div>
+          </div>
+
+          <div class="source-card" onclick="selectSource('Your Website','🌐','#6b4e9e')" data-source="Website">
+            <div class="sc-check"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2"/></svg></div>
+            <div class="sc-logo" style="background:rgba(107,78,158,0.1)">🌐</div>
+            <div class="sc-name">Your Website</div>
+            <div class="sc-note">Testimonials from your site</div>
+          </div>
+
+          <div class="source-card" onclick="selectSource('Other','📋','#888')" data-source="Other">
+            <div class="sc-check"><svg viewBox="0 0 8 8"><polyline points="1,4 3,6 7,2"/></svg></div>
+            <div class="sc-logo" style="background:rgba(136,136,136,0.1)">📋</div>
+            <div class="sc-name">Other</div>
+            <div class="sc-note">Any other source</div>
+          </div>
+
+        </div>
+
+        <div style="margin-top:20px">
+          <div class="section-label">Profile / listing URL (optional but recommended)</div>
+          <div class="field" style="margin-bottom:6px">
+            <input type="url" id="sourceUrl" placeholder="https://www.google.com/maps/place/your-guide-listing...">
+            <div class="field-hint">Providing the URL helps Riffle verify the source. Reviewers may be able to confirm their review via this link.</div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <div></div>
+          <button class="btn-next" id="step1Next" onclick="goTo(2)" disabled>
+            Continue <svg viewBox="0 0 15 15"><polyline points="5,2 10,7.5 5,13"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ── STEP 2: ENTER REVIEWS ── -->
+      <div class="step-panel" id="step2">
+        <div id="reviewsContainer"></div>
+        <button class="add-btn" id="addReviewBtn" onclick="addReview()">
+          <svg viewBox="0 0 16 16"><line x1="8" y1="2" x2="8" y2="14"/><line x1="2" y1="8" x2="14" y2="8"/></svg>
+          Add another review
+        </button>
+
+        <div style="background:var(--pebble);border-radius:var(--r-sm);padding:12px 16px;margin-top:8px">
+          <div style="font-size:11px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.7px;margin-bottom:6px">Tips for accuracy</div>
+          <div style="font-size:12px;color:var(--text-muted);line-height:1.6">Copy the review text exactly as written — don't paraphrase. Use the reviewer's actual name or initials if they've posted publicly. If you're entering from a private email, use first name + last initial only. Approximate dates are fine.</div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn-back" onclick="goTo(1)">← Back</button>
+          <button class="btn-next" id="step2Next" onclick="goTo(3)">
+            Preview <svg viewBox="0 0 15 15"><polyline points="5,2 10,7.5 5,13"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ── STEP 3: PREVIEW ── -->
+      <div class="step-panel" id="step3">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px">
+          <div style="font-size:14px;font-weight:600;color:var(--ink)">How your reviews will appear on Riffle</div>
+          <button onclick="goTo(2)" style="font-size:12px;font-weight:600;color:var(--forest-mid);background:none;border:1.5px solid var(--pebble-dk);padding:6px 14px;border-radius:var(--pill);cursor:pointer;font-family:'DM Sans',sans-serif">Edit reviews</button>
+        </div>
+
+        <div class="preview-stats" id="previewStats"></div>
+        <div id="previewList"></div>
+
+        <div style="background:var(--pebble);border-radius:var(--r-sm);padding:14px 16px;margin-bottom:4px">
+          <div style="font-size:12px;color:var(--text-muted);line-height:1.65">This is exactly how your imported reviews will appear on your public Riffle profile. The source badge and "Imported" label are always visible to anglers. Riffle-verified bookings (trips completed through Riffle) will appear in a separate section above these.</div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn-back" onclick="goTo(2)">← Back</button>
+          <button class="btn-next" onclick="goTo(4)">
+            Confirm &amp; Import <svg viewBox="0 0 15 15"><polyline points="5,2 10,7.5 5,13"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ── STEP 4: CONSENT ── -->
+      <div class="step-panel" id="step4">
+        <div class="consent-box">
+          <div class="cb-title">
+            <svg viewBox="0 0 15 15"><path d="M7.5 1L9.5 5.5H14.5L10.5 8.5L12 13.5L7.5 10.5L3 13.5L4.5 8.5L0.5 5.5H5.5Z"/></svg>
+            Before you import
+          </div>
+          <div class="cb-body">Riffle takes review integrity seriously. By importing, you're confirming these are genuine reviews from real clients. Imported reviews are clearly labeled so anglers always know which reviews are Riffle-verified and which come from elsewhere.</div>
+          <div class="cb-checks">
+            <label class="cb-check">
+              <input type="checkbox" id="consent1" onchange="checkConsent()">
+              These are genuine reviews written by real clients who hired me as a guide
+            </label>
+            <label class="cb-check">
+              <input type="checkbox" id="consent2" onchange="checkConsent()">
+              I have not edited, fabricated, or misrepresented any review text or rating
+            </label>
+            <label class="cb-check">
+              <input type="checkbox" id="consent3" onchange="checkConsent()">
+              I understand imported reviews will be labeled with their source and date, separate from Riffle-verified reviews
+            </label>
+            <label class="cb-check">
+              <input type="checkbox" id="consent4" onchange="checkConsent()">
+              I understand Riffle may ask me to verify any imported review and may remove reviews that appear inaccurate
+            </label>
+          </div>
+        </div>
+
+        <div style="background:var(--success-bg);border:1px solid rgba(45,106,79,0.2);border-radius:var(--r);padding:14px 18px;margin-bottom:20px">
+          <div style="font-size:13px;color:var(--success);line-height:1.65">
+            <strong>What happens after you submit:</strong> Your imported reviews go into a brief review queue. Riffle will add them to your profile within 24 hours. You'll get an email confirmation. You can add more reviews any time from your guide dashboard.
+          </div>
+        </div>
+
+        <div style="background:var(--pebble);border-radius:var(--r);padding:16px 18px;margin-bottom:4px;display:flex;gap:12px;align-items:center">
+          <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--forest);flex-shrink:0" id="finalCount">0</div>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:2px">reviews ready to import</div>
+            <div style="font-size:12px;color:var(--text-muted)" id="finalSource">from Google</div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn-back" onclick="goTo(3)">← Back</button>
+          <button class="btn-submit" id="submitBtn" onclick="submitImport()" disabled>
+            Import Reviews to My Profile →
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SUCCESS STATE -->
+  <div id="successWrap" class="success-wrap">
+    <div class="success-icon">
+      <svg viewBox="0 0 36 36"><polyline points="6,18 13,26 30,10"/></svg>
+    </div>
+    <div class="success-title">Reviews imported.</div>
+    <p class="success-sub">Your reviews are in the queue and will appear on your Riffle profile within 24 hours. They'll be clearly labeled with their source so anglers know exactly where they came from.</p>
+    <div class="success-preview-label">Here's how they'll look on your profile</div>
+    <div id="successPreviewList" style="text-align:left;max-width:560px;margin:0 auto"></div>
+    <div class="success-btns">
+      <a class="sb-btn sb-primary" href="riffle-guide-profile.html">View My Profile</a>
+      <button class="sb-btn sb-secondary" onclick="resetForm()">Import More Reviews</button>
+      <a class="sb-btn sb-secondary" href="#">Back to Dashboard</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ── STATE ──
+var currentStep = 1;
+var selectedSource = '';
+var reviews = [];
+var reviewIdCounter = 0;
+
+// ── NAVIGATION ──
+function goTo(n) {
+  if (n === 3) buildPreview();
+  if (n === 4) buildConfirm();
+
+  document.getElementById('step' + currentStep).classList.remove('active');
+  currentStep = n;
+  document.getElementById('step' + n).classList.add('active');
+
+  // Update tabs
+  document.querySelectorAll('.step-tab').forEach(function(t) {
+    var s = parseInt(t.dataset.step);
+    t.className = 'step-tab' + (s < n ? ' done' : s === n ? ' active' : '');
+  });
+
+  // Update progress bar
+  document.getElementById('pbFill').style.width = (n / 4 * 100) + '%';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── SOURCE SELECTION ──
+function selectSource(name, emoji, color) {
+  selectedSource = name;
+  document.querySelectorAll('.source-card').forEach(function(c) {
+    c.classList.remove('selected');
+  });
+  event.currentTarget.classList.add('selected');
+  document.getElementById('step1Next').disabled = false;
+
+  // Pre-populate first review if none exist yet
+  if (reviews.length === 0) {
+    // will add when entering step 2
+  }
+}
+
+// ── STEP 2: BUILD REVIEWS ──
+document.addEventListener('DOMContentLoaded', function() {
+  // Start with 3 empty review slots when arriving on step 2
+});
+
+function renderReviews() {
+  var container = document.getElementById('reviewsContainer');
+  if (reviews.length === 0) {
+    // Add initial 3
+    for (var i = 0; i < 3; i++) addReview();
+    return;
+  }
+  container.innerHTML = '';
+  reviews.forEach(function(r, i) {
+    container.innerHTML += buildReviewEntryHTML(r, i);
+  });
+  attachStarHandlers();
+  updateReviewCountBadge();
+}
+
+function buildReviewEntryHTML(r, i) {
+  var stars = '';
+  for (var s = 1; s <= 5; s++) {
+    stars += '<span class="re-star" data-id="' + r.id + '" data-val="' + s + '" onclick="setStars(' + r.id + ',' + s + ')" style="opacity:' + (s <= r.rating ? '1' : '0.25') + '">' + '★' + '</span>';
+  }
+  return '<div class="review-entry" id="re_' + r.id + '">' +
+    '<div class="re-header">' +
+      '<div class="re-num">Review ' + (i + 1) + ' — from ' + selectedSource + '</div>' +
+      (reviews.length > 1 ? '<button class="re-remove" onclick="removeReview(' + r.id + ')" title="Remove">×</button>' : '') +
+    '</div>' +
+    '<div style="margin-bottom:12px">' +
+      '<div style="font-size:11px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.7px;margin-bottom:6px">Rating</div>' +
+      '<div class="re-stars" id="stars_' + r.id + '">' + stars + '</div>' +
+    '</div>' +
+    '<div class="field" style="margin-bottom:10px"><label>Review text (copy exactly as written)</label>' +
+      '<textarea id="text_' + r.id + '" rows="3" placeholder="Paste the full review text here..." onchange="updateReview(' + r.id + ',\'text\',this.value)">' + (r.text || '') + '</textarea>' +
+    '</div>' +
+    '<div class="field-row">' +
+      '<div class="field"><label>Reviewer name (as shown publicly)</label>' +
+        '<input type="text" id="name_' + r.id + '" placeholder="Tom H." value="' + (r.name || '') + '" onchange="updateReview(' + r.id + ',\'name\',this.value)">' +
+      '</div>' +
+      '<div class="field"><label>Approximate date</label>' +
+        '<input type="month" id="date_' + r.id + '" value="' + (r.date || '') + '" onchange="updateReview(' + r.id + ',\'date\',this.value)">' +
+      '</div>' +
+    '</div>' +
+    '<div class="field" style="margin-bottom:0"><label>Trip / species (optional)</label>' +
+      '<input type="text" id="trip_' + r.id + '" placeholder="Full Day Beaverkill, May 2024" value="' + (r.trip || '') + '" onchange="updateReview(' + r.id + ',\'trip\',this.value)">' +
+    '</div>' +
+  '</div>';
+}
+
+function addReview() {
+  var id = ++reviewIdCounter;
+  reviews.push({ id: id, rating: 5, text: '', name: '', date: '', trip: '' });
+  var container = document.getElementById('reviewsContainer');
+  var div = document.createElement('div');
+  div.innerHTML = buildReviewEntryHTML(reviews[reviews.length - 1], reviews.length - 1);
+  container.appendChild(div.firstChild);
+  attachStarHandlers();
+  updateReviewCountBadge();
+}
+
+function removeReview(id) {
+  reviews = reviews.filter(function(r) { return r.id !== id; });
+  var el = document.getElementById('re_' + id);
+  if (el) el.remove();
+  // Re-number
+  document.querySelectorAll('.re-num').forEach(function(el, i) {
+    el.textContent = 'Review ' + (i + 1) + ' — from ' + selectedSource;
+  });
+  updateReviewCountBadge();
+}
+
+function setStars(id, val) {
+  var r = reviews.find(function(x) { return x.id === id; });
+  if (r) r.rating = val;
+  var container = document.getElementById('stars_' + id);
+  if (container) {
+    container.querySelectorAll('.re-star').forEach(function(s) {
+      s.style.opacity = parseInt(s.dataset.val) <= val ? '1' : '0.25';
+    });
+  }
+}
+
+function updateReview(id, field, val) {
+  var r = reviews.find(function(x) { return x.id === id; });
+  if (r) r[field] = val;
+}
+
+function attachStarHandlers() {
+  // Already handled via inline onclick
+}
+
+function updateReviewCountBadge() {
+  var badge = document.getElementById('reviewCountBadge');
+  if (reviews.length > 0) {
+    badge.style.display = 'block';
+    badge.textContent = reviews.length + ' review' + (reviews.length > 1 ? 's' : '');
+  }
+}
+
+// Override step2 entry
+var origGoTo = goTo;
+document.addEventListener('click', function(e) {});
+
+// When entering step 2, init reviews if empty
+(function() {
+  var orig = goTo;
+  goTo = function(n) {
+    if (n === 2 && reviews.length === 0) {
+      setTimeout(function() {
+        for (var i = 0; i < 3; i++) addReview();
+      }, 50);
+    }
+    orig(n);
+  };
+})();
+
+// ── PREVIEW ──
+function buildPreview() {
+  // Sync all current field values into reviews array
+  reviews.forEach(function(r) {
+    var textEl = document.getElementById('text_' + r.id);
+    var nameEl = document.getElementById('name_' + r.id);
+    var dateEl = document.getElementById('date_' + r.id);
+    var tripEl = document.getElementById('trip_' + r.id);
+    if (textEl) r.text = textEl.value;
+    if (nameEl) r.name = nameEl.value;
+    if (dateEl) r.date = dateEl.value;
+    if (tripEl) r.trip = tripEl.value;
+  });
+
+  // Filter out truly empty reviews
+  var populated = reviews.filter(function(r) { return r.text && r.text.trim(); });
+
+  // Stats
+  var avg = populated.length ? (populated.reduce(function(a, b) { return a + b.rating; }, 0) / populated.length).toFixed(1) : '—';
+  document.getElementById('previewStats').innerHTML =
+    '<div class="ps-item"><div class="ps-num">' + populated.length + '</div><div class="ps-label">Reviews</div></div>' +
+    '<div class="ps-divider"></div>' +
+    '<div class="ps-item"><div class="ps-num">' + avg + '</div><div class="ps-label">Avg Rating</div></div>' +
+    '<div class="ps-divider"></div>' +
+    '<div class="ps-item"><div class="ps-num">' + selectedSource + '</div><div class="ps-label">Source</div></div>';
+
+  // Preview list
+  var list = document.getElementById('previewList');
+  list.innerHTML = populated.length === 0
+    ? '<div style="text-align:center;padding:24px;color:var(--text-muted);font-size:14px">No reviews with text yet — go back and fill in the review text.</div>'
+    : populated.map(function(r) { return buildReviewPreviewHTML(r); }).join('');
+}
+
+function buildReviewPreviewHTML(r) {
+  var stars = '';
+  for (var i = 0; i < 5; i++) stars += i < r.rating ? '★' : '☆';
+  var initials = (r.name || 'A').split(' ').map(function(w) { return w[0]; }).join('').toUpperCase().slice(0, 2) || 'A';
+  var colors = ['#2c4e35','#4a7fa0','#8a4a2c','#3d6b4a','#5a3a7a'];
+  var color = colors[r.id % colors.length];
+  var dateDisplay = r.date ? new Date(r.date + '-01').toLocaleDateString('en-US', { month: 'long', year: 'numeric' }) : 'Date not specified';
+  return '<div class="review-preview">' +
+    '<div class="rp-source-badge"><svg viewBox="0 0 11 11"><circle cx="5.5" cy="5.5" r="4.5"/><polyline points="3,5.5 5,7.5 8.5,3.5"/></svg>From ' + selectedSource + '</div>' +
+    '<div class="rp-stars">' + stars + '</div>' +
+    '<div class="rp-text">' + (r.text || '') + '</div>' +
+    '<div class="rp-meta">' +
+      '<div class="rp-av" style="background:' + color + '">' + initials + '</div>' +
+      '<div>' +
+        '<div class="rp-name">' + (r.name || 'Anonymous') + '</div>' +
+        '<div class="rp-date">' + dateDisplay + (r.trip ? ' · ' + r.trip : '') + '</div>' +
+        '<div class="rp-imported"><svg viewBox="0 0 10 10"><polyline points="2,5 4,7 8,3"/></svg>Imported · Not a Riffle-verified booking</div>' +
+      '</div>' +
+    '</div>' +
+  '</div>';
+}
+
+// ── CONFIRM ──
+function buildConfirm() {
+  var populated = reviews.filter(function(r) { return r.text && r.text.trim(); });
+  document.getElementById('finalCount').textContent = populated.length;
+  document.getElementById('finalSource').textContent = 'from ' + selectedSource;
+}
+
+// ── CONSENT ──
+function checkConsent() {
+  var all = ['consent1','consent2','consent3','consent4'].every(function(id) {
+    return document.getElementById(id).checked;
+  });
+  document.getElementById('submitBtn').disabled = !all;
+}
+
+// ── SUBMIT ──
+function submitImport() {
+  var populated = reviews.filter(function(r) { return r.text && r.text.trim(); });
+
+  // Show success
+  document.getElementById('mainCard').style.display = 'none';
+  document.getElementById('successWrap').style.display = 'block';
+
+  // Build success preview
+  var list = document.getElementById('successPreviewList');
+  list.innerHTML = populated.map(function(r) { return buildReviewPreviewHTML(r); }).join('');
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── RESET ──
+function resetForm() {
+  reviews = [];
+  reviewIdCounter = 0;
+  selectedSource = '';
+  currentStep = 1;
+  document.getElementById('mainCard').style.display = 'block';
+  document.getElementById('successWrap').style.display = 'none';
+  document.getElementById('reviewsContainer').innerHTML = '';
+  document.getElementById('reviewCountBadge').style.display = 'none';
+  document.querySelectorAll('.source-card').forEach(function(c) { c.classList.remove('selected'); });
+  document.getElementById('step1Next').disabled = true;
+  ['consent1','consent2','consent3','consent4'].forEach(function(id) {
+    document.getElementById(id).checked = false;
+  });
+  document.getElementById('submitBtn').disabled = true;
+  document.getElementById('pbFill').style.width = '25%';
+
+  document.querySelectorAll('.step-panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById('step1').classList.add('active');
+  document.querySelectorAll('.step-tab').forEach(function(t, i) {
+    t.className = 'step-tab' + (i === 0 ? ' active' : '');
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beaverkill Valley Inn — Fly Fishing Lodge | Riffle</title>
+<meta name="description" content="Book the Beaverkill Valley Inn — the most storied fly fishing lodge in the Catskills. 3 miles of private Beaverkill frontage, guided trips, gourmet dining, and 20 rooms on legendary trout water.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --forest:#1e3222;--forest-mid:#2c4e35;--forest-lt:#3d6b4a;
+  --sage:#5a8a68;--mist:#9ec4aa;--river:#4a7fa0;
+  --pebble:#f0ebe0;--pebble-dk:#ddd6c4;--cream:#fdfaf3;--warm:#faf6ee;
+  --amber:#b8772a;--amber-lt:#d4943a;--gold:#e8c068;
+  --ink:#1a1f16;--text-mid:#3a4a3a;--text-muted:#7a8a72;
+  --white:#fff;--r:14px;--r-sm:8px;--pill:100px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);line-height:1.6;overflow-x:hidden}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:64px;background:rgba(26,31,22,0.97);backdrop-filter:blur(16px);box-shadow:0 1px 0 rgba(255,255,255,0.05)}
+.nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none}
+.nav-logo svg{width:28px;height:28px}
+.nav-word{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff}
+.nav-back{color:rgba(255,255,255,0.6);text-decoration:none;font-size:13px;font-weight:500;display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:var(--r-sm);border:1px solid rgba(255,255,255,0.15);transition:all 0.2s}
+.nav-back:hover{color:#fff;border-color:rgba(255,255,255,0.4)}
+.nav-back svg{width:14px;height:14px;stroke:currentColor;stroke-width:2;fill:none}
+
+/* ── HERO ── */
+.lodge-hero{position:relative;height:520px;overflow:hidden;margin-top:64px}
+.lh-img{position:absolute;inset:0;z-index:0}
+.lh-img img{width:100%;height:100%;object-fit:cover;object-position:center 55%;filter:sepia(10%) contrast(1.05) brightness(0.78) saturate(1.1)}
+.lh-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,rgba(15,22,14,0.3) 0%,rgba(15,22,14,0.1) 35%,rgba(15,22,14,0.78) 100%)}
+.lh-content{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:36px 5% 40px;display:flex;align-items:flex-end;justify-content:space-between;gap:20px}
+.lh-left{}
+.lh-breadcrumb{font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.lh-breadcrumb a{color:rgba(255,255,255,0.5);text-decoration:none}
+.lh-breadcrumb a:hover{color:rgba(255,255,255,0.8)}
+.lh-breadcrumb span{opacity:0.35}
+.lh-type{display:inline-flex;align-items:center;gap:6px;background:rgba(212,148,58,0.2);border:1px solid rgba(212,148,58,0.35);color:var(--gold);font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 12px;border-radius:var(--pill);margin-bottom:10px}
+.lh-name{font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,52px);font-weight:700;color:#fff;line-height:1;margin-bottom:10px;letter-spacing:-0.5px}
+.lh-loc{font-size:14px;color:rgba(255,255,255,0.65);display:flex;align-items:center;gap:6px;margin-bottom:12px}
+.lh-loc svg{width:13px;height:13px;stroke:currentColor;stroke-width:1.5;fill:none}
+.lh-badges{display:flex;gap:8px;flex-wrap:wrap}
+.lh-badge{font-size:11px;font-weight:600;padding:4px 12px;border-radius:var(--pill)}
+.lhb-verified{background:var(--sage);color:#fff}
+.lhb-private{background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.8);border:1px solid rgba(255,255,255,0.2)}
+.lh-photo-grid{display:flex;gap:6px;flex-shrink:0}
+.lh-thumb{width:90px;height:64px;border-radius:var(--r-sm);overflow:hidden;cursor:pointer;transition:opacity 0.2s}
+.lh-thumb:hover{opacity:0.85}
+.lh-thumb img{width:100%;height:100%;object-fit:cover;filter:sepia(8%)}
+.lh-more{background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff}
+@media(max-width:700px){.lh-content{flex-direction:column;align-items:flex-start;padding:24px 20px 28px}.lh-photo-grid{display:none}}
+
+/* ── STICKY BAR ── */
+.sticky-bar{position:sticky;top:64px;z-index:200;background:var(--white);border-bottom:1px solid var(--pebble-dk);padding:0 5%}
+.sb-inner{display:flex;align-items:center;justify-content:space-between;height:56px;gap:16px}
+.sb-meta{display:flex;align-items:center;gap:20px}
+.sb-rating{display:flex;align-items:center;gap:5px}
+.sb-stars{color:var(--amber-lt);font-size:13px}
+.sb-rn{font-size:14px;font-weight:600;color:var(--ink)}
+.sb-rc{font-size:13px;color:var(--text-muted)}
+.sb-div{width:1px;height:20px;background:var(--pebble-dk)}
+.sb-price{font-size:13px;color:var(--ink)}.sb-price strong{font-size:17px;font-weight:700;color:var(--forest)}
+.sb-cta{background:var(--forest);color:#fff;font-size:14px;font-weight:600;padding:10px 24px;border-radius:var(--pill);border:none;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap;transition:all 0.2s}
+.sb-cta:hover{background:var(--forest-mid);transform:translateY(-1px)}
+@media(max-width:700px){.sb-div,.sb-price{display:none}}
+
+/* ── BODY LAYOUT ── */
+.lodge-body{display:grid;grid-template-columns:1fr 380px;gap:48px;padding:52px 5%;max-width:1200px;margin:0 auto}
+@media(max-width:1024px){.lodge-body{grid-template-columns:1fr;padding:36px 5%}}
+
+/* ── LEFT COL ── */
+.ey{font-size:10px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--sage);margin-bottom:10px}
+.sec-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--ink);margin-bottom:14px}
+section.ls{padding:0 0 48px;border-bottom:1px solid var(--pebble-dk);margin-bottom:48px}
+section.ls:last-child{border-bottom:none}
+.body-text{font-size:15px;color:var(--text-mid);line-height:1.8;margin-bottom:12px}
+
+/* Lodge meta grid */
+.lodge-meta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px}
+@media(max-width:600px){.lodge-meta-grid{grid-template-columns:repeat(2,1fr)}}
+.lm-card{background:var(--pebble);border-radius:var(--r-sm);padding:14px;text-align:center}
+.lm-val{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--forest);margin-bottom:3px;line-height:1}
+.lm-label{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.7px}
+
+/* Waters section */
+.water-highlight{background:var(--forest);border-radius:var(--r);padding:24px;margin-bottom:20px;color:#fff}
+.wh-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff;margin-bottom:8px}
+.wh-body{font-size:13px;color:rgba(255,255,255,0.6);line-height:1.75}
+.wh-stats{display:flex;gap:24px;margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.1)}
+.whs{text-align:center}
+.whs-n{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--gold);line-height:1}
+.whs-l{font-size:10px;color:rgba(255,255,255,0.38);text-transform:uppercase;letter-spacing:0.7px;margin-top:3px}
+
+/* Amenities */
+.amenity-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:600px){.amenity-grid{grid-template-columns:repeat(2,1fr)}}
+.am-item{background:var(--white);border:1px solid var(--pebble-dk);border-radius:var(--r-sm);padding:12px 14px;display:flex;align-items:center;gap:10px}
+.am-icon{width:32px;height:32px;border-radius:var(--r-sm);background:var(--pebble);flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.am-icon svg{width:15px;height:15px;stroke:var(--forest-mid);stroke-width:1.5;fill:none}
+.am-name{font-size:12px;font-weight:600;color:var(--ink);line-height:1.3}
+
+/* Packages */
+.pkg-list{display:flex;flex-direction:column;gap:14px}
+.pkg-card{background:var(--white);border:1px solid var(--pebble-dk);border-radius:var(--r);padding:22px;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;transition:all 0.2s;cursor:pointer}
+.pkg-card:hover{border-color:var(--sage);box-shadow:0 6px 24px rgba(26,31,22,0.08)}
+.pkg-card.featured{border-color:var(--amber-lt);background:rgba(212,148,58,0.03)}
+.pkg-badge{display:inline-block;background:var(--amber-lt);color:#fff;font-size:9px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;padding:3px 9px;border-radius:var(--pill);margin-bottom:8px}
+.pkg-name{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.pkg-meta{display:flex;gap:14px;margin-bottom:10px;flex-wrap:wrap}
+.pkg-tag{font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:4px}
+.pkg-tag svg{width:12px;height:12px;stroke:currentColor;stroke-width:1.5;fill:none}
+.pkg-desc{font-size:13px;color:var(--text-muted);line-height:1.65;margin-bottom:10px}
+.pkg-includes{display:flex;flex-wrap:wrap;gap:5px}
+.pi-chip{background:var(--pebble);color:var(--forest-mid);font-size:10px;font-weight:500;padding:3px 8px;border-radius:var(--pill)}
+.pkg-right{text-align:right;flex-shrink:0}
+.pkg-from{font-size:11px;color:var(--text-muted)}
+.pkg-price{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--forest);line-height:1}
+.pkg-per{font-size:11px;color:var(--text-muted);margin-top:2px}
+.pkg-book{margin-top:12px;background:var(--forest);color:#fff;font-size:12px;font-weight:600;padding:8px 18px;border-radius:var(--pill);border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;white-space:nowrap}
+.pkg-book:hover{background:var(--forest-mid)}
+
+/* Photo gallery */
+.gallery-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:200px 200px;gap:8px;border-radius:var(--r);overflow:hidden}
+.gallery-img{overflow:hidden;cursor:pointer}
+.gallery-img img{width:100%;height:100%;object-fit:cover;filter:sepia(8%) contrast(1.05) brightness(0.9);transition:transform 0.4s}
+.gallery-img:hover img{transform:scale(1.04)}
+.gallery-img.main{grid-row:1/3}
+@media(max-width:650px){.gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:150px 150px 150px}.gallery-img.main{grid-row:auto}}
+
+/* Season calendar */
+.season-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+@media(max-width:600px){.season-grid{grid-template-columns:repeat(3,1fr)}}
+.sg-month{background:var(--white);border:1px solid var(--pebble-dk);border-radius:var(--r-sm);padding:12px 8px;text-align:center}
+.sg-month.prime{background:rgba(90,138,104,0.08);border-color:var(--sage)}
+.sg-m{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:5px}
+.sg-bar{height:4px;border-radius:2px;margin-bottom:6px}
+.sg-bar.low{background:rgba(90,138,104,0.2)}
+.sg-bar.med{background:rgba(90,138,104,0.55)}
+.sg-bar.high{background:var(--sage)}
+.sg-label{font-size:9px;color:var(--text-muted);line-height:1.4}
+
+/* Reviews */
+.rv-card{background:var(--white);border:1px solid var(--pebble-dk);border-radius:var(--r);padding:24px;position:relative;margin-bottom:16px}
+.rv-q{font-family:'Playfair Display',serif;font-size:44px;font-weight:700;color:var(--pebble-dk);line-height:1;position:absolute;top:12px;left:18px}
+.rv-stars{color:var(--amber-lt);font-size:12px;margin-bottom:10px}
+.rv-text{font-size:14px;color:var(--text-mid);line-height:1.75;font-style:italic;margin-top:16px;margin-bottom:16px}
+.rv-author{display:flex;align-items:center;gap:10px}
+.rv-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
+.rv-name{font-size:13px;font-weight:600;color:var(--ink)}
+.rv-meta{font-size:11px;color:var(--text-muted);margin-top:1px}
+
+/* Rating summary */
+.rating-summary{display:flex;gap:24px;align-items:center;background:var(--pebble);border-radius:var(--r);padding:22px;margin-bottom:24px}
+.rs-big{text-align:center;flex-shrink:0}
+.rs-num{font-family:'Playfair Display',serif;font-size:48px;font-weight:700;color:var(--forest);line-height:1}
+.rs-stars{color:var(--amber-lt);font-size:15px;display:block;margin-top:4px}
+.rs-ct{font-size:12px;color:var(--text-muted);margin-top:4px}
+.rs-bars{flex:1}
+.rb-row{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.rb-label{font-size:12px;color:var(--text-muted);width:100px;flex-shrink:0}
+.rb-track{flex:1;height:6px;background:var(--pebble-dk);border-radius:3px;overflow:hidden}
+.rb-fill{height:100%;background:var(--amber-lt);border-radius:3px}
+@media(max-width:600px){.rating-summary{flex-direction:column}.rb-label{width:80px}}
+
+/* ── RIGHT COL — booking card ── */
+.right-col{position:sticky;top:120px;height:fit-content}
+.booking-card{background:var(--white);border:1px solid var(--pebble-dk);border-radius:var(--r);overflow:hidden;box-shadow:0 8px 32px rgba(26,31,22,0.08)}
+.bc-header{background:var(--forest);padding:22px 24px}
+.bc-lodge-name{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:2px}
+.bc-tagline{font-size:12px;color:rgba(255,255,255,0.45);margin-bottom:14px}
+.bc-price-row{display:flex;align-items:baseline;gap:6px;margin-bottom:4px}
+.bc-from{font-size:11px;color:rgba(255,255,255,0.5)}
+.bc-price{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:#fff}
+.bc-per{font-size:12px;color:rgba(255,255,255,0.5)}
+.bc-rating{display:flex;align-items:center;gap:5px;margin-top:6px}
+.bc-stars{color:var(--gold);font-size:12px}
+.bc-rn{font-size:13px;color:rgba(255,255,255,0.8);font-weight:600}
+.bc-rc{font-size:12px;color:rgba(255,255,255,0.45)}
+.bc-body{padding:22px}
+.bc-label{font-size:10px;font-weight:600;letter-spacing:0.8px;text-transform:uppercase;color:var(--text-muted);display:block;margin-bottom:6px}
+.bc-input{width:100%;padding:11px 14px;border:1.5px solid var(--pebble-dk);border-radius:var(--r-sm);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);background:var(--pebble);outline:none;transition:border 0.2s;-webkit-appearance:none}
+.bc-input:focus{border-color:var(--sage);background:#fff}
+.bc-field{margin-bottom:14px}
+.bc-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+/* Package selector */
+.bc-pkg-select{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.bps{border:1.5px solid var(--pebble-dk);border-radius:var(--r-sm);padding:10px 12px;cursor:pointer;transition:all 0.2s;display:flex;justify-content:space-between;align-items:center}
+.bps:hover{border-color:var(--sage)}
+.bps.selected{border-color:var(--forest);background:rgba(30,50,34,0.04)}
+.bps-name{font-size:12px;font-weight:600;color:var(--ink)}
+.bps-price{font-size:12px;font-weight:700;color:var(--forest)}
+/* Submit */
+.bc-submit{width:100%;background:var(--forest);color:#fff;font-size:15px;font-weight:700;padding:14px;border-radius:var(--pill);border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;margin-top:6px}
+.bc-submit:hover{background:var(--forest-mid);transform:translateY(-1px)}
+.bc-note{text-align:center;font-size:12px;color:var(--text-muted);margin-top:10px;line-height:1.5}
+.bc-footer{padding:16px 22px;border-top:1px solid var(--pebble-dk);background:var(--pebble)}
+.bc-perk{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-mid);margin-bottom:7px}
+.bc-perk:last-child{margin-bottom:0}
+.bc-perk svg{width:14px;height:14px;stroke:var(--sage);stroke-width:2;fill:none;flex-shrink:0}
+/* Price breakdown */
+.bc-breakdown{padding:14px 0 0;border-top:1px solid var(--pebble-dk);margin-top:14px}
+.bcb-row{display:flex;justify-content:space-between;font-size:13px;color:var(--text-muted);margin-bottom:6px}
+.bcb-row.total{font-weight:700;color:var(--ink);font-size:14px;padding-top:8px;border-top:1px solid var(--pebble-dk);margin-top:6px}
+
+/* ── FOOTER ── */
+footer{background:#0c1610;padding:40px 5% 32px;margin-top:80px}
+.ft-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
+.ft-logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff}
+.ft-tagline{font-family:'Playfair Display',serif;font-size:13px;font-style:italic;color:rgba(255,255,255,0.28)}
+.ft-links a{text-decoration:none;font-size:12px;color:rgba(255,255,255,0.25);margin-left:20px}
+.ft-copy{width:100%;padding-top:20px;border-top:1px solid rgba(255,255,255,0.06);font-size:11px;color:rgba(255,255,255,0.18);margin-top:16px}
+
+/* ── REVEAL ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity 0.5s ease,transform 0.5s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="riffle.html">
+    <svg viewBox="0 0 32 32" fill="none"><path d="M4 22 Q8 14 13 18 Q18 22 23 15 Q27 10 31 13" stroke="#9EC4AA" stroke-width="2.2" stroke-linecap="round" fill="none"/><path d="M4 27 Q9 20 14 24 Q19 28 24 21 Q28 15 31 18" stroke="#5A8A68" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.7"/><circle cx="29.5" cy="10.5" r="2.5" fill="#D4943A"/><path d="M29.5 10.5 L25 6" stroke="#D4943A" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <span class="nav-word">Riffle</span>
+  </a>
+  <a class="nav-back" href="riffle-lodges.html"><svg viewBox="0 0 14 14"><polyline points="9,2 4,7 9,12"/></svg> Back to lodges</a>
+</nav>
+
+<!-- HERO -->
+<div class="lodge-hero">
+  <div class="lh-img">
+    <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1800&q=85&fit=crop&crop=bottom" alt="Beaverkill Valley Inn">
+  </div>
+  <div class="lh-overlay"></div>
+  <div class="lh-content">
+    <div class="lh-left">
+      <div class="lh-breadcrumb">
+        <a href="#">Lodges</a><span>›</span>
+        <a href="#">New York</a><span>›</span>
+        <a href="#">Catskills</a>
+      </div>
+      <div class="lh-type">✦ Fly Fishing Lodge</div>
+      <div class="lh-name">Beaverkill Valley Inn</div>
+      <div class="lh-loc">
+        <svg viewBox="0 0 14 14"><path d="M7 1C5 1 3.5 2.5 3.5 4.3c0 2.8 3.5 8.7 3.5 8.7s3.5-5.9 3.5-8.7C10.5 2.5 9 1 7 1z"/><circle cx="7" cy="4.3" r="1.5"/></svg>
+        Lew Beach, New York · Beaverkill River
+      </div>
+      <div class="lh-badges">
+        <span class="lh-badge lhb-verified">✓ Riffle Verified</span>
+        <span class="lh-badge lhb-private">3 Miles Private Water</span>
+        <span class="lh-badge lhb-private">Guides Included</span>
+        <span class="lh-badge lhb-private">All-Inclusive Available</span>
+      </div>
+    </div>
+    <div class="lh-photo-grid">
+      <div class="lh-thumb"><img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&q=80&fit=crop" alt="Fishing"></div>
+      <div class="lh-thumb"><img src="https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=300&q=80&fit=crop" alt="River"></div>
+      <div class="lh-thumb lh-more">+12</div>
+    </div>
+  </div>
+</div>
+
+<!-- STICKY BAR -->
+<div class="sticky-bar">
+  <div class="sb-inner">
+    <div class="sb-meta">
+      <div class="sb-rating">
+        <span class="sb-stars">★★★★★</span>
+        <span class="sb-rn">4.9</span>
+        <span class="sb-rc">(186 reviews)</span>
+      </div>
+      <div class="sb-div"></div>
+      <div class="sb-price">From <strong>$485</strong> / person / night</div>
+    </div>
+    <button class="sb-cta" onclick="document.getElementById('booking-card').scrollIntoView({behavior:'smooth'})">Check Availability</button>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="lodge-body">
+
+  <!-- LEFT -->
+  <div class="left-col">
+
+    <!-- ABOUT -->
+    <section class="ls reveal">
+      <div class="lodge-meta-grid">
+        <div class="lm-card"><div class="lm-val">20</div><div class="lm-label">Rooms</div></div>
+        <div class="lm-card"><div class="lm-val">3 mi</div><div class="lm-label">Private water</div></div>
+        <div class="lm-card"><div class="lm-val">6</div><div class="lm-label">Resident guides</div></div>
+        <div class="lm-card"><div class="lm-val">1893</div><div class="lm-label">Est.</div></div>
+      </div>
+      <div class="ey">About the Lodge</div>
+      <h2 class="sec-title">The most storied address in American fly fishing</h2>
+      <p class="body-text">The Beaverkill Valley Inn has stood on the banks of the Beaverkill River since 1893 — when Theodore Gordon himself fished these pools. Situated in the hamlet of Lew Beach in the heart of the Catskills, the inn controls three miles of private Beaverkill frontage, including some of the most legendary named pools in the history of American dry fly fishing.</p>
+      <p class="body-text">This is not a resort that happens to have a river nearby. The lodge was built by anglers, managed by anglers, and designed around the singular purpose of fishing the Beaverkill as well as it can be fished. Every detail — the early breakfast service, the fly-tying bench in the common room, the guided wading program, the hatch reports posted each morning — exists to serve the angler.</p>
+      <p class="body-text">The 20 rooms range from classic river-view doubles to two-bedroom suites for groups. All-inclusive fishing packages include three guided wading sessions per day, all meals, gear, and unlimited access to private water. Non-angling guests are welcome but the Beaverkill is the reason people come.</p>
+    </section>
+
+    <!-- WATER -->
+    <section class="ls reveal">
+      <div class="ey">Private Water</div>
+      <h2 class="sec-title">Three miles of the Beaverkill — yours alone</h2>
+      <div class="water-highlight">
+        <div class="wh-title">The Beaverkill River · Private Stretch</div>
+        <p class="wh-body">The inn's private water runs from the Upper Flats through Hendrickson's Pool, Ferdon's Eddy, and down to the famous Junction Pool where the Willowemoc meets the Beaverkill. Guests have exclusive access — no day anglers, no public pressure. The pools are rested daily and managed for wild brown trout.</p>
+        <div class="wh-stats">
+          <div class="whs"><div class="whs-n">3 mi</div><div class="whs-l">Private frontage</div></div>
+          <div class="whs"><div class="whs-n">14+</div><div class="whs-l">Named pools</div></div>
+          <div class="whs"><div class="whs-n">Wild</div><div class="whs-l">Brown trout only</div></div>
+          <div class="whs"><div class="whs-n">20"</div><div class="whs-l">Avg trophy size</div></div>
+        </div>
+      </div>
+      <p class="body-text">Beyond the private stretch, resident guides have access to an additional 12 miles of the upper Beaverkill and the West Branch Delaware — all within 30 minutes of the lodge. Guides select water daily based on conditions, flows, and which hatches are active.</p>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="ls reveal">
+      <div class="ey">Gallery</div>
+      <h2 class="sec-title">The lodge and its water</h2>
+      <div class="gallery-grid">
+        <div class="gallery-img main"><img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=85&fit=crop&crop=bottom" alt="Beaverkill Valley Inn main view"></div>
+        <div class="gallery-img"><img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&q=80&fit=crop" alt="Fishing the Beaverkill"></div>
+        <div class="gallery-img"><img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&q=80&fit=crop" alt="River morning"></div>
+        <div class="gallery-img"><img src="https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=400&q=80&fit=crop" alt="The pools"></div>
+        <div class="gallery-img"><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&q=80&fit=crop" alt="Delaware River"></div>
+      </div>
+    </section>
+
+    <!-- PACKAGES -->
+    <section class="ls reveal">
+      <div class="ey">Stay Packages</div>
+      <h2 class="sec-title">Choose your experience</h2>
+      <div class="pkg-list">
+
+        <div class="pkg-card featured">
+          <div class="pkg-left">
+            <div class="pkg-badge">Most Popular</div>
+            <div class="pkg-name">Full Fishing Package</div>
+            <div class="pkg-meta">
+              <span class="pkg-tag"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/><polyline points="6,3 6,6 8,7"/></svg>3–7 nights</span>
+              <span class="pkg-tag"><svg viewBox="0 0 12 12"><circle cx="4" cy="4" r="2"/><circle cx="8" cy="4" r="2"/><path d="M2 11c0-2.2 1.8-4 4-4s4 1.8 4 4"/></svg>Up to 4 guests</span>
+              <span class="pkg-tag"><svg viewBox="0 0 12 12"><rect x="2" y="2" width="8" height="8" rx="1"/><line x1="2" y1="5" x2="10" y2="5"/></svg>Apr–Oct</span>
+            </div>
+            <p class="pkg-desc">The complete Beaverkill experience. Three guided wading sessions daily (morning, midday, evening rise), all meals including shore lunch, unlimited access to private water, flies and terminal tackle, and full use of lodge facilities.</p>
+            <div class="pkg-includes">
+              <span class="pi-chip">3 guided sessions/day</span><span class="pi-chip">All meals</span><span class="pi-chip">Private water access</span><span class="pi-chip">Flies & gear</span><span class="pi-chip">Fly tying workshop</span>
+            </div>
+          </div>
+          <div class="pkg-right">
+            <div class="pkg-from">From</div>
+            <div class="pkg-price">$785</div>
+            <div class="pkg-per">per person / night</div>
+            <button class="pkg-book">Book This Package</button>
+          </div>
+        </div>
+
+        <div class="pkg-card">
+          <div class="pkg-left">
+            <div class="pkg-name">Bed, Breakfast & Water</div>
+            <div class="pkg-meta">
+              <span class="pkg-tag"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/><polyline points="6,3 6,6 8,7"/></svg>1–14 nights</span>
+              <span class="pkg-tag"><svg viewBox="0 0 12 12"><circle cx="4" cy="4" r="2"/><circle cx="8" cy="4" r="2"/><path d="M2 11c0-2.2 1.8-4 4-4s4 1.8 4 4"/></svg>1–2 guests</span>
+              <span class="pkg-tag"><svg viewBox="0 0 12 12"><rect x="2" y="2" width="8" height="8" rx="1"/><line x1="2" y1="5" x2="10" y2="5"/></svg>Year-round</span>
+            </div>
+            <p class="pkg-desc">Room, breakfast, and full access to private water. Bring your own tackle or rent from the lodge shop. Add guided sessions à la carte. The most flexible option for experienced anglers who want to fish independently.</p>
+            <div class="pkg-includes">
+              <span class="pi-chip">Room & breakfast</span><span class="pi-chip">Private water access</span><span class="pi-chip">Gear rental available</span><span class="pi-chip">Guide sessions à la carte</span>
+            </div>
+          </div>
+          <div class="pkg-right">
+            <div class="pkg-from">From</div>
+            <div class="pkg-price">$485</div>
+            <div class="pkg-per">per person / night</div>
+            <button class="pkg-book">Book This Package</button>
+          </div>
+        </div>
+
+        <div class="pkg-card">
+          <div class="pkg-left">
+            <div class="pkg-name">Corporate & Group Retreat</div>
+            <div class="pkg-meta">
+              <span class="pkg-tag"><svg viewBox="0 0 12 12"><circle cx="6" cy="6" r="5"/><polyline points="6,3 6,6 8,7"/></svg>2–5 nights</span>
+              <span class="pkg-tag"><svg viewBox="0 0 12 12"><circle cx="4" cy="4" r="2"/><circle cx="8" cy="4" r="2"/><path d="M2 11c0-2.2 1.8-4 4-4s4 1.8 4 4"/></svg>8–20 guests</span>
+              <span class="pkg-tag"><svg viewBox="0 0 12 12"><rect x="2" y="2" width="8" height="8" rx="1"/><line x1="2" y1="5" x2="10" y2="5"/></svg>May–Oct</span>
+            </div>
+            <p class="pkg-desc">Exclusive use of the lodge for groups. Full guided program for all skill levels including complete beginners — ideal for corporate retreats, bachelor parties, and private celebrations. Custom menus and programming available.</p>
+            <div class="pkg-includes">
+              <span class="pi-chip">Exclusive lodge use</span><span class="pi-chip">All meals & bar</span><span class="pi-chip">6 dedicated guides</span><span class="pi-chip">Beginner instruction</span><span class="pi-chip">Custom programming</span>
+            </div>
+          </div>
+          <div class="pkg-right">
+            <div class="pkg-from">From</div>
+            <div class="pkg-price">$4,800</div>
+            <div class="pkg-per">per night (full buyout)</div>
+            <button class="pkg-book">Inquire</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- AMENITIES -->
+    <section class="ls reveal">
+      <div class="ey">Lodge Amenities</div>
+      <h2 class="sec-title">Everything a serious angler needs</h2>
+      <div class="amenity-grid">
+        <div class="am-item"><div class="am-icon"><svg viewBox="0 0 15 15"><path d="M2 13V5l5-3 5 3v8"/><rect x="5" y="9" width="3" height="4"/><rect x="9" y="7" width="3" height="6"/></svg></div><div class="am-name">20 River-View Rooms</div></div>
+        <div class="am-item"><div class="am-icon"><svg viewBox="0 0 15 15"><path d="M2 11c0-2.8 2.2-5 5-5s5 2.2 5 5"/><circle cx="7" cy="4" r="2.5"/></svg></div><div class="am-name">6 Resident Expert Guides</div></div>
+        <div class="am-item"><div class="am-icon"><svg viewBox="0 0 15 15"><path d="M2 4h11v9H2z"/><path d="M5 4V2.5a2 2 0 014 0V4"/></svg></div><div class="am-name">Full-Service Fly Shop</div></div>
+        <div class="am-item"><div class="am-icon"><svg viewBox="0 0 15 15"><path d="M2 3h11v9H2z"/><path d="M5 7h5M7 5v4"/></svg></div><div class="am-name">Fly Tying Room & Bench</div></div>
+        <div class="am-item"><div class="am-icon"><svg viewBox="0 0 15 15"><path d="M7 2L9 6h4l-3.5 2.7 1.3 4.3L7 10.5 4.2 13l1.3-4.3L2 6h4z"/></svg></div><div class="am-name">Fine Dining Restaurant</div></div>
+        <div class="am-item"><div class="am-icon"><svg viewBox="0 0 15 15"><path d="M3 12V6a4 4 0 018 0v6"/><line x1="1" y1="12" x2="14" y2="12"/></svg></div><div class="am-name">Streamside Bar & Porch</div></div>
+        <div class="am-item"><div class="am-icon"><svg viewBox="0 0 15 15"><rect x="2" y="3" width="11" height="9" rx="1"/><line x1="5" y1="7" x2="10" y2="7"/><line x1="7" y1="5" x2="7" y2="9"/></svg></div><div class="am-name">Daily Hatch Reports</div></div>
+        <div class="am-item"><div class="am-icon"><svg viewBox="0 0 15 15"><circle cx="7.5" cy="7.5" r="5.5"/><path d="M7.5 4v3.5l2 2"/></svg></div><div class="am-name">Gear Storage & Drying Room</div></div>
+        <div class="am-item"><div class="am-icon"><svg viewBox="0 0 15 15"><path d="M2 2h11v4l-5.5 4L2 6V2z"/></svg></div><div class="am-name">Free WiFi & Cell Signal</div></div>
+      </div>
+    </section>
+
+    <!-- SEASON -->
+    <section class="ls reveal">
+      <div class="ey">Best Times to Visit</div>
+      <h2 class="sec-title">When the Beaverkill is at its best</h2>
+      <div class="season-grid">
+        <div class="sg-month"><div class="sg-m">Jan</div><div class="sg-bar low"></div><div class="sg-label">Midges only</div></div>
+        <div class="sg-month"><div class="sg-m">Feb</div><div class="sg-bar low"></div><div class="sg-label">BWO starts</div></div>
+        <div class="sg-month"><div class="sg-m">Mar</div><div class="sg-bar med"></div><div class="sg-label">Early stonefly</div></div>
+        <div class="sg-month prime"><div class="sg-m">Apr</div><div class="sg-bar high"></div><div class="sg-label">Hendrickson hatch</div></div>
+        <div class="sg-month prime"><div class="sg-m">May</div><div class="sg-bar high"></div><div class="sg-label">Peak dry fly</div></div>
+        <div class="sg-month prime"><div class="sg-m">Jun</div><div class="sg-bar high"></div><div class="sg-label">Green Drake</div></div>
+        <div class="sg-month"><div class="sg-m">Jul</div><div class="sg-bar med"></div><div class="sg-label">Trico & terrestrials</div></div>
+        <div class="sg-month"><div class="sg-m">Aug</div><div class="sg-bar low"></div><div class="sg-label">Low water</div></div>
+        <div class="sg-month prime"><div class="sg-m">Sep</div><div class="sg-bar high"></div><div class="sg-label">Isonychia & BWO</div></div>
+        <div class="sg-month prime"><div class="sg-m">Oct</div><div class="sg-bar high"></div><div class="sg-label">Streamers, BWO</div></div>
+        <div class="sg-month"><div class="sg-m">Nov</div><div class="sg-bar med"></div><div class="sg-label">BWO & midges</div></div>
+        <div class="sg-month"><div class="sg-m">Dec</div><div class="sg-bar low"></div><div class="sg-label">Off season</div></div>
+      </div>
+      <p class="body-text" style="margin-top:16px">Highlighted months are prime season. May–June is the most requested window — book at least 3 months in advance. October is exceptional for large browns on streamers and often has availability.</p>
+    </section>
+
+    <!-- REVIEWS -->
+    <section class="ls reveal">
+      <div class="ey">Guest Reviews</div>
+      <h2 class="sec-title">What anglers say</h2>
+      <div class="rating-summary">
+        <div class="rs-big">
+          <div class="rs-num">4.9</div>
+          <span class="rs-stars">★★★★★</span>
+          <div class="rs-ct">186 reviews</div>
+        </div>
+        <div class="rs-bars">
+          <div class="rb-row"><span class="rb-label">Fishing quality</span><div class="rb-track"><div class="rb-fill" style="width:96%"></div></div></div>
+          <div class="rb-row"><span class="rb-label">Guides</span><div class="rb-track"><div class="rb-fill" style="width:98%"></div></div></div>
+          <div class="rb-row"><span class="rb-label">Accommodations</span><div class="rb-track"><div class="rb-fill" style="width:90%"></div></div></div>
+          <div class="rb-row"><span class="rb-label">Food & dining</span><div class="rb-track"><div class="rb-fill" style="width:92%"></div></div></div>
+          <div class="rb-row"><span class="rb-label">Value</span><div class="rb-track"><div class="rb-fill" style="width:85%"></div></div></div>
+        </div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-q">"</div>
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">Three days on the private stretch in October. The guides put us on trophy browns every session — the best streamer fishing I've had anywhere. The evening meals by the fire are as much a part of the experience as the water. I've fished lodges in Montana, New Zealand, and Patagonia. The Beaverkill Valley competes with all of them.</p>
+        <div class="rv-author">
+          <div class="rv-av" style="background:#2c4e35">WH</div>
+          <div><div class="rv-name">William Harrington</div><div class="rv-meta">Full Fishing Package · October 2025 · 3 nights</div></div>
+        </div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-q">"</div>
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">We brought eight people for a corporate retreat — only two had ever fly fished before. By day two everyone was catching wild browns on dry flies. The guides are exceptional teachers. The entire lodge experience is refined without being pretentious. Already planning the return trip.</p>
+        <div class="rv-author">
+          <div class="rv-av" style="background:#4a7fa0">SM</div>
+          <div><div class="rv-name">Sarah Melton</div><div class="rv-meta">Corporate Retreat · June 2025 · 3 nights</div></div>
+        </div>
+      </div>
+      <div class="rv-card">
+        <div class="rv-q">"</div>
+        <div class="rv-stars">★★★★★</div>
+        <p class="rv-text">The Hendrickson hatch in late April. If you know, you know. The guides on this private water knew every lie, every feeding lane, every rise. I've been fly fishing for 30 years and this was a top-five experience. The lodge itself is beautiful and the kitchen is genuinely excellent.</p>
+        <div class="rv-author">
+          <div class="rv-av" style="background:#8a4a2c">RK</div>
+          <div><div class="rv-name">Robert Kimura</div><div class="rv-meta">Full Fishing Package · April 2025 · 4 nights</div></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- RIGHT — BOOKING CARD -->
+  <div class="right-col">
+    <div class="booking-card" id="booking-card">
+      <div class="bc-header">
+        <div class="bc-lodge-name">Beaverkill Valley Inn</div>
+        <div class="bc-tagline">Lew Beach, NY · 3 miles private water</div>
+        <div class="bc-price-row">
+          <span class="bc-from">From</span>
+          <span class="bc-price">$485</span>
+          <span class="bc-per">/ person / night</span>
+        </div>
+        <div class="bc-rating">
+          <span class="bc-stars">★★★★★</span>
+          <span class="bc-rn">4.9</span>
+          <span class="bc-rc">· 186 reviews</span>
+        </div>
+      </div>
+      <div class="bc-body">
+        <div class="bc-field">
+          <label class="bc-label">Select Package</label>
+          <div class="bc-pkg-select">
+            <div class="bps selected" onclick="selectPkg(this,785,'Full Fishing Package')">
+              <span class="bps-name">Full Fishing Package</span>
+              <span class="bps-price">$785/night</span>
+            </div>
+            <div class="bps" onclick="selectPkg(this,485,'Bed, Breakfast & Water')">
+              <span class="bps-name">Bed, Breakfast & Water</span>
+              <span class="bps-price">$485/night</span>
+            </div>
+            <div class="bps" onclick="selectPkg(this,0,'Corporate Buyout')">
+              <span class="bps-name">Corporate Buyout</span>
+              <span class="bps-price">Inquire</span>
+            </div>
+          </div>
+        </div>
+        <div class="bc-row">
+          <div class="bc-field">
+            <label class="bc-label">Check In</label>
+            <input class="bc-input" type="date" id="checkIn" onchange="updateTotal()">
+          </div>
+          <div class="bc-field">
+            <label class="bc-label">Check Out</label>
+            <input class="bc-input" type="date" id="checkOut" onchange="updateTotal()">
+          </div>
+        </div>
+        <div class="bc-row">
+          <div class="bc-field">
+            <label class="bc-label">Guests</label>
+            <select class="bc-input" id="guests" onchange="updateTotal()">
+              <option value="1">1 guest</option>
+              <option value="2" selected>2 guests</option>
+              <option value="3">3 guests</option>
+              <option value="4">4 guests</option>
+            </select>
+          </div>
+          <div class="bc-field">
+            <label class="bc-label">Room Type</label>
+            <select class="bc-input">
+              <option>River View Double</option>
+              <option>Streamside Suite</option>
+              <option>Two-Bedroom Suite</option>
+            </select>
+          </div>
+        </div>
+        <div class="bc-field">
+          <label class="bc-label">Experience Level</label>
+          <select class="bc-input">
+            <option>Mix of levels in our group</option>
+            <option>Complete beginners</option>
+            <option>Intermediate anglers</option>
+            <option>Experienced / expert</option>
+          </select>
+        </div>
+        <!-- Price breakdown -->
+        <div class="bc-breakdown" id="bcBreakdown" style="display:none">
+          <div class="bcb-row"><span>Package rate</span><span id="bcrRate">—</span></div>
+          <div class="bcb-row"><span id="bcrNightsLabel">Nights</span><span id="bcrNights">—</span></div>
+          <div class="bcb-row"><span id="bcrGuestsLabel">Guests</span><span id="bcrGuests">—</span></div>
+          <div class="bcb-row"><span>Riffle service fee (10%)</span><span id="bcrFee">—</span></div>
+          <div class="bcb-row total"><span>Estimated total</span><span id="bcrTotal">—</span></div>
+        </div>
+        <button class="bc-submit" onclick="document.getElementById('lodge-booking-flow').scrollIntoView({behavior:'smooth'})">Request to Book</button>
+        <div class="bc-note">No charge now. Lodge confirms within 48 hours. 25% deposit on confirmation.</div>
+      </div>
+      <div class="bc-footer">
+        <div class="bc-perk"><svg viewBox="0 0 14 14"><polyline points="2,7 5,10 12,3"/></svg>Free cancellation up to 21 days out</div>
+        <div class="bc-perk"><svg viewBox="0 0 14 14"><polyline points="2,7 5,10 12,3"/></svg>25% deposit to confirm, balance 30 days prior</div>
+        <div class="bc-perk"><svg viewBox="0 0 14 14"><polyline points="2,7 5,10 12,3"/></svg>Riffle-verified lodge — quality guaranteed</div>
+        <div class="bc-perk"><svg viewBox="0 0 14 14"><polyline points="2,7 5,10 12,3"/></svg>All guides licensed, insured, and vetted</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ANCHOR FOR BOOKING FLOW -->
+<div id="lodge-booking-flow"></div>
+
+<footer>
+  <div class="ft-inner">
+    <div><div class="ft-logo">Riffle</div><div class="ft-tagline">Find your water.</div></div>
+    <div class="ft-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Help</a><a href="#">riffle.guide</a></div>
+  </div>
+  <div class="ft-copy">© 2026 Riffle, Inc. · riffle.guide/lodges/beaverkill-valley-inn</div>
+</footer>
+
+<script>
+var pkgPrice = 785;
+var pkgName = 'Full Fishing Package';
+
+// Reveal on scroll
+var obs = new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:0.06});
+document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el)});
+
+function selectPkg(el, price, name) {
+  document.querySelectorAll('.bps').forEach(function(b){b.classList.remove('selected')});
+  el.classList.add('selected');
+  pkgPrice = price;
+  pkgName = name;
+  updateTotal();
+}
+
+function updateTotal() {
+  var checkIn = document.getElementById('checkIn').value;
+  var checkOut = document.getElementById('checkOut').value;
+  var guests = parseInt(document.getElementById('guests').value);
+  if (!checkIn || !checkOut || pkgPrice === 0) {
+    document.getElementById('bcBreakdown').style.display = 'none';
+    return;
+  }
+  var nights = Math.max(1, Math.round((new Date(checkOut) - new Date(checkIn)) / 86400000));
+  var subtotal = pkgPrice * nights * guests;
+  var fee = Math.round(subtotal * 0.10);
+  var total = subtotal + fee;
+  document.getElementById('bcBreakdown').style.display = 'block';
+  document.getElementById('bcrRate').textContent = '$' + pkgPrice + '/night';
+  document.getElementById('bcrNightsLabel').textContent = nights + ' night' + (nights > 1 ? 's' : '');
+  document.getElementById('bcrNights').textContent = '×' + nights;
+  document.getElementById('bcrGuestsLabel').textContent = guests + ' guest' + (guests > 1 ? 's' : '');
+  document.getElementById('bcrGuests').textContent = '×' + guests;
+  document.getElementById('bcrFee').textContent = '$' + fee.toLocaleString();
+  document.getElementById('bcrTotal').textContent = '$' + total.toLocaleString();
+}
+
+// Package book buttons route to booking card
+document.querySelectorAll('.pkg-book').forEach(function(b){
+  b.addEventListener('click', function(){
+    document.getElementById('booking-card').scrollIntoView({behavior:'smooth'});
+  });
+});
+</script>
+</body>
+</html>
