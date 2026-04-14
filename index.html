@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Riffle — Find Your Water</title>
+<meta name="description" content="Book verified fly fishing guides on legendary rivers. Riffle connects anglers with expert local guides across the Catskills, Montana, Patagonia and beyond.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1a1f16;
+  --forest:#1e3222;
+  --forest-mid:#2c4e35;
+  --forest-light:#3d6b4a;
+  --sage:#5a8a68;
+  --mist:#9ec4aa;
+  --river:#4a7fa0;
+  --river-light:#7ab0c8;
+  --pebble:#f0ebe0;
+  --pebble-dark:#ddd6c4;
+  --cream:#fdfaf3;
+  --warm:#faf6ee;
+  --amber:#b8772a;
+  --amber-light:#d4943a;
+  --gold:#e8c068;
+  --rust:#8a4a2c;
+  --sand:#e8d8b0;
+  --white:#ffffff;
+  --text-dark:#1a1f16;
+  --text-mid:#3a4a3a;
+  --text-muted:#7a8a72;
+  --r:14px;
+  --r-sm:8px;
+  --pill:100px;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--cream);
+  color:var(--text-dark);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:400;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5%;height:68px;
+  transition:all 0.35s;
+}
+nav.solid{
+  background:rgba(26,31,22,0.96);
+  backdrop-filter:blur(16px);
+  box-shadow:0 1px 0 rgba(255,255,255,0.05);
+}
+.logo{display:flex;align-items:center;gap:11px;text-decoration:none}
+.logo-mark svg{width:34px;height:34px}
+.logo-word{
+  font-family:'Playfair Display',serif;
+  font-size:26px;font-weight:700;color:#fff;
+  letter-spacing:0.3px;
+}
+.nav-links{display:flex;align-items:center;gap:6px}
+.nl{color:rgba(255,255,255,0.72);text-decoration:none;font-size:14px;font-weight:500;padding:7px 13px;border-radius:var(--r-sm);transition:all 0.2s}
+.nl:hover{color:#fff;background:rgba(255,255,255,0.09)}
+.n-outline{color:rgba(255,255,255,0.8);border:1px solid rgba(255,255,255,0.28);font-size:13px;font-weight:500;padding:7px 17px;border-radius:var(--pill);text-decoration:none;transition:all 0.2s;margin-left:4px}
+.n-outline:hover{border-color:rgba(255,255,255,0.65);color:#fff}
+.n-cta{background:var(--amber-light);color:#fff;font-size:13px;font-weight:600;padding:8px 20px;border-radius:var(--pill);text-decoration:none;margin-left:8px;transition:all 0.2s}
+.n-cta:hover{background:var(--amber);transform:translateY(-1px)}
+
+/* ─── HERO ─── */
+.hero{
+  position:relative;min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.hero-img{
+  position:absolute;inset:0;z-index:0;
+  background-image:url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1800&q=85&fit=crop');
+  background-size:cover;background-position:center 40%;
+  transform:scale(1.03);
+  transition:transform 8s ease;
+}
+.hero-img.loaded{transform:scale(1)}
+.hero-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(to bottom, rgba(15,22,14,0.55) 0%, rgba(15,22,14,0.25) 40%, rgba(15,22,14,0.70) 100%),
+    linear-gradient(to right, rgba(15,22,14,0.4) 0%, transparent 60%);
+}
+.hero-grain{
+  position:absolute;inset:0;z-index:2;opacity:0.035;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px;
+}
+.hero-water-svg{
+  position:absolute;bottom:0;left:0;right:0;z-index:3;
+  height:260px;pointer-events:none;
+}
+.hero-content{
+  position:relative;z-index:4;
+  text-align:left;max-width:760px;
+  width:100%;padding:0 5%;
+  animation:fadeUp 1s ease both;
+}
+.hero-kicker{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(232,192,104,0.15);
+  border:1px solid rgba(232,192,104,0.32);
+  color:var(--gold);
+  font-size:11px;font-weight:600;letter-spacing:1.3px;text-transform:uppercase;
+  padding:6px 15px;border-radius:var(--pill);
+  margin-bottom:28px;
+}
+.kicker-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);animation:blink 2s ease-in-out infinite}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(54px,9vw,104px);
+  font-weight:900;line-height:0.92;
+  color:#fff;letter-spacing:-2px;
+  margin-bottom:10px;
+}
+.hero h1 em{font-style:italic;color:var(--mist);display:block;font-weight:700}
+.hero-sub{
+  font-size:clamp(15px,1.8vw,18px);
+  color:rgba(255,255,255,0.62);
+  max-width:460px;margin:22px 0 44px;
+  line-height:1.7;font-weight:300;
+}
+/* search box */
+.search-wrap{max-width:680px;width:100%}
+.sbox{
+  background:rgba(253,250,243,0.97);
+  border-radius:var(--r);
+  display:grid;grid-template-columns:1fr 1fr 1fr auto;
+  align-items:center;
+  box-shadow:0 28px 80px rgba(0,0,0,0.4),0 0 0 1px rgba(255,255,255,0.1);
+  overflow:hidden;
+}
+.sf{padding:16px 20px;border-right:1px solid var(--pebble-dark)}
+.sf:last-of-type{border-right:none}
+.sf label{display:block;font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);margin-bottom:5px}
+.sf input,.sf select{
+  width:100%;border:none;outline:none;background:transparent;
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;
+  color:var(--text-dark);
+}
+.sf input::placeholder{color:var(--text-muted);font-weight:400}
+.sf select{-webkit-appearance:none;cursor:pointer}
+.sgo{
+  background:var(--forest);color:#fff;
+  border:none;padding:16px 28px;
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;
+  cursor:pointer;transition:all 0.2s;
+  display:flex;align-items:center;gap:8px;
+  height:100%;white-space:nowrap;
+}
+.sgo:hover{background:var(--forest-mid)}
+.stags{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.stag{
+  background:rgba(255,255,255,0.09);
+  border:1px solid rgba(255,255,255,0.14);
+  color:rgba(255,255,255,0.65);
+  font-size:12px;padding:5px 13px;
+  border-radius:var(--pill);cursor:pointer;transition:all 0.2s;
+}
+.stag:hover{background:rgba(255,255,255,0.14);color:rgba(255,255,255,0.9)}
+/* stats */
+.hero-bottom{
+  position:relative;z-index:4;
+  width:100%;padding:0 5%;
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:52px;
+}
+.hero-stats{display:flex;gap:48px}
+.hstat .n{font-family:'Playfair Display',serif;font-size:34px;font-weight:700;color:#fff;line-height:1}
+.hstat .l{font-size:11px;color:rgba(255,255,255,0.42);text-transform:uppercase;letter-spacing:1px;margin-top:5px}
+.scroll-hint{
+  display:flex;align-items:center;gap:8px;
+  color:rgba(255,255,255,0.35);font-size:12px;
+}
+.scroll-line{width:40px;height:1px;background:rgba(255,255,255,0.2)}
+
+/* ─── TRUST ─── */
+.trust{
+  background:var(--white);
+  border-bottom:1px solid var(--pebble-dark);
+  padding:16px 5%;
+  display:flex;justify-content:center;align-items:center;
+  gap:40px;flex-wrap:wrap;
+}
+.ti{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:var(--text-mid)}
+.ti-check{
+  width:18px;height:18px;border-radius:50%;
+  background:var(--forest-light);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.ti-check svg{width:9px;height:9px}
+
+/* ─── SECTION BASE ─── */
+section{padding:88px 5%}
+.sh{text-align:center;margin-bottom:56px}
+.ey{font-size:11px;font-weight:600;letter-spacing:1.3px;text-transform:uppercase;color:var(--sage);margin-bottom:12px}
+.st{font-family:'Playfair Display',serif;font-size:clamp(30px,4.5vw,52px);font-weight:700;line-height:1.1;color:var(--text-dark)}
+.st em{font-style:italic;color:var(--forest-mid)}
+.ss{font-size:16px;color:var(--text-muted);margin-top:12px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.7}
+.see-all{
+  display:inline-flex;align-items:center;gap:6px;
+  color:var(--forest-mid);font-size:14px;font-weight:600;
+  text-decoration:none;padding-bottom:2px;
+  border-bottom:1px solid var(--pebble-dark);
+  transition:all 0.2s;margin-top:44px;
+}
+.see-all:hover{color:var(--forest);border-color:var(--sage)}
+
+/* ─── CATSKILLS ORIGIN STORY ─── */
+.origin{
+  background:var(--forest);
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:600px;
+  overflow:hidden;
+}
+.origin-img{
+  position:relative;overflow:hidden;
+}
+.origin-img img{
+  width:100%;height:100%;object-fit:cover;
+  display:block;
+  filter:sepia(15%) contrast(1.05) brightness(0.9);
+}
+.origin-img::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to right, transparent 60%, var(--forest) 100%);
+}
+.origin-text{
+  padding:72px 56px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.origin-text .ey{color:var(--mist)}
+.origin-text .st{color:#fff;text-align:left;font-size:clamp(28px,3.5vw,44px)}
+.origin-text .st em{color:var(--gold)}
+.origin-text p{
+  font-size:15px;color:rgba(255,255,255,0.55);
+  line-height:1.8;margin:20px 0;
+  max-width:420px;
+}
+.origin-text p strong{color:rgba(255,255,255,0.85);font-weight:500}
+.origin-quote{
+  border-left:2px solid var(--amber-light);
+  padding-left:20px;margin:28px 0;
+}
+.origin-quote q{
+  font-family:'Playfair Display',serif;
+  font-size:19px;font-style:italic;color:rgba(255,255,255,0.8);
+  line-height:1.6;
+}
+.origin-quote cite{
+  display:block;font-size:12px;color:rgba(255,255,255,0.35);
+  margin-top:8px;font-style:normal;letter-spacing:0.5px;
+}
+.origin-facts{
+  display:flex;gap:32px;margin-top:32px;
+}
+.of{text-align:center}
+.of-n{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:#fff}
+.of-l{font-size:11px;color:rgba(255,255,255,0.38);text-transform:uppercase;letter-spacing:0.8px;margin-top:4px}
+
+/* ─── DESTINATIONS ─── */
+.dest-section{background:var(--warm)}
+.dest-grid{
+  display:grid;
+  grid-template-columns:1.5fr 1fr 1fr;
+  grid-template-rows:300px 280px;
+  gap:16px;
+}
+.dc{
+  position:relative;border-radius:var(--r);
+  overflow:hidden;cursor:pointer;
+  transition:transform 0.35s cubic-bezier(.34,1.4,.64,1);
+}
+.dc:hover{transform:translateY(-5px)}
+.dc:hover .dc-img{transform:scale(1.05)}
+.dc:hover .dc-arrow{opacity:1;transform:translate(2px,-2px)}
+.dc.tall{grid-row:span 2}
+.dc-img{
+  position:absolute;inset:0;
+  background-size:cover;background-position:center;
+  transition:transform 0.6s ease;
+}
+.dc-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(10,18,10,0.92) 0%,rgba(10,18,10,0.15) 55%,transparent 100%);
+}
+.dc-arrow{
+  position:absolute;top:14px;right:14px;
+  width:30px;height:30px;border-radius:50%;
+  background:rgba(255,255,255,0.14);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:all 0.25s;
+}
+.dc-arrow svg{width:12px;height:12px;stroke:#fff;stroke-width:2;fill:none}
+.dc-badge{
+  position:absolute;top:14px;left:14px;
+  font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;
+  padding:4px 10px;border-radius:var(--pill);
+}
+.db-gold{background:var(--amber-light);color:#fff}
+.db-mist{background:rgba(158,196,170,0.85);color:var(--forest)}
+.dc-info{position:absolute;bottom:0;left:0;right:0;padding:22px 20px}
+.dc-name{
+  font-family:'Playfair Display',serif;
+  font-size:22px;font-weight:700;color:#fff;line-height:1.15;
+}
+.dc.tall .dc-name{font-size:32px}
+.dc-sub{font-size:12px;color:rgba(255,255,255,0.58);margin-top:5px}
+.dc-guides{
+  display:inline-block;margin-top:10px;
+  font-size:12px;font-weight:600;color:rgba(255,255,255,0.5);
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.1);
+  padding:3px 10px;border-radius:var(--pill);
+}
+
+/* dest bg images */
+.bg-beaverkill{background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=80&fit=crop&crop=center')}
+.bg-catskills{background-image:url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=900&q=80&fit=crop&crop=bottom')}
+.bg-esopus{background-image:url('https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=900&q=80&fit=crop')}
+.bg-adirondacks{background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80&fit=crop&crop=bottom')}
+.bg-montana{background-image:url('https://images.unsplash.com/photo-1501854140801-50d01698950b?w=900&q=80&fit=crop')}
+.bg-patagonia{background-image:url('https://images.unsplash.com/photo-1553913861-c0fddf2619ee?w=900&q=80&fit=crop')}
+
+/* ─── GUIDES ─── */
+.guides-section{background:var(--pebble)}
+.guides-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.gc{
+  background:var(--white);border-radius:var(--r);
+  border:1px solid var(--pebble-dark);
+  overflow:hidden;transition:all 0.3s;cursor:pointer;
+}
+.gc:hover{
+  box-shadow:0 22px 60px rgba(26,31,22,0.13);
+  transform:translateY(-6px);border-color:transparent;
+}
+.gc-hero{height:220px;position:relative;overflow:hidden}
+.gc-img{
+  position:absolute;inset:0;background-size:cover;background-position:center;
+  transition:transform 0.55s ease;
+}
+.gc:hover .gc-img{transform:scale(1.06)}
+.gc-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(10,18,10,0.78) 0%,transparent 55%);
+}
+.gc-pill{
+  position:absolute;top:12px;left:12px;
+  background:rgba(26,31,22,0.82);color:var(--mist);
+  font-size:11px;font-weight:600;padding:4px 11px;
+  border-radius:var(--pill);backdrop-filter:blur(6px);
+  border:1px solid rgba(158,196,170,0.2);
+}
+.gc-price{
+  position:absolute;top:12px;right:12px;
+  background:rgba(180,119,42,0.92);color:#fff;
+  font-size:11px;font-weight:700;padding:4px 11px;border-radius:var(--pill);
+}
+.gc-av{
+  position:absolute;bottom:-22px;left:18px;
+  width:46px;height:46px;border-radius:50%;
+  border:3px solid var(--white);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#fff;
+  z-index:2;box-shadow:0 2px 12px rgba(0,0,0,0.18);
+}
+.gc-vbadge{
+  position:absolute;bottom:-20px;left:46px;
+  width:18px;height:18px;border-radius:50%;
+  background:var(--sage);border:2px solid var(--white);
+  display:flex;align-items:center;justify-content:center;z-index:3;
+}
+.gc-vbadge svg{width:9px;height:9px}
+.gc-body{padding:30px 18px 18px}
+.gc-name{font-weight:600;font-size:15px;color:var(--text-dark)}
+.gc-loc{font-size:13px;color:var(--text-muted);display:flex;align-items:center;gap:4px;margin-top:3px}
+.gc-loc svg{width:11px;height:11px;flex-shrink:0}
+.gc-tags{display:flex;flex-wrap:wrap;gap:5px;margin:12px 0 10px}
+.gtag{
+  background:var(--pebble);color:var(--forest-mid);
+  font-size:11px;font-weight:500;padding:3px 10px;
+  border-radius:var(--pill);border:1px solid var(--pebble-dark);
+}
+.gc-stars{color:var(--amber-light);font-size:12px;letter-spacing:.5px}
+.gc-rating{display:flex;align-items:center;gap:6px}
+.gc-rn{font-size:13px;font-weight:600;color:var(--text-dark)}
+.gc-rc{font-size:12px;color:var(--text-muted)}
+.gc-div{border:none;border-top:1px solid var(--pebble-dark);margin:12px 0}
+.gc-foot{display:flex;align-items:center;justify-content:space-between}
+.gc-exp{font-size:12px;color:var(--text-muted)}
+.gc-exp strong{color:var(--text-dark)}
+.bk-btn{
+  background:var(--forest);color:#fff;font-size:12px;font-weight:600;
+  padding:7px 16px;border-radius:var(--pill);border:none;cursor:pointer;
+  font-family:'DM Sans',sans-serif;transition:all 0.2s;
+}
+.bk-btn:hover{background:var(--forest-mid)}
+
+/* guide card bg images */
+.gbg-1{background-image:url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&q=80&fit=crop&crop=center')}
+.gbg-2{background-image:url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600&q=80&fit=crop&crop=center')}
+.gbg-3{background-image:url('https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=600&q=80&fit=crop&crop=top')}
+.gbg-4{background-image:url('https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=600&q=80&fit=crop&crop=center')}
+.gbg-5{background-image:url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80&fit=crop&crop=center')}
+.gbg-6{background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80&fit=crop&crop=bottom')}
+
+/* ─── PHOTO INTERLUDE ─── */
+.interlude{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  height:480px;
+  overflow:hidden;
+}
+.int-panel{
+  position:relative;overflow:hidden;cursor:pointer;
+}
+.int-panel img{
+  width:100%;height:100%;object-fit:cover;
+  display:block;
+  transition:transform 0.6s ease;
+  filter:sepia(10%) contrast(1.05) brightness(0.92) saturate(1.1);
+}
+.int-panel:hover img{transform:scale(1.05)}
+.int-panel-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(10,18,10,0.75) 0%,transparent 60%);
+}
+.int-caption{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:24px 22px;
+}
+.int-caption-title{
+  font-family:'Playfair Display',serif;
+  font-size:22px;font-weight:700;color:#fff;
+  font-style:italic;
+}
+.int-caption-sub{font-size:12px;color:rgba(255,255,255,0.5);margin-top:4px}
+.int-divider{width:1px;background:rgba(255,255,255,0.08)}
+
+/* ─── HOW IT WORKS ─── */
+.how{background:var(--forest);position:relative;overflow:hidden}
+.how-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 70% at 70% 60%,rgba(74,127,160,0.07) 0%,transparent 65%),
+    radial-gradient(ellipse 60% 50% at 10% 80%,rgba(90,138,104,0.06) 0%,transparent 55%);
+}
+.how .ey{color:var(--mist)}
+.how .st{color:#fff}
+.how .ss{color:rgba(255,255,255,0.4)}
+.how-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0;position:relative;z-index:1;
+}
+.hw{
+  padding:44px 32px;
+  border-right:1px solid rgba(255,255,255,0.055);
+}
+.hw:last-child{border-right:none}
+.hw-n{
+  font-family:'Playfair Display',serif;
+  font-size:72px;font-weight:700;
+  color:rgba(255,255,255,0.05);
+  line-height:1;letter-spacing:-3px;margin-bottom:24px;
+}
+.hw-icon{
+  width:46px;height:46px;border-radius:var(--r-sm);
+  background:rgba(180,119,42,0.12);
+  border:1px solid rgba(180,119,42,0.2);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:18px;
+}
+.hw-icon svg{width:20px;height:20px;stroke:var(--amber-light);stroke-width:1.5;fill:none}
+.hw-title{
+  font-family:'Playfair Display',serif;
+  font-size:21px;font-weight:700;color:#fff;margin-bottom:12px;
+}
+.hw-desc{font-size:13px;color:rgba(255,255,255,0.42);line-height:1.75}
+
+/* ─── SPECIES ─── */
+.species{background:var(--warm)}
+.species-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.sc{
+  background:var(--white);border-radius:var(--r);
+  border:1px solid var(--pebble-dark);
+  padding:22px 12px;text-align:center;
+  cursor:pointer;transition:all 0.25s;position:relative;overflow:hidden;
+}
+.sc::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:var(--sage);transform:scaleX(0);transition:transform 0.25s;
+}
+.sc:hover{border-color:var(--sage);transform:translateY(-3px);box-shadow:0 8px 24px rgba(90,138,104,0.12)}
+.sc:hover::after{transform:scaleX(1)}
+.sc-icon{
+  width:50px;height:50px;border-radius:50%;
+  background:var(--pebble);margin:0 auto 12px;
+  display:flex;align-items:center;justify-content:center;
+  transition:background 0.25s;
+}
+.sc:hover .sc-icon{background:rgba(90,138,104,0.12)}
+.sc-icon svg{width:22px;height:22px;stroke:var(--forest-mid);stroke-width:1.5;fill:none}
+.sc-name{font-size:12px;font-weight:600;color:var(--text-dark)}
+.sc-ct{font-size:11px;color:var(--text-muted);margin-top:3px}
+
+/* ─── TECHNIQUES ─── */
+.techniques{background:var(--pebble)}
+.techniques-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.tc{
+  background:var(--white);border-radius:var(--r);
+  border:1px solid var(--pebble-dark);
+  overflow:hidden;display:flex;
+  cursor:pointer;transition:all 0.25s;
+}
+.tc:hover{box-shadow:0 12px 40px rgba(26,31,22,0.1);transform:translateY(-3px);border-color:transparent}
+.tc-bar{width:4px;flex-shrink:0}
+.bar-sage{background:var(--sage)}
+.bar-forest{background:var(--forest-mid)}
+.bar-amber{background:var(--amber)}
+.bar-river{background:var(--river)}
+.bar-rust{background:var(--rust)}
+.bar-mist{background:var(--mist)}
+.tc-body{padding:22px 20px}
+.tc-name{
+  font-family:'Playfair Display',serif;
+  font-size:19px;font-weight:700;color:var(--text-dark);margin-bottom:7px;
+}
+.tc-desc{font-size:13px;color:var(--text-muted);line-height:1.65}
+.tc-ct{font-size:12px;font-weight:600;color:var(--sage);margin-top:10px}
+
+/* ─── WIDE PHOTO BANNER ─── */
+.wide-banner{
+  position:relative;height:520px;overflow:hidden;
+}
+.wide-banner img{
+  width:100%;height:100%;object-fit:cover;
+  display:block;
+  filter:sepia(12%) contrast(1.06) brightness(0.85) saturate(1.15);
+}
+.wide-banner-overlay{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(to right, rgba(10,18,10,0.75) 0%, rgba(10,18,10,0.2) 55%, transparent 100%);
+}
+.wide-banner-content{
+  position:absolute;top:50%;left:5%;transform:translateY(-50%);
+  max-width:520px;
+}
+.wide-banner-content .ey{color:var(--mist);margin-bottom:14px}
+.wide-banner-content h2{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(32px,4vw,52px);font-weight:700;
+  color:#fff;line-height:1.1;margin-bottom:16px;
+}
+.wide-banner-content h2 em{font-style:italic;color:var(--gold)}
+.wide-banner-content p{
+  font-size:15px;color:rgba(255,255,255,0.58);
+  line-height:1.75;margin-bottom:28px;max-width:400px;
+}
+.wb-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--amber-light);color:#fff;
+  font-size:14px;font-weight:600;
+  padding:13px 28px;border-radius:var(--pill);
+  text-decoration:none;transition:all 0.2s;border:none;cursor:pointer;
+  font-family:'DM Sans',sans-serif;
+}
+.wb-btn:hover{background:var(--amber);transform:translateY(-2px)}
+
+/* ─── REVIEWS ─── */
+.reviews{background:var(--warm)}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.rv{
+  background:var(--white);border-radius:var(--r);
+  border:1px solid var(--pebble-dark);
+  padding:30px 24px;position:relative;
+  transition:box-shadow 0.25s;
+}
+.rv:hover{box-shadow:0 10px 36px rgba(26,31,22,0.08)}
+.rv-q{
+  font-family:'Playfair Display',serif;
+  font-size:56px;font-weight:700;
+  color:var(--pebble-dark);line-height:1;
+  position:absolute;top:14px;left:20px;
+}
+.rv-stars{color:var(--amber-light);font-size:13px;margin-bottom:14px}
+.rv-text{
+  font-size:14px;color:var(--text-mid);
+  line-height:1.8;font-style:italic;
+  margin-top:18px;margin-bottom:22px;
+}
+.rv-author{display:flex;align-items:center;gap:12px}
+.rv-av{
+  width:40px;height:40px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Playfair Display',serif;
+  font-size:14px;font-weight:700;color:#fff;flex-shrink:0;
+}
+.rv-name{font-size:14px;font-weight:600;color:var(--text-dark)}
+.rv-trip{font-size:12px;color:var(--text-muted);margin-top:1px}
+
+/* ─── GUIDE CTA (full bleed photo) ─── */
+.guide-cta{
+  position:relative;overflow:hidden;
+  padding:110px 5%;
+}
+.guide-cta-img{
+  position:absolute;inset:0;
+  background-image:url('https://images.unsplash.com/photo-1501854140801-50d01698950b?w=1800&q=85&fit=crop&crop=center');
+  background-size:cover;background-position:center;
+  filter:sepia(15%) contrast(1.05) brightness(0.75) saturate(1.1);
+}
+.guide-cta-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(10,18,10,0.88) 0%,rgba(10,18,10,0.6) 60%,rgba(10,18,10,0.45) 100%);
+}
+.guide-cta-inner{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:60px;align-items:center;
+}
+.guide-cta-left .ey{color:var(--mist);margin-bottom:14px}
+.guide-cta-left h2{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(32px,4vw,52px);font-weight:700;
+  color:#fff;line-height:1.1;margin-bottom:16px;
+}
+.guide-cta-left h2 em{font-style:italic;color:var(--gold)}
+.guide-cta-left p{
+  font-size:15px;color:rgba(255,255,255,0.55);
+  line-height:1.75;max-width:400px;margin-bottom:32px;
+}
+.cta-btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn-gold{
+  background:var(--amber-light);color:#fff;
+  font-size:14px;font-weight:700;padding:13px 32px;
+  border-radius:var(--pill);border:none;cursor:pointer;
+  font-family:'DM Sans',sans-serif;transition:all 0.2s;
+  text-decoration:none;display:inline-block;
+}
+.btn-gold:hover{background:var(--amber);transform:translateY(-2px)}
+.btn-ghost{
+  background:transparent;color:#fff;
+  font-size:14px;font-weight:500;padding:13px 28px;
+  border-radius:var(--pill);border:1px solid rgba(255,255,255,0.28);
+  cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;
+  text-decoration:none;display:inline-block;
+}
+.btn-ghost:hover{border-color:rgba(255,255,255,0.65);background:rgba(255,255,255,0.06)}
+.guide-cta-right{display:flex;flex-direction:column;gap:16px}
+.perk{
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:var(--r);padding:22px 20px;
+  display:flex;gap:14px;align-items:flex-start;
+}
+.perk-icon{
+  width:40px;height:40px;border-radius:var(--r-sm);
+  background:rgba(180,119,42,0.14);
+  border:1px solid rgba(180,119,42,0.22);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.perk-icon svg{width:18px;height:18px;stroke:var(--amber-light);stroke-width:1.5;fill:none}
+.perk-title{font-size:14px;font-weight:600;color:#fff;margin-bottom:4px}
+.perk-desc{font-size:13px;color:rgba(255,255,255,0.42);line-height:1.55}
+
+/* ─── FOOTER ─── */
+footer{background:#0c1610;padding:68px 5% 32px}
+.ft-grid{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:48px;padding-bottom:48px;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.ft-brand .ft-logo{
+  font-family:'Playfair Display',serif;
+  font-size:26px;font-weight:700;color:#fff;
+  display:block;margin-bottom:8px;
+}
+.ft-tagline{
+  font-family:'Playfair Display',serif;
+  font-size:14px;font-style:italic;
+  color:rgba(255,255,255,0.3);margin-bottom:16px;
+}
+.ft-desc{font-size:13px;color:rgba(255,255,255,0.3);line-height:1.75;max-width:260px}
+.ft-col h4{
+  font-size:11px;font-weight:600;letter-spacing:1px;
+  text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:18px;
+}
+.ft-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.ft-links a{text-decoration:none;font-size:13px;color:rgba(255,255,255,0.3);transition:color 0.2s}
+.ft-links a:hover{color:rgba(255,255,255,0.75)}
+.ft-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-top:28px;font-size:12px;color:rgba(255,255,255,0.2);
+}
+.ft-bottom a{color:rgba(255,255,255,0.2);text-decoration:none;margin-left:20px;transition:color 0.2s}
+.ft-bottom a:hover{color:rgba(255,255,255,0.5)}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.4}}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1024px){
+  .origin{grid-template-columns:1fr}
+  .origin-img{height:360px}
+  .origin-img::after{background:linear-gradient(to top,var(--forest) 0%,transparent 60%)}
+  .dest-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .dc.tall{grid-row:span 1}
+  .guides-grid{grid-template-columns:1fr 1fr}
+  .interlude{grid-template-columns:1fr}
+  .interlude .int-panel:not(:first-child){display:none}
+  .interlude{height:360px}
+  .hw-grid{grid-template-columns:1fr 1fr}
+  .how-grid{grid-template-columns:1fr 1fr}
+  .species-grid{grid-template-columns:repeat(3,1fr)}
+  .techniques-grid{grid-template-columns:1fr 1fr}
+  .guide-cta-inner{grid-template-columns:1fr}
+  .ft-grid{grid-template-columns:1fr 1fr}
+  .sbox{grid-template-columns:1fr 1fr;gap:0}
+  .sgo{grid-column:span 2;justify-content:center}
+}
+@media(max-width:700px){
+  .guides-grid,.dest-grid,.species-grid,.techniques-grid,.reviews-grid{grid-template-columns:1fr}
+  .how-grid{grid-template-columns:1fr}
+  .hero-stats{gap:24px;flex-wrap:wrap}
+  .hero-bottom{flex-direction:column;align-items:flex-start;gap:20px}
+  .ft-grid{grid-template-columns:1fr}
+  .n-outline,.n-cta{display:none}
+  .sbox{grid-template-columns:1fr}
+  .sgo{grid-column:span 1}
+  .interlude{height:280px}
+  .wide-banner{height:400px}
+  .cta-btns{flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="logo" href="#">
+    <div class="logo-mark">
+      <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 22 Q8 14 13 18 Q18 22 23 15 Q27 10 31 13" stroke="#9ec4aa" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+        <path d="M4 27 Q9 20 14 24 Q19 28 24 21 Q28 15 31 18" stroke="#5a8a68" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.7"/>
+        <circle cx="29.5" cy="10.5" r="2.5" fill="#d4943a"/>
+        <path d="M29.5 10.5 L25 6" stroke="#d4943a" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <span class="logo-word">Riffle</span>
+  </a>
+  <div class="nav-links">
+    <a class="nl" href="#destinations">Destinations</a>
+    <a class="nl" href="#guides">Find a Guide</a>
+    <a class="nl" href="#techniques">Techniques</a>
+    <a class="n-outline" href="#">Log in</a>
+    <a class="n-cta" href="#list">List Your Guide Service</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-img" id="heroImg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-grain"></div>
+
+  <svg class="hero-water-svg" viewBox="0 0 1440 260" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,100 C200,160 400,50 600,110 C800,170 1000,50 1200,110 C1320,140 1400,100 1440,110 L1440,260 L0,260Z" fill="rgba(90,138,104,0.07)"/>
+    <path d="M0,150 C240,90 480,190 720,150 C960,110 1200,190 1440,150 L1440,260 L0,260Z" fill="rgba(26,31,22,0.55)"/>
+    <path d="M0,195 C300,145 600,230 900,195 C1100,170 1320,205 1440,195 L1440,260 L0,260Z" fill="rgba(12,22,16,0.85)"/>
+  </svg>
+
+  <div class="hero-content">
+    <div class="hero-kicker">
+      <span class="kicker-dot"></span>
+      The fly fishing guide marketplace
+    </div>
+    <h1>Find Your<br><em>Water.</em></h1>
+    <p class="hero-sub">Connect with expert fly fishing guides on legendary rivers — from the Catskills to Patagonia. Curated, verified, and ready to book.</p>
+
+    <div class="search-wrap">
+      <div class="sbox">
+        <div class="sf">
+          <label>Destination or River</label>
+          <input type="text" placeholder="Beaverkill, Madison River…">
+        </div>
+        <div class="sf">
+          <label>Date</label>
+          <input type="date">
+        </div>
+        <div class="sf">
+          <label>Anglers</label>
+          <select>
+            <option>1 angler</option>
+            <option>2 anglers</option>
+            <option>3 anglers</option>
+            <option>4 anglers</option>
+          </select>
+        </div>
+        <button class="sgo">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6.5" cy="6.5" r="4.5"/><line x1="10.5" y1="10.5" x2="14" y2="14"/></svg>
+          Search
+        </button>
+      </div>
+      <div class="stags">
+        <span class="stag">Catskills Dry Fly</span>
+        <span class="stag">Beaverkill Trout</span>
+        <span class="stag">Montana Drift Boat</span>
+        <span class="stag">Beginner Friendly</span>
+        <span class="stag">Patagonia Brown Trout</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-bottom">
+    <div class="hero-stats">
+      <div class="hstat"><div class="n">2,400+</div><div class="l">Expert Guides</div></div>
+      <div class="hstat"><div class="n">340</div><div class="l">Rivers &amp; Waters</div></div>
+      <div class="hstat"><div class="n">4.9★</div><div class="l">Avg Rating</div></div>
+      <div class="hstat"><div class="n">18K+</div><div class="l">Trips Booked</div></div>
+    </div>
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      Scroll to explore
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<div class="trust">
+  <div class="ti"><div class="ti-check"><svg viewBox="0 0 9 9" fill="none" stroke="white" stroke-width="1.8"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></div>Verified &amp; licensed guides only</div>
+  <div class="ti"><div class="ti-check"><svg viewBox="0 0 9 9" fill="none" stroke="white" stroke-width="1.8"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></div>Secure booking &amp; deposits</div>
+  <div class="ti"><div class="ti-check"><svg viewBox="0 0 9 9" fill="none" stroke="white" stroke-width="1.8"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></div>Free cancellation on most trips</div>
+  <div class="ti"><div class="ti-check"><svg viewBox="0 0 9 9" fill="none" stroke="white" stroke-width="1.8"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></div>18,000+ verified reviews</div>
+  <div class="ti"><div class="ti-check"><svg viewBox="0 0 9 9" fill="none" stroke="white" stroke-width="1.8"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></div>Gear often included</div>
+</div>
+
+<!-- ORIGIN STORY - CATSKILLS -->
+<div class="origin reveal">
+  <div class="origin-img">
+    <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1200&q=85&fit=crop&crop=bottom" alt="Catskill river landscape" loading="lazy">
+  </div>
+  <div class="origin-text">
+    <div class="ey">The Birthplace</div>
+    <h2 class="st">Fly fishing was <em>born here.</em></h2>
+    <p>The Catskill Mountains of New York are where American fly fishing began. The Beaverkill, the Willowemoc, the Delaware — these rivers shaped everything. <strong>Theodore Gordon</strong> first cast a dry fly here in the 1880s. The Catskill style of fly tying became the foundation of the sport.</p>
+    <div class="origin-quote">
+      <q>The dry fly was born on Catskill water, and it remains the truest test of a fly angler's skill.</q>
+      <cite>— Theodore Gordon, Father of American Dry Fly Fishing</cite>
+    </div>
+    <p>Riffle starts where the sport started — with the guides who know these rivers better than anyone alive. Book one and understand why anglers have made the pilgrimage here for over 150 years.</p>
+    <div class="origin-facts">
+      <div class="of"><div class="of-n">150+</div><div class="of-l">Years of tradition</div></div>
+      <div class="of"><div class="of-n">3</div><div class="of-l">Legendary rivers</div></div>
+      <div class="of"><div class="of-n">40+</div><div class="of-l">Expert guides</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- DESTINATIONS -->
+<section class="dest-section" id="destinations">
+  <div class="sh">
+    <div class="ey">Top Destinations</div>
+    <h2 class="st">Legendary <em>Waters</em></h2>
+    <p class="ss">From Catskill tailwaters to Patagonian wilderness. Find your river.</p>
+  </div>
+
+  <div class="dest-grid reveal">
+
+    <!-- TALL - Catskills/Beaverkill -->
+    <div class="dc tall">
+      <div class="dc-img bg-beaverkill"></div>
+      <div class="dc-overlay"></div>
+      <div class="dc-arrow"><svg viewBox="0 0 12 12" fill="none"><path d="M2 10 L10 2 M4 2 H10 V8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="dc-badge db-gold">Home of Dry Fly</div>
+      <div class="dc-info">
+        <div class="dc-name">Catskills &amp;<br>Beaverkill</div>
+        <div class="dc-sub">Beaverkill · Willowemoc · Esopus · Delaware</div>
+        <span class="dc-guides">40+ guides available</span>
+      </div>
+    </div>
+
+    <!-- Esopus -->
+    <div class="dc">
+      <div class="dc-img bg-esopus"></div>
+      <div class="dc-overlay"></div>
+      <div class="dc-arrow"><svg viewBox="0 0 12 12" fill="none"><path d="M2 10 L10 2 M4 2 H10 V8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="dc-badge db-mist">Wild Water</div>
+      <div class="dc-info">
+        <div class="dc-name">Esopus Creek</div>
+        <div class="dc-sub">Catskill Park · Phoenicia, NY</div>
+        <span class="dc-guides">12+ guides</span>
+      </div>
+    </div>
+
+    <!-- Adirondacks -->
+    <div class="dc">
+      <div class="dc-img bg-adirondacks"></div>
+      <div class="dc-overlay"></div>
+      <div class="dc-arrow"><svg viewBox="0 0 12 12" fill="none"><path d="M2 10 L10 2 M4 2 H10 V8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="dc-info">
+        <div class="dc-name">Adirondacks</div>
+        <div class="dc-sub">Ausable · Saranac · Lake Placid</div>
+        <span class="dc-guides">30+ guides</span>
+      </div>
+    </div>
+
+    <!-- Montana -->
+    <div class="dc">
+      <div class="dc-img bg-montana"></div>
+      <div class="dc-overlay"></div>
+      <div class="dc-arrow"><svg viewBox="0 0 12 12" fill="none"><path d="M2 10 L10 2 M4 2 H10 V8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="dc-info">
+        <div class="dc-name">Montana</div>
+        <div class="dc-sub">Madison · Gallatin · Bighorn</div>
+        <span class="dc-guides">240+ guides</span>
+      </div>
+    </div>
+
+    <!-- Patagonia -->
+    <div class="dc">
+      <div class="dc-img bg-patagonia"></div>
+      <div class="dc-overlay"></div>
+      <div class="dc-arrow"><svg viewBox="0 0 12 12" fill="none"><path d="M2 10 L10 2 M4 2 H10 V8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="dc-badge db-mist">International</div>
+      <div class="dc-info">
+        <div class="dc-name">Patagonia</div>
+        <div class="dc-sub">Argentina &amp; Chile · Remote Rivers</div>
+        <span class="dc-guides">98 guides</span>
+      </div>
+    </div>
+
+  </div>
+  <div style="text-align:center"><a class="see-all" href="#">View all 340 destinations →</a></div>
+</section>
+
+<!-- PHOTO INTERLUDE -->
+<div class="interlude">
+  <div class="int-panel">
+    <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&q=85&fit=crop&crop=center" alt="Fly fishing Catskills" loading="lazy">
+    <div class="int-panel-overlay"></div>
+    <div class="int-caption">
+      <div class="int-caption-title">The morning rise</div>
+      <div class="int-caption-sub">Beaverkill River, New York</div>
+    </div>
+  </div>
+  <div class="int-divider"></div>
+  <div class="int-panel">
+    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&q=85&fit=crop&crop=center" alt="River landscape" loading="lazy">
+    <div class="int-panel-overlay"></div>
+    <div class="int-caption">
+      <div class="int-caption-title">Reading the water</div>
+      <div class="int-caption-sub">Delaware River, Catskills</div>
+    </div>
+  </div>
+  <div class="int-divider"></div>
+  <div class="int-panel">
+    <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=900&q=85&fit=crop&crop=center" alt="Mountain river" loading="lazy">
+    <div class="int-panel-overlay"></div>
+    <div class="int-caption">
+      <div class="int-caption-title">Where trout hold</div>
+      <div class="int-caption-sub">Esopus Creek, New York</div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURED GUIDES -->
+<section class="guides-section" id="guides">
+  <div class="sh">
+    <div class="ey">Featured Guides</div>
+    <h2 class="st">Guides Who <em>Know the Water</em></h2>
+    <p class="ss">Every guide on Riffle is verified, licensed, and reviewed by real anglers.</p>
+  </div>
+
+  <div class="guides-grid">
+
+    <div class="gc reveal">
+      <div class="gc-hero">
+        <div class="gc-img gbg-1"></div>
+        <div class="gc-overlay"></div>
+        <div class="gc-pill">Drift Boat · Wading</div>
+        <div class="gc-price">From $450/day</div>
+        <div class="gc-av" style="background:#2c4e35">JR</div>
+        <div class="gc-vbadge"><svg viewBox="0 0 9 9" fill="none" stroke="white" stroke-width="1.8"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></div>
+      </div>
+      <div class="gc-body">
+        <div class="gc-name">Jake Rivers</div>
+        <div class="gc-loc"><svg viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M5.5 1C4 1 3 2.2 3 3.5c0 2.2 2.5 6.5 2.5 6.5S8 5.7 8 3.5C8 2.2 7 1 5.5 1z"/><circle cx="5.5" cy="3.5" r="1"/></svg>Bozeman, Montana</div>
+        <div class="gc-tags"><span class="gtag">Dry Fly</span><span class="gtag">Nymphing</span><span class="gtag">Madison River</span><span class="gtag">Rainbow Trout</span></div>
+        <div class="gc-rating"><span class="gc-stars">★★★★★</span><span class="gc-rn">5.0</span><span class="gc-rc">(312 reviews)</span></div>
+        <div class="gc-div"></div>
+        <div class="gc-foot"><div class="gc-exp"><strong>18 yrs</strong> guiding</div><button class="bk-btn">Check Availability</button></div>
+      </div>
+    </div>
+
+    <div class="gc reveal">
+      <div class="gc-hero">
+        <div class="gc-img gbg-2"></div>
+        <div class="gc-overlay"></div>
+        <div class="gc-pill">Catskills Expert</div>
+        <div class="gc-price">From $380/day</div>
+        <div class="gc-av" style="background:#3d6b4a">MW</div>
+        <div class="gc-vbadge"><svg viewBox="0 0 9 9" fill="none" stroke="white" stroke-width="1.8"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></div>
+      </div>
+      <div class="gc-body">
+        <div class="gc-name">Mike Walsh</div>
+        <div class="gc-loc"><svg viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M5.5 1C4 1 3 2.2 3 3.5c0 2.2 2.5 6.5 2.5 6.5S8 5.7 8 3.5C8 2.2 7 1 5.5 1z"/><circle cx="5.5" cy="3.5" r="1"/></svg>Roscoe, New York</div>
+        <div class="gc-tags"><span class="gtag">Beaverkill</span><span class="gtag">Dry Fly</span><span class="gtag">Delaware</span><span class="gtag">Brown Trout</span></div>
+        <div class="gc-rating"><span class="gc-stars">★★★★★</span><span class="gc-rn">4.9</span><span class="gc-rc">(224 reviews)</span></div>
+        <div class="gc-div"></div>
+        <div class="gc-foot"><div class="gc-exp"><strong>22 yrs</strong> guiding</div><button class="bk-btn">Check Availability</button></div>
+      </div>
+    </div>
+
+    <div class="gc reveal">
+      <div class="gc-hero">
+        <div class="gc-img gbg-3"></div>
+        <div class="gc-overlay"></div>
+        <div class="gc-pill">Saltwater · Flats</div>
+        <div class="gc-price">From $700/day</div>
+        <div class="gc-av" style="background:#8a4a2c">MT</div>
+        <div class="gc-vbadge"><svg viewBox="0 0 9 9" fill="none" stroke="white" stroke-width="1.8"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></div>
+      </div>
+      <div class="gc-body">
+        <div class="gc-name">Marco Tides</div>
+        <div class="gc-loc"><svg viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M5.5 1C4 1 3 2.2 3 3.5c0 2.2 2.5 6.5 2.5 6.5S8 5.7 8 3.5C8 2.2 7 1 5.5 1z"/><circle cx="5.5" cy="3.5" r="1"/></svg>Florida Keys, FL</div>
+        <div class="gc-tags"><span class="gtag">Bonefish</span><span class="gtag">Permit</span><span class="gtag">Tarpon</span><span class="gtag">Grand Slam</span></div>
+        <div class="gc-rating"><span class="gc-stars">★★★★★</span><span class="gc-rn">4.9</span><span class="gc-rc">(241 reviews)</span></div>
+        <div class="gc-div"></div>
+        <div class="gc-foot"><div class="gc-exp"><strong>22 yrs</strong> guiding</div><button class="bk-btn">Check Availability</button></div>
+      </div>
+    </div>
+
+    <div class="gc reveal">
+      <div class="gc-hero">
+        <div class="gc-img gbg-4"></div>
+        <div class="gc-overlay"></div>
+        <div class="gc-pill">Esopus · Catskills</div>
+        <div class="gc-price">From $320/day</div>
+        <div class="gc-av" style="background:#4a7fa0">SC</div>
+        <div class="gc-vbadge"><svg viewBox="0 0 9 9" fill="none" stroke="white" stroke-width="1.8"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></div>
+      </div>
+      <div class="gc-body">
+        <div class="gc-name">Sarah Clearwater</div>
+        <div class="gc-loc"><svg viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M5.5 1C4 1 3 2.2 3 3.5c0 2.2 2.5 6.5 2.5 6.5S8 5.7 8 3.5C8 2.2 7 1 5.5 1z"/><circle cx="5.5" cy="3.5" r="1"/></svg>Phoenicia, New York</div>
+        <div class="gc-tags"><span class="gtag">Esopus Creek</span><span class="gtag">Nymphing</span><span class="gtag">Wild Trout</span></div>
+        <div class="gc-rating"><span class="gc-stars">★★★★★</span><span class="gc-rn">5.0</span><span class="gc-rc">(187 reviews)</span></div>
+        <div class="gc-div"></div>
+        <div class="gc-foot"><div class="gc-exp"><strong>12 yrs</strong> guiding</div><button class="bk-btn">Check Availability</button></div>
+      </div>
+    </div>
+
+    <div class="gc reveal">
+      <div class="gc-hero">
+        <div class="gc-img gbg-5"></div>
+        <div class="gc-overlay"></div>
+        <div class="gc-pill">Sight Fishing</div>
+        <div class="gc-price">From $420/day</div>
+        <div class="gc-av" style="background:#3a6040">LM</div>
+        <div class="gc-vbadge"><svg viewBox="0 0 9 9" fill="none" stroke="white" stroke-width="1.8"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></div>
+      </div>
+      <div class="gc-body">
+        <div class="gc-name">Lena McKenzie</div>
+        <div class="gc-loc"><svg viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M5.5 1C4 1 3 2.2 3 3.5c0 2.2 2.5 6.5 2.5 6.5S8 5.7 8 3.5C8 2.2 7 1 5.5 1z"/><circle cx="5.5" cy="3.5" r="1"/></svg>Queenstown, New Zealand</div>
+        <div class="gc-tags"><span class="gtag">Brown Trout</span><span class="gtag">Sight Fishing</span><span class="gtag">Backcountry</span></div>
+        <div class="gc-rating"><span class="gc-stars">★★★★★</span><span class="gc-rn">5.0</span><span class="gc-rc">(143 reviews)</span></div>
+        <div class="gc-div"></div>
+        <div class="gc-foot"><div class="gc-exp"><strong>10 yrs</strong> guiding</div><button class="bk-btn">Check Availability</button></div>
+      </div>
+    </div>
+
+    <div class="gc reveal">
+      <div class="gc-hero">
+        <div class="gc-img gbg-6"></div>
+        <div class="gc-overlay"></div>
+        <div class="gc-pill">Patagonia Expert</div>
+        <div class="gc-price">From $600/day</div>
+        <div class="gc-av" style="background:#7a3a18">CR</div>
+        <div class="gc-vbadge"><svg viewBox="0 0 9 9" fill="none" stroke="white" stroke-width="1.8"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></div>
+      </div>
+      <div class="gc-body">
+        <div class="gc-name">Carlos Ríos</div>
+        <div class="gc-loc"><svg viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M5.5 1C4 1 3 2.2 3 3.5c0 2.2 2.5 6.5 2.5 6.5S8 5.7 8 3.5C8 2.2 7 1 5.5 1z"/><circle cx="5.5" cy="3.5" r="1"/></svg>Coyhaique, Patagonia</div>
+        <div class="gc-tags"><span class="gtag">Sea Trout</span><span class="gtag">Wild Brown</span><span class="gtag">Remote Rivers</span></div>
+        <div class="gc-rating"><span class="gc-stars">★★★★★</span><span class="gc-rn">4.9</span><span class="gc-rc">(76 reviews)</span></div>
+        <div class="gc-div"></div>
+        <div class="gc-foot"><div class="gc-exp"><strong>14 yrs</strong> guiding</div><button class="bk-btn">Check Availability</button></div>
+      </div>
+    </div>
+
+  </div>
+  <div style="text-align:center"><a class="see-all" href="#">Browse all 2,400 guides →</a></div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="how-bg"></div>
+  <div class="sh">
+    <div class="ey">How Riffle Works</div>
+    <h2 class="st">From Search to <em style="color:var(--mist)">First Cast</em></h2>
+    <p class="ss">We stripped out every bit of friction. Finding and booking a world-class guide should take minutes.</p>
+  </div>
+  <div class="how-grid">
+    <div class="hw reveal">
+      <div class="hw-n">01</div>
+      <div class="hw-icon"><svg viewBox="0 0 20 20"><circle cx="9" cy="9" r="6"/><line x1="13.5" y1="13.5" x2="18" y2="18"/></svg></div>
+      <div class="hw-title">Search Your Water</div>
+      <p class="hw-desc">Filter by region, species, technique, or experience level. Every guide profile is built around what they actually know — not generic listings.</p>
+    </div>
+    <div class="hw reveal">
+      <div class="hw-n">02</div>
+      <div class="hw-icon"><svg viewBox="0 0 20 20"><path d="M2 4h16v10a2 2 0 01-2 2H4a2 2 0 01-2-2V4z"/><polyline points="2,4 10,11 18,4"/></svg></div>
+      <div class="hw-title">Message the Guide</div>
+      <p class="hw-desc">Ask about river conditions, what flies are working, and what to expect. Guides who know their water will tell you everything upfront.</p>
+    </div>
+    <div class="hw reveal">
+      <div class="hw-n">03</div>
+      <div class="hw-icon"><svg viewBox="0 0 20 20"><rect x="2" y="3" width="16" height="15" rx="2"/><line x1="2" y1="9" x2="18" y2="9"/><line x1="6" y1="1" x2="6" y2="5"/><line x1="14" y1="1" x2="14" y2="5"/></svg></div>
+      <div class="hw-title">Book &amp; Deposit</div>
+      <p class="hw-desc">Lock your dates with a secure deposit. Most trips offer free cancellation up to 14 days out. No surprises, no phone tag.</p>
+    </div>
+    <div class="hw reveal">
+      <div class="hw-n">04</div>
+      <div class="hw-icon"><svg viewBox="0 0 20 20"><path d="M3 15 Q7 7 11 10 Q13 6 17 3"/><circle cx="17" cy="3" r="2" fill="currentColor" stroke="none"/></svg></div>
+      <div class="hw-title">Riffle</div>
+      <p class="hw-desc">Show up, wade in, and let an expert read the water for you. Leave a review when you're done — it helps the next angler find their guide.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WIDE PHOTO BANNER - Esopus -->
+<div class="wide-banner reveal">
+  <img src="https://images.unsplash.com/photo-1504701954957-2010ec3bcec1?w=1800&q=85&fit=crop&crop=center" alt="Esopus Creek New York" loading="lazy">
+  <div class="wide-banner-overlay"></div>
+  <div class="wide-banner-content">
+    <div class="ey">Catskills · Esopus Creek</div>
+    <h2>Wild water,<br>wilder <em>trout.</em></h2>
+    <p>The Esopus is one of New York's most productive and challenging freestone streams. Fed by the Schoharie Reservoir, it runs cold and fast through the heart of the Catskill Park — prime habitat for wild rainbow trout that will test even experienced anglers.</p>
+    <a class="wb-btn" href="#">Find Esopus Guides →</a>
+  </div>
+</div>
+
+<!-- SPECIES -->
+<section class="species" id="species">
+  <div class="sh">
+    <div class="ey">Target Species</div>
+    <h2 class="st">What Are You <em>Chasing?</em></h2>
+  </div>
+  <div class="species-grid reveal">
+    <div class="sc"><div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M18 9s-2 4-6 4S6 9 6 9s-2 4 0 8c1 2 3 3 6 3s5-1 6-3c2-4 0-8 0-8z"/><path d="M18 9l3-3M18 9l2-4"/></svg></div><div class="sc-name">Rainbow Trout</div><div class="sc-ct">840 guides</div></div>
+    <div class="sc"><div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M16 10s-1.5 3.5-5 3.5S6 10 6 10s-1.5 3.5 0 7c.8 1.8 2.5 2.5 5 2.5s4.2-.7 5-2.5c1.5-3.5 0-7 0-7z"/><path d="M16 10l4-2M16 10l3-4"/></svg></div><div class="sc-name">Brown Trout</div><div class="sc-ct">720 guides</div></div>
+    <div class="sc"><div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><ellipse cx="11" cy="13" rx="7" ry="5"/><path d="M18 10l4-3M18 10l3 3"/><circle cx="9" cy="11" r="1" fill="currentColor"/></svg></div><div class="sc-name">Bonefish</div><div class="sc-ct">210 guides</div></div>
+    <div class="sc"><div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M5 12s2-5 7-5 7 5 7 5-2 5-7 5-7-5-7-5z"/><path d="M19 12l3 2M19 12l3-2"/></svg></div><div class="sc-name">Atlantic Salmon</div><div class="sc-ct">180 guides</div></div>
+    <div class="sc"><div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M17 9s-2 5-6 5S5 9 5 9s-1 4 1 7c1 1.5 3 2.5 6 2.5s5-1 6-2.5c2-3 1-7 1-7z"/><path d="M17 9l3.5-1.5M17 9l2.5-3.5"/></svg></div><div class="sc-name">Permit</div><div class="sc-ct">95 guides</div></div>
+    <div class="sc"><div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M4 14s3-7 8-7 8 7 8 7-3 5-8 5-8-5-8-5z"/><path d="M20 14l3 1M20 14l3-1"/></svg></div><div class="sc-name">Tarpon</div><div class="sc-ct">160 guides</div></div>
+    <div class="sc"><div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M6 12s1.5-4 5-4 5 4 5 4-1.5 4-5 4-5-4-5-4z"/><path d="M16 12l5-1M16 12l4 2"/></svg></div><div class="sc-name">Cutthroat</div><div class="sc-ct">380 guides</div></div>
+    <div class="sc"><div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M5 11s2-4 6-4 6 4 6 4-2 5-6 5-6-5-6-5z"/><path d="M17 11l4 0M17 11l3 3"/></svg></div><div class="sc-name">Steelhead</div><div class="sc-ct">290 guides</div></div>
+    <div class="sc"><div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M7 13s1-4 4-4 4 4 4 4-1 4-4 4-4-4-4-4z"/><path d="M15 13l4-1M15 13l4 1"/></svg></div><div class="sc-name">Brook Trout</div><div class="sc-ct">330 guides</div></div>
+    <div class="sc"><div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><ellipse cx="11" cy="12" rx="5" ry="4"/><path d="M16 12l5 0M16 12l4 2"/><circle cx="9" cy="11" r=".8" fill="currentColor"/></svg></div><div class="sc-name">Bass</div><div class="sc-ct">245 guides</div></div>
+    <div class="sc"><div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M6 12s2-3 5-3 5 3 5 3-2 3-5 3-5-3-5-3z"/><path d="M16 12l4-2M16 12l4 2"/></svg></div><div class="sc-name">Pike</div><div class="sc-ct">88 guides</div></div>
+    <div class="sc"><div class="sc-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M5 13s2-4 6-4 6 4 6 4-2 3-6 3-6-3-6-3z"/><path d="M17 13l3-2M17 13l3 2"/></svg></div><div class="sc-name">Arctic Char</div><div class="sc-ct">62 guides</div></div>
+  </div>
+</section>
+
+<!-- TECHNIQUES -->
+<section class="techniques" id="techniques">
+  <div class="sh">
+    <div class="ey">Fly Fishing Techniques</div>
+    <h2 class="st">Every <em>Discipline</em></h2>
+    <p class="ss">Find a guide matched to how you fish — or how you want to learn.</p>
+  </div>
+  <div class="techniques-grid reveal">
+    <div class="tc"><div class="tc-bar bar-sage"></div><div class="tc-body"><div class="tc-name">Dry Fly</div><p class="tc-desc">The most iconic form — presenting flies on the surface to rising fish. The heartbeat of Catskill tradition. Perfect for summer evenings when the hatch is on.</p><div class="tc-ct">620 guides available</div></div></div>
+    <div class="tc"><div class="tc-bar bar-forest"></div><div class="tc-body"><div class="tc-name">Nymphing</div><p class="tc-desc">Sub-surface fishing with weighted flies. Deadly year-round and essential for beginners learning to read currents, seams, and pocket water.</p><div class="tc-ct">780 guides available</div></div></div>
+    <div class="tc"><div class="tc-bar bar-amber"></div><div class="tc-body"><div class="tc-name">Streamer Fishing</div><p class="tc-desc">Large baitfish-imitating flies stripped aggressively to trigger explosive strikes. Produces the biggest fish of the season when conditions align.</p><div class="tc-ct">410 guides available</div></div></div>
+    <div class="tc"><div class="tc-bar bar-river"></div><div class="tc-body"><div class="tc-name">Saltwater Fly</div><p class="tc-desc">Sight-casting to bonefish, permit, and tarpon on tropical flats. Precision presentation under pressure — the grand slam of fly fishing challenges.</p><div class="tc-ct">265 guides available</div></div></div>
+    <div class="tc"><div class="tc-bar bar-rust"></div><div class="tc-body"><div class="tc-name">Spey Casting</div><p class="tc-desc">Two-handed casting for big salmon and steelhead rivers. A sweeping, efficient technique for covering vast water without backcast room.</p><div class="tc-ct">190 guides available</div></div></div>
+    <div class="tc"><div class="tc-bar bar-mist"></div><div class="tc-body"><div class="tc-name">Euro Nymphing</div><p class="tc-desc">High-stick, tight-line technique born from European competition fishing. Extraordinarily sensitive and precise — deadly on technical freestone streams.</p><div class="tc-ct">340 guides available</div></div></div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews">
+  <div class="sh">
+    <div class="ey">Angler Reviews</div>
+    <h2 class="st">Stories from <em>the Water</em></h2>
+  </div>
+  <div class="reviews-grid reveal">
+    <div class="rv">
+      <div class="rv-q">"</div>
+      <div class="rv-stars">★★★★★</div>
+      <p class="rv-text">Mike walked me to a run on the Beaverkill I never would have found alone. By 8am we had a dozen browns. He's been fishing that river his whole life — you can feel it in how he reads the water.</p>
+      <div class="rv-author"><div class="rv-av" style="background:var(--forest-mid)">TH</div><div><div class="rv-name">Tom Harrington</div><div class="rv-trip">Beaverkill River, NY · June 2025</div></div></div>
+    </div>
+    <div class="rv">
+      <div class="rv-q">"</div>
+      <div class="rv-stars">★★★★★</div>
+      <p class="rv-text">Sarah put me on the Esopus for two days and completely changed how I read moving water. The Catskills are something else — wild rainbows in crystal cold freestone. Already planning to go back.</p>
+      <div class="rv-author"><div class="rv-av" style="background:var(--river)">AP</div><div><div class="rv-name">Anna Prescott</div><div class="rv-trip">Esopus Creek, NY · Sept 2025</div></div></div>
+    </div>
+    <div class="rv">
+      <div class="rv-q">"</div>
+      <div class="rv-stars">★★★★★</div>
+      <p class="rv-text">Marco got us our Grand Slam on day three — bonefish at sunrise, permit before lunch, 100lb tarpon at dusk. His knowledge of those flats is otherworldly. Best money I've ever spent on anything.</p>
+      <div class="rv-author"><div class="rv-av" style="background:var(--amber)">RD</div><div><div class="rv-name">Rafael Delgado</div><div class="rv-trip">Florida Keys · March 2026</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GUIDE CTA -->
+<div class="guide-cta" id="list">
+  <div class="guide-cta-img"></div>
+  <div class="guide-cta-overlay"></div>
+  <div class="guide-cta-inner">
+    <div class="guide-cta-left reveal">
+      <div class="ey">For Guides</div>
+      <h2>List on Riffle.<br>Reach anglers you<br><em>can't find elsewhere.</em></h2>
+      <p>Join 2,400+ professional guides. Set your price, keep 85% of every booking. We bring you anglers who actually know how to fish — not tourists who want to take selfies.</p>
+      <div class="cta-btns">
+        <a class="btn-gold" href="#">Start Listing Free →</a>
+        <a class="btn-ghost" href="#">See How It Works</a>
+      </div>
+    </div>
+    <div class="guide-cta-right reveal">
+      <div class="perk">
+        <div class="perk-icon"><svg viewBox="0 0 18 18"><path d="M9 2L11.5 7H16.5L12.5 10.5L14 15.5L9 12.5L4 15.5L5.5 10.5L1.5 7H6.5Z"/></svg></div>
+        <div><div class="perk-title">AI-Built Profile</div><div class="perk-desc">Answer a few questions. We build your full guide profile automatically — copy, tags, trip types, and specialty waters.</div></div>
+      </div>
+      <div class="perk">
+        <div class="perk-icon"><svg viewBox="0 0 18 18"><rect x="2" y="3" width="14" height="12" rx="2"/><line x1="2" y1="7" x2="16" y2="7"/><line x1="6" y1="1" x2="6" y2="5"/><line x1="12" y1="1" x2="12" y2="5"/></svg></div>
+        <div><div class="perk-title">Simple Booking</div><div class="perk-desc">Set availability and pricing. Clients request a date, you confirm, they pay a deposit. No phone tag, no chasing invoices.</div></div>
+      </div>
+      <div class="perk">
+        <div class="perk-icon"><svg viewBox="0 0 18 18"><circle cx="9" cy="9" r="7"/><path d="M9 5v4l3 3"/></svg></div>
+        <div><div class="perk-title">Only Pay for Results</div><div class="perk-desc">15% on bookings we generate. Bring your existing clients at zero cost. You only pay when Riffle brings you new business.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-grid">
+    <div class="ft-brand">
+      <span class="ft-logo">Riffle</span>
+      <div class="ft-tagline">Find your water.</div>
+      <p class="ft-desc">The world's most trusted marketplace for fly fishing guides. Connecting serious anglers with expert guides on legendary rivers — beginning on the Beaverkill, reaching every corner of the globe.</p>
+    </div>
+    <div class="ft-col">
+      <h4>Explore</h4>
+      <ul class="ft-links">
+        <li><a href="#">Find a Guide</a></li>
+        <li><a href="#">Destinations</a></li>
+        <li><a href="#">Species</a></li>
+        <li><a href="#">Techniques</a></li>
+        <li><a href="#">Fishing Near Me</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h4>Guides</h4>
+      <ul class="ft-links">
+        <li><a href="#">List Your Service</a></li>
+        <li><a href="#">Guide Dashboard</a></li>
+        <li><a href="#">Pricing &amp; Fees</a></li>
+        <li><a href="#">Resources</a></li>
+        <li><a href="#">Success Stories</a></li>
+      </ul>
+    </div>
+    <div class="ft-col">
+      <h4>Company</h4>
+      <ul class="ft-links">
+        <li><a href="#">About Riffle</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Help Center</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <span>© 2026 Riffle, Inc. All rights reserved. · riffle.guide</span>
+    <div><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Accessibility</a></div>
+  </div>
+</footer>
+
+<script>
+// Nav scroll
+var nav=document.getElementById('nav');
+window.addEventListener('scroll',function(){
+  nav.classList.toggle('solid',window.scrollY>50);
+},{passive:true});
+
+// Hero image pan
+var heroImg=document.getElementById('heroImg');
+heroImg.style.backgroundImage="url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1800&q=85&fit=crop&crop=center')";
+setTimeout(function(){heroImg.classList.add('loaded')},100);
+
+// Scroll reveal
+var observer=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){e.target.classList.add('visible')}
+  });
+},{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){observer.observe(el)});
+
+// Search tags
+document.querySelectorAll('.stag').forEach(function(t){
+  t.addEventListener('click',function(){
+    document.querySelector('.sf input').value=t.textContent;
+  });
+});
+</script>
+</body>
+</html>
