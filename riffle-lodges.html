@@ -146,6 +146,21 @@ footer{background:#0c1610;padding:40px 5% 32px;margin-top:60px}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 .reveal{opacity:0;transform:translateY(12px);transition:opacity 0.5s ease,transform 0.5s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ── MOBILE NAV ── */
+.nav-hamburger{display:none;flex-direction:column;align-items:center;justify-content:center;gap:5px;width:44px;height:44px;background:rgba(255,255,255,0.1);border:none;border-radius:8px;cursor:pointer;-webkit-tap-highlight-color:transparent;flex-shrink:0}
+.ham-line{width:20px;height:1.5px;background:#fff;border-radius:2px;transition:all 0.3s;transform-origin:center}
+.nav-hamburger.open .ham-line:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav-hamburger.open .ham-line:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-hamburger.open .ham-line:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.nav-drawer{position:fixed;top:0;left:0;right:0;bottom:0;z-index:490;background:rgba(22,34,24,0.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;flex-direction:column;padding:88px 32px 40px;transform:translateX(100%);transition:transform 0.35s cubic-bezier(0.4,0,0.2,1);pointer-events:none}
+.nav-drawer.open{transform:translateX(0);pointer-events:all}
+.drawer-link{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:rgba(255,255,255,0.82);text-decoration:none;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.07);display:block;transition:color 0.2s}
+.drawer-link:active{color:#fff}
+.drawer-cta{margin-top:24px;background:#d4943a;color:#fff;font-size:15px;font-weight:700;padding:15px 28px;border-radius:100px;text-decoration:none;text-align:center;display:block;font-family:'DM Sans',sans-serif}
+.drawer-tagline{margin-top:auto;font-family:'Playfair Display',serif;font-size:15px;font-style:italic;color:rgba(255,255,255,0.2)}
+@media(max-width:860px){.nav-hamburger{display:flex}.nav-links,.nav-right-links{display:none!important}}
+@media(max-width:500px){.logo-word,.nav-word{font-size:21px!important}}
 </style>
 </head>
 <body>
@@ -157,10 +172,16 @@ footer{background:#0c1610;padding:40px 5% 32px;margin-top:60px}
   </a>
   <div class="nav-links">
     <a class="nl" href="riffle-catskills.html">Guides</a>
-    <a class="nl active" href="#">Lodges</a>
-    <a class="nl" href="#">Destinations</a>
+    <a class="nl active" href="riffle-lodges.html">Lodges</a>
+    <a class="nl" href="riffle-catskills.html">Destinations</a>
     <a class="n-cta" href="riffle-lodge-onboarding.html">List Your Lodge</a>
   </div>
+
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <div class="ham-line"></div>
+    <div class="ham-line"></div>
+    <div class="ham-line"></div>
+  </button>
 </nav>
 
 <!-- HERO -->
@@ -296,7 +317,7 @@ footer{background:#0c1610;padding:40px 5% 32px;margin-top:60px}
             <div>
               <div class="lc-rating"><span class="lc-stars">★★★★★</span><span class="lc-rn">4.9</span><span class="lc-rc">(186 reviews)</span></div>
             </div>
-            <button class="lc-bk">View Lodge</button>
+            <button class="lc-bk" onclick="window.location='riffle-lodge-profile.html'">View Lodge</button>
           </div>
         </div>
       </a>
@@ -322,7 +343,7 @@ footer{background:#0c1610;padding:40px 5% 32px;margin-top:60px}
           <div class="lc-tags"><span class="ltag">Willowemoc</span><span class="ltag">Dry Fly</span><span class="ltag">Instruction</span><span class="ltag">Intimate</span></div>
           <div class="lc-footer">
             <div><div class="lc-rating"><span class="lc-stars">★★★★★</span><span class="lc-rn">4.8</span><span class="lc-rc">(94 reviews)</span></div></div>
-            <button class="lc-bk">View Lodge</button>
+            <button class="lc-bk" onclick="window.location='riffle-lodge-profile.html'">View Lodge</button>
           </div>
         </div>
       </div>
@@ -348,7 +369,7 @@ footer{background:#0c1610;padding:40px 5% 32px;margin-top:60px}
           <div class="lc-tags"><span class="ltag">Montana</span><span class="ltag">Drift Boat</span><span class="ltag">Cutthroat</span><span class="ltag">Rainbow Trout</span><span class="ltag">5 Rivers</span></div>
           <div class="lc-footer">
             <div><div class="lc-rating"><span class="lc-stars">★★★★★</span><span class="lc-rn">4.9</span><span class="lc-rc">(218 reviews)</span></div></div>
-            <button class="lc-bk">View Lodge</button>
+            <button class="lc-bk" onclick="window.location='riffle-lodge-profile.html'">View Lodge</button>
           </div>
         </div>
       </div>
@@ -374,7 +395,7 @@ footer{background:#0c1610;padding:40px 5% 32px;margin-top:60px}
           <div class="lc-tags"><span class="ltag">Patagonia</span><span class="ltag">Sight Fishing</span><span class="ltag">Wild Brown Trout</span><span class="ltag">Remote</span><span class="ltag">Exclusive</span></div>
           <div class="lc-footer">
             <div><div class="lc-rating"><span class="lc-stars">★★★★★</span><span class="lc-rn">5.0</span><span class="lc-rc">(62 reviews)</span></div></div>
-            <button class="lc-bk">View Lodge</button>
+            <button class="lc-bk" onclick="window.location='riffle-lodge-profile.html'">View Lodge</button>
           </div>
         </div>
       </div>
@@ -399,14 +420,14 @@ footer{background:#0c1610;padding:40px 5% 32px;margin-top:60px}
           <div class="lc-tags"><span class="ltag">Saltwater</span><span class="ltag">Bonefish</span><span class="ltag">Permit</span><span class="ltag">Tarpon</span><span class="ltag">Grand Slam</span></div>
           <div class="lc-footer">
             <div><div class="lc-rating"><span class="lc-stars">★★★★★</span><span class="lc-rn">4.8</span><span class="lc-rc">(143 reviews)</span></div></div>
-            <button class="lc-bk">View Lodge</button>
+            <button class="lc-bk" onclick="window.location='riffle-lodge-profile.html'">View Lodge</button>
           </div>
         </div>
       </div>
 
     </div>
 
-    <div class="load-more"><button class="lm-btn">Load 137 more lodges →</button></div>
+    <div class="load-more"><button class="lm-btn" onclick="window.location='riffle-lodge-profile.html'">Load 137 more lodges →</button></div>
 
     <!-- WHY RIFFLE LODGES -->
     <div class="why-section reveal">
@@ -426,7 +447,7 @@ footer{background:#0c1610;padding:40px 5% 32px;margin-top:60px}
 <footer>
   <div class="ft-inner">
     <div><div class="ft-logo">Riffle</div><div class="ft-tagline">Find your water.</div></div>
-    <div class="ft-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Help</a><a href="#">riffle.guide</a></div>
+    <div class="ft-links"><a href="riffle.html">Privacy</a><a href="riffle.html">Terms</a><a href="riffle-guide-onboarding.html">Help</a><a href="riffle.html">riffle.guide</a></div>
   </div>
   <div class="ft-copy">© 2026 Riffle, Inc. · riffle.guide/lodges</div>
 </footer>
@@ -435,6 +456,19 @@ footer{background:#0c1610;padding:40px 5% 32px;margin-top:60px}
 var obs = new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:0.06});
 document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el)});
 function filter(el){document.querySelectorAll('.fc').forEach(function(c){c.classList.remove('active')});el.classList.add('active')}
+
+// Mobile nav
+(function(){
+  var hbg=document.getElementById('hamburger');
+  var drw=document.getElementById('navDrawer');
+  if(!hbg||!drw) return;
+  var open=false;
+  function close(){open=false;hbg.classList.remove('open');drw.classList.remove('open');document.body.style.overflow='';}
+  window.closeDrawer=close;
+  hbg.addEventListener('click',function(){open=!open;hbg.classList.toggle('open',open);drw.classList.toggle('open',open);document.body.style.overflow=open?'hidden':''});
+  drw.addEventListener('click',function(e){if(e.target===drw)close();});
+})();
+
 </script>
 </body>
 </html>

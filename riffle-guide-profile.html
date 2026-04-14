@@ -235,16 +235,37 @@ footer{background:#0c1610;padding:40px 5% 32px;margin-top:80px}
   .rs-bars{width:100%}
   .rb-label{width:30px}
 }
+
+/* ── MOBILE NAV ── */
+.nav-hamburger{display:none;flex-direction:column;align-items:center;justify-content:center;gap:5px;width:44px;height:44px;background:rgba(255,255,255,0.1);border:none;border-radius:8px;cursor:pointer;-webkit-tap-highlight-color:transparent;flex-shrink:0}
+.ham-line{width:20px;height:1.5px;background:#fff;border-radius:2px;transition:all 0.3s;transform-origin:center}
+.nav-hamburger.open .ham-line:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav-hamburger.open .ham-line:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-hamburger.open .ham-line:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.nav-drawer{position:fixed;top:0;left:0;right:0;bottom:0;z-index:490;background:rgba(22,34,24,0.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;flex-direction:column;padding:88px 32px 40px;transform:translateX(100%);transition:transform 0.35s cubic-bezier(0.4,0,0.2,1);pointer-events:none}
+.nav-drawer.open{transform:translateX(0);pointer-events:all}
+.drawer-link{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:rgba(255,255,255,0.82);text-decoration:none;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.07);display:block;transition:color 0.2s}
+.drawer-link:active{color:#fff}
+.drawer-cta{margin-top:24px;background:#d4943a;color:#fff;font-size:15px;font-weight:700;padding:15px 28px;border-radius:100px;text-decoration:none;text-align:center;display:block;font-family:'DM Sans',sans-serif}
+.drawer-tagline{margin-top:auto;font-family:'Playfair Display',serif;font-size:15px;font-style:italic;color:rgba(255,255,255,0.2)}
+@media(max-width:860px){.nav-hamburger{display:flex}.nav-links,.nav-right-links{display:none!important}}
+@media(max-width:500px){.logo-word,.nav-word{font-size:21px!important}}
 </style>
 </head>
 <body>
 
 <nav>
-  <a class="nav-logo" href="index.html">
+  <a class="nav-logo" href="riffle.html">
     <svg viewBox="0 0 32 32" fill="none"><path d="M4 22 Q8 14 13 18 Q18 22 23 15 Q27 10 31 13" stroke="#9ec4aa" stroke-width="2.2" stroke-linecap="round" fill="none"/><path d="M4 27 Q9 20 14 24 Q19 28 24 21 Q28 15 31 18" stroke="#5a8a68" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.7"/><circle cx="29.5" cy="10.5" r="2.5" fill="#d4943a"/><path d="M29.5 10.5 L25 6" stroke="#d4943a" stroke-width="1.6" stroke-linecap="round"/></svg>
     <span class="nav-word">Riffle</span>
   </a>
-  <a class="nav-back" href="index.html"><svg viewBox="0 0 14 14"><polyline points="9,2 4,7 9,12"/></svg> Back to guides</a>
+  <a class="nav-back" href="riffle.html"><svg viewBox="0 0 14 14"><polyline points="9,2 4,7 9,12"/></svg> Back to guides</a>
+
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <div class="ham-line"></div>
+    <div class="ham-line"></div>
+    <div class="ham-line"></div>
+  </button>
 </nav>
 
 <!-- HERO -->
@@ -254,9 +275,9 @@ footer{background:#0c1610;padding:40px 5% 32px;margin-top:80px}
   <div class="ph-content">
     <div class="ph-left">
       <div class="ph-breadcrumb">
-        <a href="#">Guides</a><span>›</span>
-        <a href="#">New York</a><span>›</span>
-        <a href="#">Catskills</a>
+        <a href="riffle.html">Home</a><span>›</span>
+        <a href="riffle-catskills.html">Catskills</a><span>›</span>
+        <a href="riffle-catskills.html">Guides</a>
       </div>
       <div class="ph-name">Mike Walsh</div>
       <div class="ph-tagline">Catskills Fly Fishing Guide · Roscoe, New York</div>
@@ -378,7 +399,7 @@ footer{background:#0c1610;padding:40px 5% 32px;margin-top:80px}
           <div class="trip-right">
             <div class="trip-price">$480</div>
             <div class="trip-per">per angler / day</div>
-            <button class="trip-book">Book This Trip</button>
+            <button class="trip-book" onclick="window.location='riffle-booking.html'">Book This Trip</button>
           </div>
         </div>
 
@@ -400,7 +421,7 @@ footer{background:#0c1610;padding:40px 5% 32px;margin-top:80px}
           <div class="trip-right">
             <div class="trip-price">$280</div>
             <div class="trip-per">per angler / half day</div>
-            <button class="trip-book">Book This Trip</button>
+            <button class="trip-book" onclick="window.location='riffle-booking.html'">Book This Trip</button>
           </div>
         </div>
 
@@ -573,7 +594,7 @@ footer{background:#0c1610;padding:40px 5% 32px;margin-top:80px}
           <label class="bc-label">Notes for Mike (optional)</label>
           <textarea class="bc-input" rows="3" style="resize:vertical" placeholder="Target species, techniques you want to practice, any questions…"></textarea>
         </div>
-        <button class="bc-submit">Request to Book</button>
+        <button class="bc-submit" onclick="window.location='riffle-booking.html'">Request to Book</button>
         <div class="bc-note">
           <svg viewBox="0 0 12 12"><path d="M6 1a5 5 0 100 10A5 5 0 006 1z"/><line x1="6" y1="5" x2="6" y2="8"/><circle cx="6" cy="3.5" r=".5" fill="currentColor"/></svg>
           You won't be charged yet. Mike confirms within 24 hours.
@@ -603,7 +624,7 @@ footer{background:#0c1610;padding:40px 5% 32px;margin-top:80px}
       <div class="ft-tagline">Find your water.</div>
     </div>
     <div class="ft-links">
-      <a href="#">Privacy</a><a href="#">Terms</a><a href="#">Help</a><a href="#">riffle.guide</a>
+      <a href="riffle.html">Privacy</a><a href="riffle.html">Terms</a><a href="riffle-guide-onboarding.html">Help</a><a href="riffle.html">riffle.guide</a>
     </div>
   </div>
   <div class="ft-copy">© 2026 Riffle, Inc. All rights reserved.</div>
@@ -628,6 +649,19 @@ document.querySelectorAll('.trip-book').forEach(function(b){
     document.getElementById('booking-card').scrollIntoView({behavior:'smooth'});
   });
 });
+
+// Mobile nav
+(function(){
+  var hbg=document.getElementById('hamburger');
+  var drw=document.getElementById('navDrawer');
+  if(!hbg||!drw) return;
+  var open=false;
+  function close(){open=false;hbg.classList.remove('open');drw.classList.remove('open');document.body.style.overflow='';}
+  window.closeDrawer=close;
+  hbg.addEventListener('click',function(){open=!open;hbg.classList.toggle('open',open);drw.classList.toggle('open',open);document.body.style.overflow=open?'hidden':''});
+  drw.addEventListener('click',function(e){if(e.target===drw)close();});
+})();
+
 </script>
 </body>
 </html>

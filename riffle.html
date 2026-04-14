@@ -745,13 +745,69 @@ footer{background:#0c1610;padding:68px 5% 32px}
   .wide-banner{height:400px}
   .cta-btns{flex-direction:column}
 }
+
+/* ─── MOBILE NAV ─── */
+.nav-hamburger{
+  display:none;
+  flex-direction:column;align-items:center;justify-content:center;gap:5px;
+  width:44px;height:44px;background:rgba(255,255,255,0.1);
+  border:none;border-radius:var(--r-sm);cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+.ham-line{
+  width:20px;height:1.5px;background:#fff;border-radius:2px;
+  transition:all 0.3s;transform-origin:center;
+}
+.nav-hamburger.open .ham-line:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav-hamburger.open .ham-line:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-hamburger.open .ham-line:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.nav-drawer{
+  position:fixed;top:0;left:0;right:0;bottom:0;z-index:390;
+  background:rgba(22,34,24,0.98);backdrop-filter:blur(20px);
+  display:flex;flex-direction:column;
+  padding:90px 32px 40px;
+  transform:translateX(100%);
+  transition:transform 0.35s cubic-bezier(0.4,0,0.2,1);
+  pointer-events:none;
+}
+.nav-drawer.open{transform:translateX(0);pointer-events:all}
+.drawer-link{
+  font-family:'Playfair Display',serif;
+  font-size:30px;font-weight:700;color:rgba(255,255,255,0.82);
+  text-decoration:none;padding:13px 0;
+  border-bottom:1px solid rgba(255,255,255,0.07);display:block;
+  transition:color 0.2s;
+}
+.drawer-link:last-of-type{border-bottom:none}
+.drawer-link:active{color:#fff}
+.drawer-cta{
+  margin-top:28px;
+  background:var(--amber-light);color:#fff;
+  font-size:16px;font-weight:700;padding:16px 28px;
+  border-radius:var(--pill);text-decoration:none;
+  text-align:center;display:block;
+  font-family:'DM Sans',sans-serif;
+}
+.drawer-tagline{
+  margin-top:auto;
+  font-family:'Playfair Display',serif;
+  font-size:16px;font-style:italic;color:rgba(255,255,255,0.22);
+}
+@media(max-width:860px){
+  .nav-links{display:none}
+  .nav-hamburger{display:flex}
+}
+@media(max-width:500px){
+  .logo-word{font-size:22px}
+}
+
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav id="nav">
-  <a class="logo" href="#">
+  <a class="logo" href="riffle.html">
     <div class="logo-mark">
       <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M4 22 Q8 14 13 18 Q18 22 23 15 Q27 10 31 13" stroke="#9ec4aa" stroke-width="2.2" stroke-linecap="round" fill="none"/>
@@ -766,10 +822,27 @@ footer{background:#0c1610;padding:68px 5% 32px}
     <a class="nl" href="#destinations">Destinations</a>
     <a class="nl" href="#guides">Find a Guide</a>
     <a class="nl" href="#techniques">Techniques</a>
+    <a class="nl" href="riffle-lodges.html">Lodges</a>
     <a class="n-outline" href="#">Log in</a>
-    <a class="n-cta" href="#list">List Your Guide Service</a>
+    <a class="n-cta" href="riffle-guide-onboarding.html">List Your Guide Service</a>
   </div>
+  <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+    <div class="ham-line"></div>
+    <div class="ham-line"></div>
+    <div class="ham-line"></div>
+  </button>
 </nav>
+
+<!-- MOBILE DRAWER -->
+<div class="nav-drawer" id="navDrawer">
+  <a class="drawer-link" href="#destinations" onclick="closeDrawer()">Destinations</a>
+  <a class="drawer-link" href="#guides" onclick="closeDrawer()">Find a Guide</a>
+  <a class="drawer-link" href="riffle-catskills.html" onclick="closeDrawer()">Catskills</a>
+  <a class="drawer-link" href="riffle-lodges.html" onclick="closeDrawer()">Lodges</a>
+  <a class="drawer-link" href="#" onclick="closeDrawer()">Log in</a>
+  <a class="drawer-cta" href="riffle-guide-onboarding.html" onclick="closeDrawer()">List Your Guide Service →</a>
+  <div class="drawer-tagline">Find your water.</div>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -810,7 +883,7 @@ footer{background:#0c1610;padding:68px 5% 32px}
             <option>4 anglers</option>
           </select>
         </div>
-        <button class="sgo">
+        <button class="sgo" onclick="window.location='riffle-catskills.html'">
           <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6.5" cy="6.5" r="4.5"/><line x1="10.5" y1="10.5" x2="14" y2="14"/></svg>
           Search
         </button>
@@ -881,7 +954,7 @@ footer{background:#0c1610;padding:68px 5% 32px}
   <div class="dest-grid reveal">
 
     <!-- TALL - Catskills/Beaverkill -->
-    <div class="dc tall">
+    <a class="dc tall" href="riffle-catskills.html" style="text-decoration:none;color:inherit">
       <div class="dc-img bg-beaverkill"></div>
       <div class="dc-overlay"></div>
       <div class="dc-arrow"><svg viewBox="0 0 12 12" fill="none"><path d="M2 10 L10 2 M4 2 H10 V8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -891,10 +964,10 @@ footer{background:#0c1610;padding:68px 5% 32px}
         <div class="dc-sub">Beaverkill · Willowemoc · Esopus · Delaware</div>
         <span class="dc-guides">40+ guides available</span>
       </div>
-    </div>
+    </a>
 
     <!-- Esopus -->
-    <div class="dc">
+    <a class="dc" href="riffle-catskills.html" style="text-decoration:none;color:inherit">
       <div class="dc-img bg-esopus"></div>
       <div class="dc-overlay"></div>
       <div class="dc-arrow"><svg viewBox="0 0 12 12" fill="none"><path d="M2 10 L10 2 M4 2 H10 V8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -904,10 +977,10 @@ footer{background:#0c1610;padding:68px 5% 32px}
         <div class="dc-sub">Catskill Park · Phoenicia, NY</div>
         <span class="dc-guides">12+ guides</span>
       </div>
-    </div>
+    </a>
 
     <!-- Adirondacks -->
-    <div class="dc">
+    <a class="dc" href="riffle-catskills.html" style="text-decoration:none;color:inherit">
       <div class="dc-img bg-adirondacks"></div>
       <div class="dc-overlay"></div>
       <div class="dc-arrow"><svg viewBox="0 0 12 12" fill="none"><path d="M2 10 L10 2 M4 2 H10 V8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -916,10 +989,10 @@ footer{background:#0c1610;padding:68px 5% 32px}
         <div class="dc-sub">Ausable · Saranac · Lake Placid</div>
         <span class="dc-guides">30+ guides</span>
       </div>
-    </div>
+    </a>
 
     <!-- Montana -->
-    <div class="dc">
+    <a class="dc" href="riffle-catskills.html" style="text-decoration:none;color:inherit">
       <div class="dc-img bg-montana"></div>
       <div class="dc-overlay"></div>
       <div class="dc-arrow"><svg viewBox="0 0 12 12" fill="none"><path d="M2 10 L10 2 M4 2 H10 V8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -928,10 +1001,10 @@ footer{background:#0c1610;padding:68px 5% 32px}
         <div class="dc-sub">Madison · Gallatin · Bighorn</div>
         <span class="dc-guides">240+ guides</span>
       </div>
-    </div>
+    </a>
 
     <!-- Patagonia -->
-    <div class="dc">
+    <a class="dc" href="riffle-catskills.html" style="text-decoration:none;color:inherit">
       <div class="dc-img bg-patagonia"></div>
       <div class="dc-overlay"></div>
       <div class="dc-arrow"><svg viewBox="0 0 12 12" fill="none"><path d="M2 10 L10 2 M4 2 H10 V8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -941,10 +1014,10 @@ footer{background:#0c1610;padding:68px 5% 32px}
         <div class="dc-sub">Argentina &amp; Chile · Remote Rivers</div>
         <span class="dc-guides">98 guides</span>
       </div>
-    </div>
+    </a>
 
   </div>
-  <div style="text-align:center"><a class="see-all" href="#">View all 340 destinations →</a></div>
+  <div style="text-align:center"><a class="see-all" href="riffle-catskills.html">View all 340 destinations →</a></div>
 </section>
 
 <!-- PHOTO INTERLUDE -->
@@ -997,12 +1070,12 @@ footer{background:#0c1610;padding:68px 5% 32px}
         <div class="gc-vbadge"><svg viewBox="0 0 9 9" fill="none" stroke="white" stroke-width="1.8"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></div>
       </div>
       <div class="gc-body">
-        <div class="gc-name">Jake Rivers</div>
+        <div class="gc-name" style="cursor:pointer" onclick="window.location='riffle-guide-joe.html'">Joe (Catskills on the Fly)</div>
         <div class="gc-loc"><svg viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M5.5 1C4 1 3 2.2 3 3.5c0 2.2 2.5 6.5 2.5 6.5S8 5.7 8 3.5C8 2.2 7 1 5.5 1z"/><circle cx="5.5" cy="3.5" r="1"/></svg>Bozeman, Montana</div>
         <div class="gc-tags"><span class="gtag">Dry Fly</span><span class="gtag">Nymphing</span><span class="gtag">Madison River</span><span class="gtag">Rainbow Trout</span></div>
         <div class="gc-rating"><span class="gc-stars">★★★★★</span><span class="gc-rn">5.0</span><span class="gc-rc">(312 reviews)</span></div>
         <div class="gc-div"></div>
-        <div class="gc-foot"><div class="gc-exp"><strong>18 yrs</strong> guiding</div><button class="bk-btn">Check Availability</button></div>
+        <div class="gc-foot"><div class="gc-exp"><strong>18 yrs</strong> guiding</div><button class="bk-btn" onclick="window.location='riffle-booking.html'">Check Availability</button></div>
       </div>
     </div>
 
@@ -1016,12 +1089,12 @@ footer{background:#0c1610;padding:68px 5% 32px}
         <div class="gc-vbadge"><svg viewBox="0 0 9 9" fill="none" stroke="white" stroke-width="1.8"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></div>
       </div>
       <div class="gc-body">
-        <div class="gc-name">Mike Walsh</div>
+        <div class="gc-name" style="cursor:pointer" onclick="window.location='riffle-guide-profile.html'">Mike Walsh</div>
         <div class="gc-loc"><svg viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M5.5 1C4 1 3 2.2 3 3.5c0 2.2 2.5 6.5 2.5 6.5S8 5.7 8 3.5C8 2.2 7 1 5.5 1z"/><circle cx="5.5" cy="3.5" r="1"/></svg>Roscoe, New York</div>
         <div class="gc-tags"><span class="gtag">Beaverkill</span><span class="gtag">Dry Fly</span><span class="gtag">Delaware</span><span class="gtag">Brown Trout</span></div>
         <div class="gc-rating"><span class="gc-stars">★★★★★</span><span class="gc-rn">4.9</span><span class="gc-rc">(224 reviews)</span></div>
         <div class="gc-div"></div>
-        <div class="gc-foot"><div class="gc-exp"><strong>22 yrs</strong> guiding</div><button class="bk-btn">Check Availability</button></div>
+        <div class="gc-foot"><div class="gc-exp"><strong>22 yrs</strong> guiding</div><button class="bk-btn" onclick="window.location='riffle-booking.html'">Check Availability</button></div>
       </div>
     </div>
 
@@ -1035,12 +1108,12 @@ footer{background:#0c1610;padding:68px 5% 32px}
         <div class="gc-vbadge"><svg viewBox="0 0 9 9" fill="none" stroke="white" stroke-width="1.8"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></div>
       </div>
       <div class="gc-body">
-        <div class="gc-name">Marco Tides</div>
+        <div class="gc-name" style="cursor:pointer" onclick="window.location='riffle-guide-profile.html'">Marco Tides</div>
         <div class="gc-loc"><svg viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M5.5 1C4 1 3 2.2 3 3.5c0 2.2 2.5 6.5 2.5 6.5S8 5.7 8 3.5C8 2.2 7 1 5.5 1z"/><circle cx="5.5" cy="3.5" r="1"/></svg>Florida Keys, FL</div>
         <div class="gc-tags"><span class="gtag">Bonefish</span><span class="gtag">Permit</span><span class="gtag">Tarpon</span><span class="gtag">Grand Slam</span></div>
         <div class="gc-rating"><span class="gc-stars">★★★★★</span><span class="gc-rn">4.9</span><span class="gc-rc">(241 reviews)</span></div>
         <div class="gc-div"></div>
-        <div class="gc-foot"><div class="gc-exp"><strong>22 yrs</strong> guiding</div><button class="bk-btn">Check Availability</button></div>
+        <div class="gc-foot"><div class="gc-exp"><strong>22 yrs</strong> guiding</div><button class="bk-btn" onclick="window.location='riffle-booking.html'">Check Availability</button></div>
       </div>
     </div>
 
@@ -1054,12 +1127,12 @@ footer{background:#0c1610;padding:68px 5% 32px}
         <div class="gc-vbadge"><svg viewBox="0 0 9 9" fill="none" stroke="white" stroke-width="1.8"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></div>
       </div>
       <div class="gc-body">
-        <div class="gc-name">Sarah Clearwater</div>
+        <div class="gc-name" style="cursor:pointer" onclick="window.location='riffle-guide-irwin-mallory.html'">Sarah Clearwater</div>
         <div class="gc-loc"><svg viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M5.5 1C4 1 3 2.2 3 3.5c0 2.2 2.5 6.5 2.5 6.5S8 5.7 8 3.5C8 2.2 7 1 5.5 1z"/><circle cx="5.5" cy="3.5" r="1"/></svg>Phoenicia, New York</div>
         <div class="gc-tags"><span class="gtag">Esopus Creek</span><span class="gtag">Nymphing</span><span class="gtag">Wild Trout</span></div>
         <div class="gc-rating"><span class="gc-stars">★★★★★</span><span class="gc-rn">5.0</span><span class="gc-rc">(187 reviews)</span></div>
         <div class="gc-div"></div>
-        <div class="gc-foot"><div class="gc-exp"><strong>12 yrs</strong> guiding</div><button class="bk-btn">Check Availability</button></div>
+        <div class="gc-foot"><div class="gc-exp"><strong>12 yrs</strong> guiding</div><button class="bk-btn" onclick="window.location='riffle-booking.html'">Check Availability</button></div>
       </div>
     </div>
 
@@ -1073,12 +1146,12 @@ footer{background:#0c1610;padding:68px 5% 32px}
         <div class="gc-vbadge"><svg viewBox="0 0 9 9" fill="none" stroke="white" stroke-width="1.8"><polyline points="1.5,4.5 3.5,6.5 7.5,2.5"/></svg></div>
       </div>
       <div class="gc-body">
-        <div class="gc-name">Lena McKenzie</div>
+        <div class="gc-name" style="cursor:pointer" onclick="window.location='riffle-guide-stefan-spoerri.html'">Lena McKenzie</div>
         <div class="gc-loc"><svg viewBox="0 0 11 11" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M5.5 1C4 1 3 2.2 3 3.5c0 2.2 2.5 6.5 2.5 6.5S8 5.7 8 3.5C8 2.2 7 1 5.5 1z"/><circle cx="5.5" cy="3.5" r="1"/></svg>Queenstown, New Zealand</div>
         <div class="gc-tags"><span class="gtag">Brown Trout</span><span class="gtag">Sight Fishing</span><span class="gtag">Backcountry</span></div>
         <div class="gc-rating"><span class="gc-stars">★★★★★</span><span class="gc-rn">5.0</span><span class="gc-rc">(143 reviews)</span></div>
         <div class="gc-div"></div>
-        <div class="gc-foot"><div class="gc-exp"><strong>10 yrs</strong> guiding</div><button class="bk-btn">Check Availability</button></div>
+        <div class="gc-foot"><div class="gc-exp"><strong>10 yrs</strong> guiding</div><button class="bk-btn" onclick="window.location='riffle-booking.html'">Check Availability</button></div>
       </div>
     </div>
 
@@ -1097,12 +1170,12 @@ footer{background:#0c1610;padding:68px 5% 32px}
         <div class="gc-tags"><span class="gtag">Sea Trout</span><span class="gtag">Wild Brown</span><span class="gtag">Remote Rivers</span></div>
         <div class="gc-rating"><span class="gc-stars">★★★★★</span><span class="gc-rn">4.9</span><span class="gc-rc">(76 reviews)</span></div>
         <div class="gc-div"></div>
-        <div class="gc-foot"><div class="gc-exp"><strong>14 yrs</strong> guiding</div><button class="bk-btn">Check Availability</button></div>
+        <div class="gc-foot"><div class="gc-exp"><strong>14 yrs</strong> guiding</div><button class="bk-btn" onclick="window.location='riffle-booking.html'">Check Availability</button></div>
       </div>
     </div>
 
   </div>
-  <div style="text-align:center"><a class="see-all" href="#">Browse all 2,400 guides →</a></div>
+  <div style="text-align:center"><a class="see-all" href="riffle-catskills.html">Browse all 2,400 guides →</a></div>
 </section>
 
 <!-- HOW IT WORKS -->
@@ -1149,7 +1222,7 @@ footer{background:#0c1610;padding:68px 5% 32px}
     <div class="ey">Catskills · Esopus Creek</div>
     <h2>Wild water,<br>wilder <em>trout.</em></h2>
     <p>The Esopus is one of New York's most productive and challenging freestone streams. Fed by the Schoharie Reservoir, it runs cold and fast through the heart of the Catskill Park — prime habitat for wild rainbow trout that will test even experienced anglers.</p>
-    <a class="wb-btn" href="#">Find Esopus Guides →</a>
+    <a class="wb-btn" href="riffle-catskills.html">Find Esopus Guides →</a>
   </div>
 </div>
 
@@ -1230,8 +1303,8 @@ footer{background:#0c1610;padding:68px 5% 32px}
       <h2>List on Riffle.<br>Reach anglers you<br><em>can't find elsewhere.</em></h2>
       <p>Join 2,400+ professional guides. Set your price, keep 85% of every booking. We bring you anglers who actually know how to fish — not tourists who want to take selfies.</p>
       <div class="cta-btns">
-        <a class="btn-gold" href="#">Start Listing Free →</a>
-        <a class="btn-ghost" href="#">See How It Works</a>
+        <a class="btn-gold" href="riffle-guide-onboarding.html">Start Listing Free →</a>
+        <a class="btn-ghost" href="riffle-guide-onboarding.html">See How It Works</a>
       </div>
     </div>
     <div class="guide-cta-right reveal">
@@ -1262,37 +1335,37 @@ footer{background:#0c1610;padding:68px 5% 32px}
     <div class="ft-col">
       <h4>Explore</h4>
       <ul class="ft-links">
-        <li><a href="#">Find a Guide</a></li>
-        <li><a href="#">Destinations</a></li>
-        <li><a href="#">Species</a></li>
-        <li><a href="#">Techniques</a></li>
-        <li><a href="#">Fishing Near Me</a></li>
+        <li><a href="riffle-catskills.html">Find a Guide</a></li>
+        <li><a href="riffle-catskills.html">Destinations</a></li>
+        <li><a href="riffle-catskills.html#species">Species</a></li>
+        <li><a href="riffle-catskills.html#techniques">Techniques</a></li>
+        <li><a href="riffle-catskills.html">Fishing Near Me</a></li>
       </ul>
     </div>
     <div class="ft-col">
       <h4>Guides</h4>
       <ul class="ft-links">
-        <li><a href="#">List Your Service</a></li>
-        <li><a href="#">Guide Dashboard</a></li>
-        <li><a href="#">Pricing &amp; Fees</a></li>
-        <li><a href="#">Resources</a></li>
-        <li><a href="#">Success Stories</a></li>
+        <li><a href="riffle-guide-onboarding.html">List Your Service</a></li>
+        <li><a href="riffle-guide-onboarding.html">Guide Dashboard</a></li>
+        <li><a href="riffle-guide-onboarding.html">Pricing &amp; Fees</a></li>
+        <li><a href="riffle-guide-onboarding.html">Resources</a></li>
+        <li><a href="riffle-catskills.html">Success Stories</a></li>
       </ul>
     </div>
     <div class="ft-col">
       <h4>Company</h4>
       <ul class="ft-links">
-        <li><a href="#">About Riffle</a></li>
-        <li><a href="#">Blog</a></li>
-        <li><a href="#">Careers</a></li>
-        <li><a href="#">Help Center</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="riffle.html">About Riffle</a></li>
+        <li><a href="riffle-catskills.html">Blog</a></li>
+        <li><a href="riffle-guide-onboarding.html">Careers</a></li>
+        <li><a href="riffle-guide-onboarding.html">Help Center</a></li>
+        <li><a href="riffle-guide-onboarding.html">Contact</a></li>
       </ul>
     </div>
   </div>
   <div class="ft-bottom">
     <span>© 2026 Riffle, Inc. All rights reserved. · riffle.guide</span>
-    <div><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Accessibility</a></div>
+    <div><a href="riffle.html">Privacy</a><a href="riffle.html">Terms</a><a href="riffle.html">Accessibility</a></div>
   </div>
 </footer>
 
@@ -1320,8 +1393,30 @@ document.querySelectorAll('.reveal').forEach(function(el){observer.observe(el)})
 document.querySelectorAll('.stag').forEach(function(t){
   t.addEventListener('click',function(){
     document.querySelector('.sf input').value=t.textContent;
+    setTimeout(function(){ window.location='riffle-catskills.html'; }, 150);
   });
 });
+
+// ── HAMBURGER ──
+var _hbg = document.getElementById('hamburger');
+var _drw = document.getElementById('navDrawer');
+var _open = false;
+function closeDrawer(){
+  _open = false;
+  _hbg.classList.remove('open');
+  _drw.classList.remove('open');
+  document.body.style.overflow = '';
+}
+_hbg.addEventListener('click', function(){
+  _open = !_open;
+  _hbg.classList.toggle('open', _open);
+  _drw.classList.toggle('open', _open);
+  document.body.style.overflow = _open ? 'hidden' : '';
+});
+_drw.addEventListener('click', function(e){
+  if(e.target === _drw) closeDrawer();
+});
+
 </script>
 </body>
 </html>

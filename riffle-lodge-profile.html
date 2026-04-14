@@ -219,6 +219,21 @@ footer{background:#0c1610;padding:40px 5% 32px;margin-top:80px}
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 .reveal{opacity:0;transform:translateY(14px);transition:opacity 0.5s ease,transform 0.5s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ── MOBILE NAV ── */
+.nav-hamburger{display:none;flex-direction:column;align-items:center;justify-content:center;gap:5px;width:44px;height:44px;background:rgba(255,255,255,0.1);border:none;border-radius:8px;cursor:pointer;-webkit-tap-highlight-color:transparent;flex-shrink:0}
+.ham-line{width:20px;height:1.5px;background:#fff;border-radius:2px;transition:all 0.3s;transform-origin:center}
+.nav-hamburger.open .ham-line:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav-hamburger.open .ham-line:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-hamburger.open .ham-line:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.nav-drawer{position:fixed;top:0;left:0;right:0;bottom:0;z-index:490;background:rgba(22,34,24,0.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;flex-direction:column;padding:88px 32px 40px;transform:translateX(100%);transition:transform 0.35s cubic-bezier(0.4,0,0.2,1);pointer-events:none}
+.nav-drawer.open{transform:translateX(0);pointer-events:all}
+.drawer-link{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:rgba(255,255,255,0.82);text-decoration:none;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.07);display:block;transition:color 0.2s}
+.drawer-link:active{color:#fff}
+.drawer-cta{margin-top:24px;background:#d4943a;color:#fff;font-size:15px;font-weight:700;padding:15px 28px;border-radius:100px;text-decoration:none;text-align:center;display:block;font-family:'DM Sans',sans-serif}
+.drawer-tagline{margin-top:auto;font-family:'Playfair Display',serif;font-size:15px;font-style:italic;color:rgba(255,255,255,0.2)}
+@media(max-width:860px){.nav-hamburger{display:flex}.nav-links,.nav-right-links{display:none!important}}
+@media(max-width:500px){.logo-word,.nav-word{font-size:21px!important}}
 </style>
 </head>
 <body>
@@ -229,6 +244,12 @@ footer{background:#0c1610;padding:40px 5% 32px;margin-top:80px}
     <span class="nav-word">Riffle</span>
   </a>
   <a class="nav-back" href="riffle-lodges.html"><svg viewBox="0 0 14 14"><polyline points="9,2 4,7 9,12"/></svg> Back to lodges</a>
+
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <div class="ham-line"></div>
+    <div class="ham-line"></div>
+    <div class="ham-line"></div>
+  </button>
 </nav>
 
 <!-- HERO -->
@@ -240,9 +261,9 @@ footer{background:#0c1610;padding:40px 5% 32px;margin-top:80px}
   <div class="lh-content">
     <div class="lh-left">
       <div class="lh-breadcrumb">
-        <a href="#">Lodges</a><span>›</span>
-        <a href="#">New York</a><span>›</span>
-        <a href="#">Catskills</a>
+        <a href="riffle.html">Home</a><span>›</span>
+        <a href="riffle-lodges.html">Lodges</a><span>›</span>
+        <span style="color:rgba(255,255,255,0.7)">Beaverkill Valley Inn</span>
       </div>
       <div class="lh-type">✦ Fly Fishing Lodge</div>
       <div class="lh-name">Beaverkill Valley Inn</div>
@@ -356,7 +377,7 @@ footer{background:#0c1610;padding:40px 5% 32px;margin-top:80px}
             <div class="pkg-from">From</div>
             <div class="pkg-price">$785</div>
             <div class="pkg-per">per person / night</div>
-            <button class="pkg-book">Book This Package</button>
+            <button class="pkg-book" onclick="window.location='riffle-lodge-booking.html'">Book This Package</button>
           </div>
         </div>
 
@@ -377,7 +398,7 @@ footer{background:#0c1610;padding:40px 5% 32px;margin-top:80px}
             <div class="pkg-from">From</div>
             <div class="pkg-price">$485</div>
             <div class="pkg-per">per person / night</div>
-            <button class="pkg-book">Book This Package</button>
+            <button class="pkg-book" onclick="window.location='riffle-lodge-booking.html'">Book This Package</button>
           </div>
         </div>
 
@@ -398,7 +419,7 @@ footer{background:#0c1610;padding:40px 5% 32px;margin-top:80px}
             <div class="pkg-from">From</div>
             <div class="pkg-price">$4,800</div>
             <div class="pkg-per">per night (full buyout)</div>
-            <button class="pkg-book">Inquire</button>
+            <button class="pkg-book" onclick="window.location='riffle-lodge-booking.html'">Inquire</button>
           </div>
         </div>
 
@@ -593,7 +614,7 @@ footer{background:#0c1610;padding:40px 5% 32px;margin-top:80px}
 <footer>
   <div class="ft-inner">
     <div><div class="ft-logo">Riffle</div><div class="ft-tagline">Find your water.</div></div>
-    <div class="ft-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Help</a><a href="#">riffle.guide</a></div>
+    <div class="ft-links"><a href="riffle.html">Privacy</a><a href="riffle.html">Terms</a><a href="riffle-guide-onboarding.html">Help</a><a href="riffle.html">riffle.guide</a></div>
   </div>
   <div class="ft-copy">© 2026 Riffle, Inc. · riffle.guide/lodges/beaverkill-valley-inn</div>
 </footer>
@@ -642,6 +663,19 @@ document.querySelectorAll('.pkg-book').forEach(function(b){
     document.getElementById('booking-card').scrollIntoView({behavior:'smooth'});
   });
 });
+
+// Mobile nav
+(function(){
+  var hbg=document.getElementById('hamburger');
+  var drw=document.getElementById('navDrawer');
+  if(!hbg||!drw) return;
+  var open=false;
+  function close(){open=false;hbg.classList.remove('open');drw.classList.remove('open');document.body.style.overflow='';}
+  window.closeDrawer=close;
+  hbg.addEventListener('click',function(){open=!open;hbg.classList.toggle('open',open);drw.classList.toggle('open',open);document.body.style.overflow=open?'hidden':''});
+  drw.addEventListener('click',function(e){if(e.target===drw)close();});
+})();
+
 </script>
 </body>
 </html>

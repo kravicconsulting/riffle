@@ -149,6 +149,21 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
 .sb-secondary{background:transparent;color:var(--forest-mid);font-size:13px;font-weight:500;padding:12px;border-radius:var(--pill);border:1.5px solid var(--pebble-dk);cursor:pointer;font-family:'DM Sans',sans-serif;text-decoration:none;display:block;text-align:center}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── MOBILE NAV ── */
+.nav-hamburger{display:none;flex-direction:column;align-items:center;justify-content:center;gap:5px;width:44px;height:44px;background:rgba(255,255,255,0.1);border:none;border-radius:8px;cursor:pointer;-webkit-tap-highlight-color:transparent;flex-shrink:0}
+.ham-line{width:20px;height:1.5px;background:#fff;border-radius:2px;transition:all 0.3s;transform-origin:center}
+.nav-hamburger.open .ham-line:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav-hamburger.open .ham-line:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-hamburger.open .ham-line:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.nav-drawer{position:fixed;top:0;left:0;right:0;bottom:0;z-index:490;background:rgba(22,34,24,0.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;flex-direction:column;padding:88px 32px 40px;transform:translateX(100%);transition:transform 0.35s cubic-bezier(0.4,0,0.2,1);pointer-events:none}
+.nav-drawer.open{transform:translateX(0);pointer-events:all}
+.drawer-link{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:rgba(255,255,255,0.82);text-decoration:none;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.07);display:block;transition:color 0.2s}
+.drawer-link:active{color:#fff}
+.drawer-cta{margin-top:24px;background:#d4943a;color:#fff;font-size:15px;font-weight:700;padding:15px 28px;border-radius:100px;text-decoration:none;text-align:center;display:block;font-family:'DM Sans',sans-serif}
+.drawer-tagline{margin-top:auto;font-family:'Playfair Display',serif;font-size:15px;font-style:italic;color:rgba(255,255,255,0.2)}
+@media(max-width:860px){.nav-hamburger{display:flex}.nav-links,.nav-right-links{display:none!important}}
+@media(max-width:500px){.logo-word,.nav-word{font-size:21px!important}}
 </style>
 </head>
 <body>
@@ -161,6 +176,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
     <span class="nav-word">Riffle</span>
   </a>
   <a class="nav-back" href="riffle-lodge-profile.html"><svg viewBox="0 0 14 14"><polyline points="9,2 4,7 9,12"/></svg> Beaverkill Valley Inn</a>
+
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <div class="ham-line"></div>
+    <div class="ham-line"></div>
+    <div class="ham-line"></div>
+  </button>
 </nav>
 
 <div class="page-wrap" id="mainWrap">
@@ -305,7 +326,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:cen
       <div style="background:var(--white);border:1px solid var(--pebble-dk);border-radius:var(--r);padding:16px;margin-bottom:24px">
         <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:13px;color:var(--text-mid);line-height:1.6">
           <input type="checkbox" style="margin-top:3px;flex-shrink:0;width:16px;height:16px" checked>
-          I agree to Riffle's <a href="#" style="color:var(--forest-mid)">Terms of Service</a> and the lodge's <a href="#" style="color:var(--forest-mid)">Cancellation Policy</a>. I understand free cancellation applies up to 21 days before check-in.
+          I agree to Riffle's <a href="riffle.html" style="color:var(--forest-mid)">Terms of Service</a> and the lodge's <a href="riffle.html" style="color:var(--forest-mid)">Cancellation Policy</a>. I understand free cancellation applies up to 21 days before check-in.
         </label>
       </div>
 
@@ -454,6 +475,19 @@ function submitBooking() {
 }
 
 updateSummary();
+
+// Mobile nav
+(function(){
+  var hbg=document.getElementById('hamburger');
+  var drw=document.getElementById('navDrawer');
+  if(!hbg||!drw) return;
+  var open=false;
+  function close(){open=false;hbg.classList.remove('open');drw.classList.remove('open');document.body.style.overflow='';}
+  window.closeDrawer=close;
+  hbg.addEventListener('click',function(){open=!open;hbg.classList.toggle('open',open);drw.classList.toggle('open',open);document.body.style.overflow=open?'hidden':''});
+  drw.addEventListener('click',function(e){if(e.target===drw)close();});
+})();
+
 </script>
 </body>
 </html>
